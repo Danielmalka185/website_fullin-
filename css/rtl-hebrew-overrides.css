@@ -1,0 +1,364 @@
+/* ============================================
+   FULLIN - Hebrew RTL & Visual Overrides
+   Loaded AFTER webflow CSS to fix RTL issues
+   ============================================ */
+
+/* Hebrew font support - Heebo is Google Font optimized for Hebrew */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap');
+
+body,
+.body,
+.font-16,
+.font-16.dark,
+.nav-link,
+.button-primary,
+.secondry-button,
+.text-block,
+.text-block-6,
+.text-block-9,
+.text-block-10,
+.text-block-11,
+.text-block-12,
+.eyebrow,
+.heading-4,
+.heading-6,
+.main-heading,
+.font-size-48,
+._01,
+._01.scan,
+label,
+.input,
+.text-area,
+.display-5 {
+  font-family: 'Heebo', 'Mona Sans', 'Antipastopro Trial', Arial, sans-serif !important;
+}
+
+/* ============ HERO SECTION ============ */
+/* Replace bar image with clean dark gradient with brand accent */
+.section {
+  background-image:
+    linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(20, 40, 25, 0.88) 50%, rgba(10, 10, 10, 0.92) 100%),
+    radial-gradient(circle at 80% 20%, rgba(72, 183, 84, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(72, 183, 84, 0.18) 0%, transparent 50%);
+  background-color: #0a0a0a;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ============ RTL TEXT ALIGNMENT FIXES ============ */
+/* In Hebrew, text must read from right to left - all text-align should be RIGHT */
+
+.main-heading:lang(he-il),
+.main-heading {
+  text-align: right;
+}
+
+html[dir="rtl"] .main-heading {
+  text-align: right;
+  width: 80%;
+}
+
+html[dir="rtl"] .paragraph-5 {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-36 {
+  text-align: right;
+  align-items: flex-start; /* flex-start in RTL = right */
+  order: 0;
+  max-width: 50%;
+}
+
+html[dir="rtl"] .div-block-38 {
+  text-align: right;
+}
+
+html[dir="rtl"] .cell-3 {
+  text-align: right;
+  align-items: flex-start; /* flex-start in RTL = right */
+}
+
+html[dir="rtl"] .font-16,
+html[dir="rtl"] .font-16.dark {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-block-6 {
+  text-align: center;
+}
+
+html[dir="rtl"] .div-block-3 {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-7 {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-25 {
+  align-items: flex-start; /* flex-start in RTL = right */
+}
+
+html[dir="rtl"] .heading-6 {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-block-8 {
+  text-align: right;
+}
+
+/* ============ NAVBAR CURRENT ITEM ARROW ============ */
+/* The w--current uses Vector-4.svg as marker - move it to the RIGHT side in Hebrew */
+html[dir="rtl"] .nav-link.w--current {
+  background-position: 100% 50%;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+/* ============ NAV BUTTON SPACING ============ */
+/* Contact button needs right margin instead of left in RTL */
+html[dir="rtl"] .nav-button-wrapper {
+  margin-left: 0;
+  margin-right: 120px;
+}
+
+/* ============ HERO BUTTON & CTA ROW ============ */
+html[dir="rtl"] .hero-div {
+  align-items: flex-start; /* flex-start in column+RTL = right */
+}
+
+html[dir="rtl"] .div-block-41 {
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+html[dir="rtl"] .div-block-34 {
+  margin-right: 0;
+  margin-left: auto;
+  width: 100%;
+  max-width: 411px;
+}
+
+html[dir="rtl"] .div-block-2 {
+  margin-right: 0;
+  justify-content: flex-start; /* flex-start in row+RTL = right */
+}
+
+/* ============ "BECOME PARTNER" ARROW (div-block-4) ============ */
+/* The arrow image must flip to point LEFT in Hebrew (forward direction) */
+html[dir="rtl"] .div-block-4 {
+  flex-flow: row; /* Normal row, will flow RTL automatically */
+}
+
+html[dir="rtl"] .div-block-4 .image-10 {
+  transform: scaleX(-1);
+}
+
+/* ============ SECTION 2 - Problem/Solution ============ */
+html[dir="rtl"] .cell-3 .div-block-3 {
+  width: 100%;
+  text-align: right;
+}
+
+html[dir="rtl"] .cell-3 .font-16 {
+  text-align: right;
+}
+
+/* ============ SECTION 3 - How It Works ============ */
+html[dir="rtl"] .div-block-35 {
+  margin-right: 0;
+  text-align: right;
+  width: 100%;
+}
+
+html[dir="rtl"] .div-block-42 {
+  margin-right: 0;
+  align-items: flex-start; /* right in RTL */
+}
+
+html[dir="rtl"] ._3-coulms {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-5 {
+  justify-content: flex-start; /* right in RTL */
+  flex-direction: row;
+}
+
+html[dir="rtl"] .div-block-6 {
+  text-align: right;
+  width: 100%;
+}
+
+/* ============ SECTION 4 - Charge Instantly ============ */
+html[dir="rtl"] .div-block-8 {
+  flex-direction: row; /* in RTL this becomes visually reversed */
+}
+
+html[dir="rtl"] .div-block-36 {
+  order: 0;
+  text-align: right;
+  align-items: flex-start; /* right in RTL */
+}
+
+html[dir="rtl"] .eyebrow {
+  text-align: right;
+}
+
+/* ============ SECTION 6 - Pricing ============ */
+html[dir="rtl"] .div-block-21 {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-block-6 {
+  text-align: center;
+}
+
+html[dir="rtl"] .div-block-39 {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .text-block-7 {
+  padding-right: 50px;
+  padding-left: 0;
+  text-align: right;
+}
+
+/* ============ SECTION 7 - Business ============ */
+html[dir="rtl"] .div-block-40 {
+  text-align: center;
+}
+
+html[dir="rtl"] .div-block-19 {
+  text-align: center;
+}
+
+html[dir="rtl"] .heading-4 {
+  text-align: center;
+}
+
+/* ============ SECTION 8 - FAQ ============ */
+html[dir="rtl"] .div-block-25 {
+  align-items: flex-start; /* right in RTL */
+  text-align: right;
+}
+
+html[dir="rtl"] .paragraph-5 {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-26 {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+html[dir="rtl"] .dropdown-toggle {
+  padding-right: 0;
+  padding-left: 0;
+  text-align: right;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+html[dir="rtl"] .dropdown-list-2 {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-block-9 {
+  text-align: right;
+  flex: 1;
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+/* Webflow dropdown toggle icon - keep it on the LEFT in RTL (end of line) */
+html[dir="rtl"] .dropdown-toggle .w-icon-dropdown-toggle {
+  right: auto;
+  left: 20px;
+}
+
+/* ============ SECTION 9 - Footer ============ */
+html[dir="rtl"] .div-block-31 {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .div-block-29 {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-30 {
+  text-align: right;
+}
+
+html[dir="rtl"] .div-block-32 {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-block-10 {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-block-11 {
+  text-align: center;
+  direction: rtl;
+}
+
+/* ============ CONTACT FORM ============ */
+html[dir="rtl"] label {
+  text-align: right;
+  display: block;
+}
+
+html[dir="rtl"] .input,
+html[dir="rtl"] .text-area {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] .input::placeholder,
+html[dir="rtl"] .text-area::placeholder {
+  text-align: right;
+}
+
+html[dir="rtl"] .buttons-row {
+  justify-content: flex-start; /* right in RTL */
+}
+
+html[dir="rtl"] .form-status {
+  text-align: right;
+}
+
+html[dir="rtl"] .display-5 {
+  text-align: right;
+}
+
+/* ============ MOBILE RESPONSIVENESS ============ */
+@media screen and (max-width: 991px) {
+  html[dir="rtl"] .nav-button-wrapper {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  html[dir="rtl"] .main-heading {
+    width: 100%;
+    text-align: right;
+  }
+
+  html[dir="rtl"] .div-block-25 {
+    align-items: flex-start;
+  }
+
+  html[dir="rtl"] .div-block-26 {
+    margin: 0;
+  }
+
+  html[dir="rtl"] .div-block-31 {
+    flex-direction: column;
+  }
+}
