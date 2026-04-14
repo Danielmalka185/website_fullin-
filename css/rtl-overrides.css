@@ -66,6 +66,119 @@ html[lang="he-il"] #home::before {
           mask-image: radial-gradient(ellipse 48% 46% at center, #000 52%, transparent 94%);
   pointer-events: none;
   z-index: 1;
+  animation: hero-powerbank-float 5.5s ease-in-out infinite;
+}
+
+@keyframes hero-powerbank-float {
+  0%, 100% { transform: translate(0, -50%); }
+  50%      { transform: translate(0, calc(-50% - 7px)); }
+}
+
+/* ------ HERO animated scene: particles + phone silhouette + pins ------
+ * Decorative storytelling layer behind the text. z-index 1 keeps the
+ * power bank (#home::before, also z-index 1) and all scene elements
+ * behind .hero-div (z-index 2). pointer-events:none so nothing blocks
+ * the CTAs. aria-hidden on the container hides it from screen readers. */
+html[lang="he-il"] .hero-scene {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* ---- Phone silhouette being charged ---- */
+html[lang="he-il"] .hero-scene__phone {
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  width: 110px;
+  height: 205px;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  /* Inline SVG: rounded phone body, inner screen, lightning bolt, and
+   * a small battery bar. Brand-green strokes with low opacity so it
+   * blends into the dark hero gradient. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 205' fill='none'><rect x='3' y='3' width='104' height='199' rx='16' ry='16' fill='rgba(6,26,14,0.55)' stroke='rgba(200,255,210,0.55)' stroke-width='2'/><rect x='11' y='16' width='88' height='173' rx='5' ry='5' fill='rgba(10,45,22,0.55)' stroke='rgba(92,220,120,0.35)' stroke-width='1'/><circle cx='55' cy='197' r='3' fill='rgba(200,255,210,0.4)'/><path d='M60 70 L44 112 L56 112 L48 150 L70 108 L58 108 Z' fill='rgba(255,230,80,0.85)' stroke='rgba(255,230,80,0.95)' stroke-width='0.8'/><rect x='26' y='38' width='58' height='9' rx='2' ry='2' fill='none' stroke='rgba(92,220,120,0.8)' stroke-width='1'/><rect x='28' y='40' width='44' height='5' fill='rgba(92,220,120,0.9)'/><rect x='85' y='40' width='3' height='5' fill='rgba(92,220,120,0.9)'/></svg>");
+  filter: drop-shadow(0 0 6px rgba(59, 181, 92, 0.35));
+  animation: hero-phone-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes hero-phone-glow {
+  0%, 100% { filter: drop-shadow(0 0  6px rgba(59, 181, 92, 0.35)); opacity: 0.85; }
+  50%      { filter: drop-shadow(0 0 18px rgba(92, 220, 120, 0.75)); opacity: 1; }
+}
+
+/* ---- Particles (10 upward-drifting dots) ---- */
+html[lang="he-il"] .hero-scene__particle {
+  position: absolute;
+  bottom: -12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(120, 235, 150, 0.95) 0%, rgba(59, 181, 92, 0.6) 45%, transparent 75%);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: hero-particle-rise 10s linear infinite;
+}
+
+/* Scatter horizontal positions, sizes, durations, delays for an
+ * organic "not a pattern" feel. The wrapper has the phone at
+ * nth-child(1), particles at nth-child(2)..(11), pins at (12)..(14). */
+html[lang="he-il"] .hero-scene__particle:nth-child(2)  { left: 10%; width: 5px; height: 5px; animation-duration:  9s; animation-delay: 0s;   }
+html[lang="he-il"] .hero-scene__particle:nth-child(3)  { left: 22%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 1.4s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(4)  { left: 35%; width: 4px; height: 4px; animation-duration:  8s; animation-delay: 2.8s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(5)  { left: 48%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 4.3s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(6)  { left: 15%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 5.6s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(7)  { left: 28%; width: 5px; height: 5px; animation-duration:  9s; animation-delay: 0.8s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(8)  { left: 40%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: 2.2s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(9)  { left:  8%; width: 4px; height: 4px; animation-duration:  8s; animation-delay: 3.6s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(10) { left: 44%; width: 7px; height: 7px; animation-duration: 12s; animation-delay: 5.1s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(11) { left: 32%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 6.9s; }
+
+@keyframes hero-particle-rise {
+  0%   { transform: translate(0, 0)         scale(1);    opacity: 0;   }
+  15%  {                                                 opacity: 0.9; }
+  60%  { transform: translate(14px, -45vh)  scale(0.85); opacity: 0.7; }
+  100% { transform: translate(-6px, -95vh)  scale(0.4);  opacity: 0;   }
+}
+
+/* ---- Location pins (3 station markers) ---- */
+html[lang="he-il"] .hero-scene__pin {
+  position: absolute;
+  width: 28px;
+  height: 34px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 34' fill='none'><path d='M14 1 C6.8 1 1 6.8 1 14 C1 23.5 14 33 14 33 C14 33 27 23.5 27 14 C27 6.8 21.2 1 14 1 Z' fill='rgba(59,181,92,0.92)' stroke='rgba(255,255,255,0.85)' stroke-width='1.4'/><circle cx='14' cy='13' r='4.2' fill='rgba(255,255,255,0.96)'/></svg>");
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 4px rgba(92, 220, 120, 0.4));
+  animation: hero-pin-pulse 4.2s ease-in-out infinite;
+}
+
+html[lang="he-il"] .hero-scene__pin:nth-child(12) { top: 18%; left:  9%; transform: scale(0.78); animation-delay: 0s;   }
+html[lang="he-il"] .hero-scene__pin:nth-child(13) { top: 70%; left: 38%; transform: scale(1);    animation-delay: 1.6s; }
+html[lang="he-il"] .hero-scene__pin:nth-child(14) { top: 28%; left: 44%; transform: scale(0.65); animation-delay: 2.9s; }
+
+@keyframes hero-pin-pulse {
+  0%, 100% { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35)) drop-shadow(0 0  4px rgba(92, 220, 120, 0.40)); }
+  50%      { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35)) drop-shadow(0 0 14px rgba(120, 235, 150, 0.85)); }
+}
+
+/* ---- Motion-reduction: kill animation for users who opt out ---- */
+@media (prefers-reduced-motion: reduce) {
+  html[lang="he-il"] #home::before,
+  html[lang="he-il"] .hero-scene__phone,
+  html[lang="he-il"] .hero-scene__particle,
+  html[lang="he-il"] .hero-scene__pin {
+    animation: none !important;
+  }
+  html[lang="he-il"] #home::before { transform: translateY(-50%); }
 }
 
 /* Flip the hero so text content forms a column hugging the right edge */
@@ -523,6 +636,15 @@ html[lang="he-il"] .form-content .text-area {
     opacity: 0.18;
     width: 70%;
     left: 15%;
+  }
+  /* Hide phone + pins, fade the particles so the scene stays as a
+   * soft atmosphere behind the Hebrew copy on narrow screens. */
+  html[lang="he-il"] .hero-scene__phone,
+  html[lang="he-il"] .hero-scene__pin {
+    display: none;
+  }
+  html[lang="he-il"] .hero-scene {
+    opacity: 0.55;
   }
 }
 
