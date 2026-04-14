@@ -53,10 +53,10 @@ html[lang="he-il"] #home {
 html[lang="he-il"] #home::before {
   content: "";
   position: absolute;
-  left: 5%;
+  left: 10%;
   top: 50%;
-  width: 32%;
-  height: 88%;
+  width: 40%;
+  height: 96%;
   transform: translateY(-50%);
   background-image: url("../images/fullin-hero-composite.png");
   background-repeat: no-repeat;
@@ -65,7 +65,6 @@ html[lang="he-il"] #home::before {
   pointer-events: none;
   z-index: 1;
   animation: hero-powerbank-float 5.5s ease-in-out infinite;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
 }
 
 @keyframes hero-powerbank-float {
@@ -635,6 +634,139 @@ html[lang="he-il"] .div-block-40,
 html[lang="he-il"] .heading-4,
 html[lang="he-il"] .div-block-19 {
   text-align: center;
+}
+
+/* ------ "Download the App + first hour free" card (section-5) ------
+ * Richer visual: gradient background (brand-green → darker green),
+ * rounded corners, soft inner glow, subtitle copy, a row of emoji
+ * feature chips, and hover-reactive app-store badges. Keeps the
+ * Webflow IX2 entrance animation intact because we leave the
+ * data-w-id and the outer element classes unchanged. */
+html[lang="he-il"] .section-5 .div-block-11 {
+  background: linear-gradient(135deg, #0d3f1f 0%, var(--brand-colour) 55%, #2dd36f 100%) !important;
+  border-radius: 28px;
+  padding: 56px 48px;
+  box-shadow:
+    0 24px 60px rgba(5, 30, 15, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+  max-width: 1040px !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Soft sparkle/glow pattern overlay on the card */
+html[lang="he-il"] .section-5 .div-block-11::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 15% 85%, rgba(255, 255, 255, 0.10) 0%, transparent 50%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+html[lang="he-il"] .section-5 .div-block-43 {
+  max-width: 780px !important;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+html[lang="he-il"] .section-5 .div-block-43 .font-size-48 {
+  color: #fff;
+  text-align: center;
+  direction: rtl;
+  line-height: 1.25;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+html[lang="he-il"] .app-cta-subtitle {
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Rubik", "Heebo", sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  direction: rtl;
+  margin: 18px auto 26px;
+  max-width: 620px;
+}
+
+html[lang="he-il"] .app-cta-features {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 30px;
+  direction: rtl;
+  position: relative;
+  z-index: 1;
+}
+
+html[lang="he-il"] .app-cta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-family: "Rubik", "Heebo", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  direction: rtl;
+}
+
+/* The app-store badges, now as links */
+html[lang="he-il"] .section-5 .div-block-12 {
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+  flex-flow: row wrap;
+  gap: 16px !important;
+}
+
+html[lang="he-il"] .section-5 .app-cta-badge {
+  display: inline-block;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
+}
+
+html[lang="he-il"] .section-5 .app-cta-badge:hover {
+  transform: translateY(-3px) scale(1.04);
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45));
+}
+
+html[lang="he-il"] .section-5 .app-cta-badge img {
+  display: block;
+  height: 54px;
+  width: auto;
+}
+
+@media (max-width: 767px) {
+  html[lang="he-il"] .section-5 .div-block-11 {
+    padding: 40px 24px;
+    border-radius: 22px;
+  }
+  html[lang="he-il"] .section-5 .div-block-43 .font-size-48 {
+    font-size: 28px;
+  }
+  html[lang="he-il"] .app-cta-subtitle {
+    font-size: 15px;
+  }
+  html[lang="he-il"] .app-cta-chip {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  html[lang="he-il"] .section-5 .app-cta-badge img {
+    height: 46px;
+  }
 }
 
 /* Contact form — labels/inputs right-aligned for Hebrew */
