@@ -640,10 +640,29 @@ html[lang="he-il"] .section-10 .background-video {
 /* Only tweak object-fit/position on the inner <video>; DO NOT
  * override its `position: absolute` from Webflow or the centering
  * trick breaks and the video collapses to 0×0. Use `contain` so the
- * whole Israel map fits inside the half-section without cropping. */
+ * whole Israel map fits inside the half-section without cropping.
+ *
+ * IMPORTANT: also wipe the inline `background-image` that Webflow
+ * attaches to this <video> element (`style="background-image:url(
+ * ...poster.jpg)"`). Without this, the poster JPG's grey framing
+ * shows through the transparent letterbox areas created by
+ * object-fit: contain, producing visible horizontal grey bars above
+ * and below the map. Need `!important` to beat the inline style.
+ */
 html[lang="he-il"] .section-10 .background-video video {
   object-position: center center !important;
   object-fit: contain !important;
+  background-image: none !important;
+  background-color: transparent !important;
+}
+
+/* Belt-and-braces: make sure nothing sitting behind the video (the
+ * .background-video wrapper itself, or the section padding area)
+ * paints a background that could leak through. */
+html[lang="he-il"] .section-10 .background-video,
+html[lang="he-il"] .section-10 .background-video::before,
+html[lang="he-il"] .section-10 .background-video::after {
+  background: transparent !important;
 }
 
 /* Pull the map in a bit from the left edge and cap its width so the
