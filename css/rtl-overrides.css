@@ -1506,3 +1506,434 @@ html[lang="he-il"] body {
     width: auto;
   }
 }
+
+/* ======================================================================
+   MOBILE UX POLISH — touch targets, nav menu, typography, spacing
+   Added on top of the earlier responsive block to make the phone view
+   feel comfortable instead of cramped: bigger tappable areas, clean
+   collapsing nav, smoother scroll, no text overflowing containers.
+   ====================================================================== */
+
+/* Global smooth in-page scrolling for anchor links (works on
+ * desktop and mobile, respects prefers-reduced-motion) */
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Consistent, readable body text for Hebrew */
+html[lang="he-il"] body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- ≤991px: tablet & below ---- */
+@media (max-width: 991px) {
+  /* Navbar: the Webflow w-nav default collapses below 991px and shows
+   * a hamburger via data-collapse="medium". When the mobile menu opens
+   * (data-nav-menu-open), force the <ul> to lay out as a clean column
+   * with properly spaced, right-aligned Hebrew items. Our earlier
+   * flex-direction:row !important override was breaking this. */
+  html[lang="he-il"] .nav-menu-wrapper.w-nav-menu {
+    background: #ffffff;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    padding: 14px 18px;
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-menu {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-menu > li {
+    width: 100%;
+    margin: 0;
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-menu > li:last-child {
+    /* Drop the desktop "margin-right:auto" that pushed the CTA left */
+    margin-right: 0 !important;
+    margin-top: 10px;
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-link {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    text-align: right;
+    font-size: 16px;
+    border-radius: 12px;
+    background: transparent;
+    transition: background 0.2s ease;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-link:hover,
+  html[lang="he-il"] .nav-menu-wrapper .nav-link:focus {
+    background: rgba(59, 181, 92, 0.08);
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-link.w--current {
+    background: rgba(59, 181, 92, 0.12);
+    background-image: none;
+    padding-right: 18px;
+  }
+  /* Full-width brand CTA in the mobile menu */
+  html[lang="he-il"] .nav-menu-wrapper .nav-button-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+  html[lang="he-il"] .nav-menu-wrapper .nav-button-wrapper .button-primary {
+    width: 100%;
+    text-align: center;
+    padding: 14px 20px;
+    min-height: 48px;
+    box-sizing: border-box;
+  }
+  /* Hamburger button: bigger, dark grey, comfortable tap target */
+  html[lang="he-il"] .menu-button {
+    padding: 10px;
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  html[lang="he-il"] .menu-button.w--open {
+    background: rgba(59, 181, 92, 0.1);
+    border-radius: 10px;
+  }
+
+  /* Section spacing: more breathing room between sections on tablet */
+  html[lang="he-il"] section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+/* ---- ≤767px: phones ---- */
+@media (max-width: 767px) {
+  /* Tighten section spacing a touch more for phones so content
+   * doesn't feel like it's drifting */
+  html[lang="he-il"] section {
+    padding-top: 52px !important;
+    padding-bottom: 52px !important;
+  }
+  html[lang="he-il"] #home {
+    padding-top: 110px;
+    padding-bottom: 40px;
+    min-height: auto;
+  }
+
+  /* Hero typography — dialed in */
+  html[lang="he-il"] .main-heading {
+    font-size: 34px !important;
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+  }
+  html[lang="he-il"] .div-block-34 .font-16,
+  html[lang="he-il"] .hero-div .font-16 {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Global H1/H2 rhythm so nothing feels oversized on a phone */
+  html[lang="he-il"] .font-size-48 {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+  }
+  html[lang="he-il"] .heading-4,
+  html[lang="he-il"] .heading-6 {
+    font-size: 26px !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Touch target safety net: any anchor, button, .w-button at least
+   * 44 px tall on phones so fat fingers can hit them */
+  html[lang="he-il"] a,
+  html[lang="he-il"] button,
+  html[lang="he-il"] .w-button,
+  html[lang="he-il"] .dropdown-toggle {
+    min-height: 44px;
+  }
+
+  /* Hero CTAs stack with a small gap */
+  html[lang="he-il"] .hero-div .div-block-2 {
+    display: flex !important;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 20px 0 16px;
+    opacity: 1 !important; /* defeat the Webflow opacity:0 IX2 stub */
+  }
+  html[lang="he-il"] .hero-div .div-block-2 a {
+    flex: 0 0 auto;
+  }
+  html[lang="he-il"] .hero-div .div-block-2 .app-store {
+    height: 46px;
+    width: auto;
+  }
+  html[lang="he-il"] .hero-div .secondry-button {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  /* ---- Section-2: cafe card ---- */
+  html[lang="he-il"] .section-2 {
+    padding: 40px 0 !important;
+  }
+  html[lang="he-il"] .section-2 .main-container {
+    padding: 0 16px;
+  }
+  html[lang="he-il"] .section-2 .second-section {
+    min-height: 440px;
+    border-radius: 18px;
+  }
+  html[lang="he-il"] .section-2 .cell-3 {
+    right: 14px;
+    left: 14px;
+    bottom: 14px;
+    padding: 20px 22px 22px;
+    gap: 12px;
+  }
+  html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
+    font-size: 22px !important;
+  }
+  html[lang="he-il"] .section-2 .cell-3 .div-block-4 {
+    width: 100%;
+    justify-content: center !important;
+    padding: 12px 22px;
+  }
+
+  /* ---- Section-3: how it works ---- */
+  html[lang="he-il"] .section-3 .cell-2 img {
+    max-width: 82%;
+    max-height: 360px;
+    margin: 0 auto;
+  }
+  html[lang="he-il"] .div-block-35 {
+    text-align: right;
+    margin-bottom: 28px;
+  }
+  html[lang="he-il"] ._3-coulms {
+    padding: 18px 18px;
+    background: #fafafa;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  html[lang="he-il"] .div-block-5 {
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  html[lang="he-il"] .div-block-5 .font-size-48,
+  html[lang="he-il"] .div-block-5 ._01 {
+    font-size: 22px !important;
+  }
+  html[lang="he-il"] .div-block-5 ._01.scan {
+    font-size: 20px !important;
+  }
+  html[lang="he-il"] .div-block-6 .font-16.dark {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* ---- Section-4/5: download card + feature chips ---- */
+  html[lang="he-il"] .section-5 .div-block-11 {
+    padding: 34px 22px;
+    border-radius: 22px;
+  }
+  html[lang="he-il"] .section-5 .div-block-43 .font-size-48 {
+    font-size: 24px !important;
+    line-height: 1.25;
+  }
+  html[lang="he-il"] .app-cta-subtitle {
+    font-size: 14px;
+    margin: 14px auto 20px;
+  }
+  html[lang="he-il"] .app-cta-features {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  html[lang="he-il"] .app-cta-chip {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  /* ---- Section-6: pricing cards ---- */
+  html[lang="he-il"] #pricing {
+    padding: 54px 0 !important;
+  }
+  html[lang="he-il"] #w-node-_8354f0cd-20ad-14de-da5a-059303f51fae-ed7d41d2 {
+    gap: 16px !important;
+  }
+  html[lang="he-il"] .div-block-20:not(.main) {
+    width: 100% !important;
+    height: auto !important;
+    text-align: center;
+  }
+  html[lang="he-il"] .div-block-20:not(.main) .font-size-48 {
+    font-size: 28px !important;
+  }
+  html[lang="he-il"] .div-block-20:not(.main) .image-8 {
+    max-width: 100%;
+    height: auto;
+  }
+  html[lang="he-il"] .div-block-20.main .card-back .text-block-6 {
+    font-size: 20px;
+  }
+  html[lang="he-il"] .div-block-20.main .card-back .font-16.center {
+    font-size: 14px;
+  }
+  html[lang="he-il"] .text-block-7 {
+    font-size: 13px;
+    text-align: center;
+    padding: 20px 10px 0;
+    line-height: 1.6;
+  }
+
+  /* ---- Section-7: for business CTAs ---- */
+  html[lang="he-il"] .section-7 .secondry-button.white {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+  }
+
+  /* ---- Section-8: FAQ ---- */
+  html[lang="he-il"] .div-block-24 {
+    gap: 22px;
+  }
+  html[lang="he-il"] .div-block-25 .heading-6 {
+    font-size: 26px !important;
+  }
+  html[lang="he-il"] .div-block-25 .paragraph-5 {
+    font-size: 14px;
+  }
+  html[lang="he-il"] .dropdown-toggle {
+    padding: 18px 0;
+  }
+  html[lang="he-il"] .dropdown-toggle .text-block-9 {
+    font-size: 15px;
+    padding-right: 0;
+    padding-left: 32px;
+  }
+  html[lang="he-il"] .dropdown-list-2 .font-16.dark {
+    font-size: 14px;
+    padding: 0 2px 14px;
+    line-height: 1.65;
+  }
+
+  /* ---- Section-10: growing network + map ---- */
+  html[lang="he-il"] .section-10 .div-block-38 {
+    padding-right: 0;
+  }
+  html[lang="he-il"] .section-10 .font-16 {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* ---- Footer ---- */
+  html[lang="he-il"] .section-9 {
+    padding: 50px 0 !important;
+  }
+  html[lang="he-il"] .div-block-31 {
+    flex-flow: column;
+    gap: 32px;
+    padding-bottom: 10px;
+    text-align: right;
+  }
+  html[lang="he-il"] .div-block-29 .div-block-33 {
+    flex-flow: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  html[lang="he-il"] .div-block-29 .image-9 {
+    max-width: 120px;
+    height: auto;
+  }
+  html[lang="he-il"] .div-block-29 .div-block-30 {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  html[lang="he-il"] .div-block-32 {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 6px 22px;
+    padding: 0;
+  }
+  html[lang="he-il"] .div-block-32 > div {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  html[lang="he-il"] .div-block-32 .text-block-10 {
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0.65;
+    flex: 0 0 100%;
+    margin-bottom: 4px;
+  }
+  html[lang="he-il"] .footer-link {
+    font-size: 15px;
+    padding: 6px 0;
+  }
+  html[lang="he-il"] .text-block-11 {
+    font-size: 12px;
+    text-align: center;
+    padding-top: 24px;
+    opacity: 0.7;
+  }
+
+  /* ---- Contact page form ---- */
+  html[lang="he-il"] .form-content {
+    padding: 0 16px;
+  }
+  html[lang="he-il"] .form-content .input,
+  html[lang="he-il"] .form-content .text-area {
+    font-size: 16px; /* prevents iOS Safari zooming on focus */
+    padding: 12px 14px;
+    min-height: 48px;
+  }
+  html[lang="he-il"] .form-content .text-area {
+    min-height: 120px;
+  }
+  html[lang="he-il"] .button-wrapper .button.w-button {
+    width: 100%;
+    min-height: 50px;
+    font-size: 16px;
+  }
+
+  /* ---- Legal pages (terms.html, privacy.html) ---- */
+  .legal-page { padding: 90px 16px 50px; }
+  .legal-page .main-container { padding: 0; }
+}
+
+/* ---- ≤480px: very narrow phones (older/small devices) ---- */
+@media (max-width: 480px) {
+  html[lang="he-il"] .main-heading {
+    font-size: 30px !important;
+  }
+  html[lang="he-il"] .font-size-48 {
+    font-size: 22px !important;
+  }
+  html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
+    font-size: 19px !important;
+  }
+  html[lang="he-il"] .section-2 .second-section {
+    min-height: 400px;
+  }
+  html[lang="he-il"] .section-5 .div-block-43 .font-size-48 {
+    font-size: 21px !important;
+  }
+  html[lang="he-il"] .app-cta-chip {
+    flex: 0 0 auto;
+  }
+  html[lang="he-il"] .div-block-32 {
+    gap: 4px 16px;
+  }
+}
