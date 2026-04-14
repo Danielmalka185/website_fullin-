@@ -459,27 +459,33 @@ html[lang="he-il"] .div-block-38 p {
 }
 
 /* Lift the map out of the document flow and pin it to the LEFT half
- * of the section so it can never collide with the text on the right. */
+ * of the section so it can never collide with the text on the right.
+ * top:0 + bottom:0 lets the browser auto-calculate the container
+ * height to match the full section height — important because the
+ * inner <video> relies on its parent having a concrete height via
+ * Webflow's default absolute centering trick (top/right/bottom/left
+ * all -100% + margin:auto + object-fit:cover). */
 html[lang="he-il"] .section-10 .background-video {
   position: absolute !important;
   left: 0 !important;
   right: auto !important;
-  top: 50% !important;
-  transform: translateY(-50%);
+  top: 0 !important;
+  bottom: 0 !important;
   width: 50% !important;
   max-width: 50% !important;
   height: auto !important;
   margin: 0 !important;
+  transform: none !important;
   z-index: 1;
   pointer-events: none;
 }
 
+/* Only tweak object-fit/position on the inner <video>; DO NOT
+ * override its `position: absolute` from Webflow or the centering
+ * trick breaks and the video collapses to 0×0. */
 html[lang="he-il"] .section-10 .background-video video {
-  object-position: left center !important;
-  object-fit: contain !important;
-  position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
+  object-position: center center !important;
+  object-fit: cover !important;
 }
 
 /* Business section */
