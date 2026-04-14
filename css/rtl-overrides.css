@@ -28,12 +28,7 @@ html[lang="he-il"] .button-primary {
   font-family: "Rubik", "Heebo", "Assistant", "Mona Sans", Arial, sans-serif;
 }
 
-/* ------ HERO: clean brand gradient (no product image yet) ------
- * Currently using a gradient-only hero. When a clean standalone
- * power-bank product shot is available, drop it into images/ and
- * re-add it as the first comma-separated background-image entry,
- * with `12% center` for background-position and `auto 75%` for
- * background-size to float it on the LEFT half of the hero. */
+/* ------ HERO: brand gradient + product shot ------ */
 html[lang="he-il"] .section {
   background-image:
     radial-gradient(circle at 80% 20%, rgba(59, 181, 92, 0.35) 0%, transparent 55%),
@@ -43,6 +38,34 @@ html[lang="he-il"] .section {
   background-size: auto, auto, cover;
   background-repeat: no-repeat, no-repeat, no-repeat;
   position: relative;
+}
+
+/* Power bank product shot floated on the LEFT half of the hero.
+ * Source PNG has a light studio background; we use a radial-gradient
+ * mask-image so the centre (where the power bank sits) is fully
+ * opaque and the edges fade out, making the cropped background
+ * disappear into the dark green gradient instead of leaving a
+ * visible white rectangle. */
+html[lang="he-il"] #home {
+  overflow: hidden;
+}
+
+html[lang="he-il"] #home::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  top: 50%;
+  width: 36%;
+  height: 82%;
+  transform: translateY(-50%);
+  background-image: url("https://raw.githubusercontent.com/Danielmalka185/website_fullin-/main/ChatGPT%20Image%20Jan%2022%2C%202026%2C%2012_10_33%20AM.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  -webkit-mask-image: radial-gradient(ellipse 38% 62% at center, #000 62%, transparent 100%);
+          mask-image: radial-gradient(ellipse 38% 62% at center, #000 62%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Flip the hero so text content forms a column hugging the right edge */
@@ -436,6 +459,16 @@ html[lang="he-il"] .form-content .text-area {
 }
 
 /* ------ Responsive: keep hero legible on small screens ------ */
+@media (max-width: 991px) {
+  /* On tablet and below the hero text gets too cramped if the product
+   * shot stays at full opacity, so push it behind as a soft accent. */
+  html[lang="he-il"] #home::before {
+    opacity: 0.18;
+    width: 70%;
+    left: 15%;
+  }
+}
+
 @media (max-width: 767px) {
   html[lang="he-il"] .main-heading {
     width: 100%;
