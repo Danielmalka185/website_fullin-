@@ -128,6 +128,14 @@ html[lang="he-il"] .div-block-2 {
   margin-left: auto;
 }
 
+/* The hero CTA "הצטרפו כשותפי עסקי" inherits align-items:flex-end
+ * from .hero-div, which in an RTL flex-COLUMN maps to the LEFT edge
+ * (cross-axis end). Override on the button itself so it sits flush
+ * right under the heading and paragraph. */
+html[lang="he-il"] .hero-div .secondry-button {
+  align-self: flex-start;
+}
+
 /* ------ NAV: mirror the current-page arrow indicator ------ */
 /* English: arrow to the LEFT of the word (background-position: 0%)
    Hebrew: arrow to the RIGHT of the word (background-position: 100%)
@@ -157,13 +165,35 @@ html[lang="he-il"] .nav-menu {
   flex-wrap: wrap;
 }
 
-/* In the stock layout `.nav-button-wrapper` has `margin-left: 120px`
- * which pushes the CTA to the far right in LTR. In RTL we want that
- * gap to the start of the row (right side) so the button sits on the
- * far LEFT — flip the margins. */
+/* Let the nav menu wrapper grow to span the full width between the
+ * logo (right) and the left edge of the navbar, so we can position
+ * its inner items independently. Without this the wrapper only takes
+ * the intrinsic width of its menu and gets stranded in the middle. */
+html[lang="he-il"] .nav-menu-wrapper {
+  flex: 1 1 auto;
+}
+
+/* Pile nav items at the start of the menu (= RIGHT in RTL), packed
+ * close to the logo. Override Webflow's `space-between` which was
+ * spreading them across the whole bar. */
+html[lang="he-il"] .nav-menu {
+  justify-content: flex-start !important;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+/* The CTA "צור קשר" button is the LAST <li> in .nav-menu. Push it to
+ * the visual far LEFT in RTL by giving it an auto right margin, which
+ * absorbs all remaining main-axis space onto its right side. */
+html[lang="he-il"] .nav-menu > li:last-child {
+  margin-right: auto;
+}
+
 html[lang="he-il"] .nav-button-wrapper {
   margin-left: 0;
-  margin-right: 120px;
+  margin-right: 0;
 }
 
 /* ------ "Low battery kills moments" row: mirror direction ------ */
@@ -236,9 +266,18 @@ html[lang="he-il"] .font-16.dark {
   direction: rtl;
 }
 
+/* Step number + title row inside each "How it works" item.
+ * DOM order is [<h1>01</h1>] then [<h1>סרקו והתחילו</h1>]. With
+ * default RTL flex-row (NO row-reverse) the first DOM child appears
+ * at the RTL start = visual RIGHT — which puts the number BEFORE the
+ * title in Hebrew reading order. */
 html[lang="he-il"] .div-block-5 {
-  justify-content: flex-end;
-  flex-flow: row-reverse;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: baseline;
+  gap: 14px;
 }
 
 /* ------ "RENT INSTANTLY / טעינה מיידית" + "ABOUT THE APP / על האפליקציה" ------
