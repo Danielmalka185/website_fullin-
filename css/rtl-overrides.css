@@ -40,12 +40,12 @@ html[lang="he-il"] .section {
   position: relative;
 }
 
-/* Power bank product shot floated on the LEFT half of the hero.
- * Source PNG has a light studio background; we use a radial-gradient
- * mask-image so the centre (where the power bank sits) is fully
- * opaque and the edges fade out, making the cropped background
- * disappear into the dark green gradient instead of leaving a
- * visible white rectangle. */
+/* Power bank + phone composite shot floated on the LEFT half of the
+ * hero. The source PNG already has a dark green background matching
+ * the hero gradient and bakes in the red low-battery indicator, the
+ * phone with the FULLIN app, and sparkle effects — so we don't need
+ * a mask-image vignette (the image already blends into the hero)
+ * nor the separate CSS battery indicator. */
 html[lang="he-il"] #home {
   overflow: hidden;
 }
@@ -55,18 +55,17 @@ html[lang="he-il"] #home::before {
   position: absolute;
   left: 5%;
   top: 50%;
-  width: 38%;
-  height: 54%;
+  width: 32%;
+  height: 88%;
   transform: translateY(-50%);
-  background-image: url("https://raw.githubusercontent.com/Danielmalka185/website_fullin-/main/ChatGPT%20Image%20Jan%2022%2C%202026%2C%2012_10_33%20AM.png");
+  background-image: url("../images/fullin-hero-composite.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  -webkit-mask-image: radial-gradient(ellipse 48% 46% at center, #000 52%, transparent 94%);
-          mask-image: radial-gradient(ellipse 48% 46% at center, #000 52%, transparent 94%);
   pointer-events: none;
   z-index: 1;
   animation: hero-powerbank-float 5.5s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.35));
 }
 
 @keyframes hero-powerbank-float {
@@ -90,87 +89,10 @@ html[lang="he-il"] .hero-scene {
   overflow: hidden;
 }
 
-/* ---- Low-battery indicator that "charges up" ----
- * Horizontal battery icon floated above the power bank. The inner
- * fill rectangle animates its width AND background-color in a loop:
- *   red (empty, almost dead) → orange → yellow → green (full)
- * This visually tells the story: "Don't get stuck on low battery —
- * FULLIN has you covered". Built from pure HTML+CSS (outline +
- * ::after nub on the shell, inner .hero-scene__battery-fill for
- * the animated charge level) so the colors can tween smoothly,
- * which isn't possible with a background-image SVG. */
-html[lang="he-il"] .hero-scene__battery {
-  position: absolute;
-  top: 32%;
-  left: 6%;
-  width: 110px;
-  height: 50px;
-  border: 3px solid rgba(255, 255, 255, 0.85);
-  border-radius: 8px;
-  background: rgba(6, 22, 12, 0.55);
-  box-shadow:
-    inset 0 0 10px rgba(0, 0, 0, 0.4),
-    0 0 14px rgba(0, 0, 0, 0.3);
-  /* Two stacked animations: the charge-cycle glow pulse and a
-   * gentle hover (translate + slight rotate) so it feels like it's
-   * floating freely in the air next to the power bank instead of
-   * stuck to a fixed anchor. */
-  animation:
-    hero-battery-pulse 4.8s ease-in-out infinite,
-    hero-battery-float 6.5s ease-in-out infinite;
-}
-
-@keyframes hero-battery-float {
-  0%, 100% { transform: translate(0, 0)    rotate(-2deg); }
-  25%      { transform: translate(3px, -6px) rotate(0.5deg); }
-  50%      { transform: translate(5px, -11px) rotate(2deg); }
-  75%      { transform: translate(2px, -5px) rotate(0.5deg); }
-}
-
-/* The positive-terminal nub on the right side of the shell */
-html[lang="he-il"] .hero-scene__battery::after {
-  content: "";
-  position: absolute;
-  right: -9px;
-  top: 12px;
-  width: 7px;
-  height: 20px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 0 3px 3px 0;
-}
-
-/* The charge level — its width and color are the whole animation */
-html[lang="he-il"] .hero-scene__battery-fill {
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 4px;
-  width: 12%;
-  background: #ff3b30;
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(255, 59, 48, 0.6);
-  animation: hero-battery-charge 4.8s ease-in-out infinite;
-}
-
-@keyframes hero-battery-charge {
-  0%   { width: 12%; background: #ff3b30; box-shadow: 0 0 10px rgba(255, 59, 48, 0.75); }
-  20%  { width: 14%; background: #ff3b30; box-shadow: 0 0 14px rgba(255, 59, 48, 0.95); }
-  45%  { width: 38%; background: #ff9500; box-shadow: 0 0 12px rgba(255, 149,  0, 0.75); }
-  68%  { width: 68%; background: #ffd60a; box-shadow: 0 0 14px rgba(255, 214, 10, 0.70); }
-  90%  { width: 94%; background: #34c759; box-shadow: 0 0 18px rgba( 52, 199, 89, 0.85); }
-  100% { width: 12%; background: #ff3b30; box-shadow: 0 0 10px rgba(255, 59, 48, 0.75); }
-}
-
-/* Shell pulse: soft glow intensifies around the "empty" frames so the
- * warning state reads like a flashing low-battery indicator, then
- * calms once it's charged. */
-@keyframes hero-battery-pulse {
-  0%, 100% { box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 0 18px rgba(255, 59, 48, 0.55); }
-  20%      { box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 0 22px rgba(255, 59, 48, 0.85); }
-  45%      { box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 0 14px rgba(255, 149,  0, 0.45); }
-  68%      { box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 0 14px rgba(255, 214, 10, 0.40); }
-  90%      { box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4), 0 0 20px rgba( 52, 199, 89, 0.55); }
-}
+/* The standalone CSS low-battery indicator was removed — the new
+ * fullin-hero-composite.png already bakes in a red "battery empty"
+ * warning icon next to the power bank, so replicating it in CSS
+ * just duplicated the visual and cluttered the scene. */
 
 /* ---- Particles (10 upward-drifting dots) ---- */
 html[lang="he-il"] .hero-scene__particle {
@@ -186,18 +108,19 @@ html[lang="he-il"] .hero-scene__particle {
 }
 
 /* Scatter horizontal positions, sizes, durations, delays for an
- * organic "not a pattern" feel. The wrapper has the phone at
- * nth-child(1), particles at nth-child(2)..(11), pins at (12)..(14). */
-html[lang="he-il"] .hero-scene__particle:nth-child(2)  { left: 10%; width: 5px; height: 5px; animation-duration:  9s; animation-delay: 0s;   }
-html[lang="he-il"] .hero-scene__particle:nth-child(3)  { left: 22%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 1.4s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(4)  { left: 35%; width: 4px; height: 4px; animation-duration:  8s; animation-delay: 2.8s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(5)  { left: 48%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 4.3s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(6)  { left: 15%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 5.6s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(7)  { left: 28%; width: 5px; height: 5px; animation-duration:  9s; animation-delay: 0.8s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(8)  { left: 40%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: 2.2s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(9)  { left:  8%; width: 4px; height: 4px; animation-duration:  8s; animation-delay: 3.6s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(10) { left: 44%; width: 7px; height: 7px; animation-duration: 12s; animation-delay: 5.1s; }
-html[lang="he-il"] .hero-scene__particle:nth-child(11) { left: 32%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 6.9s; }
+ * organic "not a pattern" feel. The wrapper now holds 10 particles
+ * as its only children (nth-child 1..10) — the CSS battery indicator
+ * was removed because the hero composite PNG bakes it in. */
+html[lang="he-il"] .hero-scene__particle:nth-child(1)  { left: 10%; width: 5px; height: 5px; animation-duration:  9s; animation-delay: 0s;   }
+html[lang="he-il"] .hero-scene__particle:nth-child(2)  { left: 22%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 1.4s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(3)  { left: 35%; width: 4px; height: 4px; animation-duration:  8s; animation-delay: 2.8s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(4)  { left: 48%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 4.3s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(5)  { left: 15%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 5.6s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(6)  { left: 28%; width: 5px; height: 5px; animation-duration:  9s; animation-delay: 0.8s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(7)  { left: 40%; width: 6px; height: 6px; animation-duration: 11s; animation-delay: 2.2s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(8)  { left:  8%; width: 4px; height: 4px; animation-duration:  8s; animation-delay: 3.6s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(9)  { left: 44%; width: 7px; height: 7px; animation-duration: 12s; animation-delay: 5.1s; }
+html[lang="he-il"] .hero-scene__particle:nth-child(10) { left: 32%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 6.9s; }
 
 @keyframes hero-particle-rise {
   0%   { transform: translate(0, 0)         scale(1);    opacity: 0;   }
@@ -209,20 +132,10 @@ html[lang="he-il"] .hero-scene__particle:nth-child(11) { left: 32%; width: 5px; 
 /* ---- Motion-reduction: kill animation for users who opt out ---- */
 @media (prefers-reduced-motion: reduce) {
   html[lang="he-il"] #home::before,
-  html[lang="he-il"] .hero-scene__battery,
-  html[lang="he-il"] .hero-scene__battery-fill,
   html[lang="he-il"] .hero-scene__particle {
     animation: none !important;
   }
   html[lang="he-il"] #home::before { transform: translateY(-50%); }
-  /* Cancel the battery's float transform so it sits level, and
-   * leave the fill in a "full green" resting state so it doesn't
-   * sit flashing red for reduced-motion users. */
-  html[lang="he-il"] .hero-scene__battery { transform: none; }
-  html[lang="he-il"] .hero-scene__battery-fill {
-    width: 94%;
-    background: #34c759;
-  }
 }
 
 /* Flip the hero so text content forms a column hugging the right edge */
@@ -895,11 +808,8 @@ html[lang="he-il"] .div-block-20.main .div-block-39 {
     width: 70%;
     left: 15%;
   }
-  /* Hide the battery, fade the particles so the scene stays as a
-   * soft atmosphere behind the Hebrew copy on narrow screens. */
-  html[lang="he-il"] .hero-scene__battery {
-    display: none;
-  }
+  /* Fade the particles so the scene stays as a soft atmosphere
+   * behind the Hebrew copy on narrow screens. */
   html[lang="he-il"] .hero-scene {
     opacity: 0.55;
   }
