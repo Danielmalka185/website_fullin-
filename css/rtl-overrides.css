@@ -163,6 +163,15 @@ html[lang="he-il"] .main-heading {
   direction: rtl;
 }
 
+/* Red accent word inside the hero H1 ("שקרן"). Stock .bold-text paints
+ * the word in brand green — override to a warning red so it contrasts
+ * with the rest of the white heading and ties into the low-battery
+ * warning theme. Scoped to .main-heading to stay out of other pages. */
+html[lang="he-il"] .main-heading .bold-text.red,
+.main-heading .bold-text.red {
+  color: #ff3b30;
+}
+
 html[lang="he-il"] .div-block-41 {
   justify-content: flex-end;
   align-items: flex-end;
