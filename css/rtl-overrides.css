@@ -275,11 +275,172 @@ html[lang="he-il"] .nav-button-wrapper {
 }
 
 /* ------ "Low battery kills moments" row: mirror direction ------ */
-html[lang="he-il"] .second-section,
 html[lang="he-il"] .quick-stack-2,
 html[lang="he-il"] .quick-stack-3,
 html[lang="he-il"] .w-layout-layout {
   direction: rtl;
+}
+
+/* ------ Section-2 redesign: cinematic photo with glassmorphism card ------
+ * The stock layout was a 2-cell row (text | image). Repurpose it into a
+ * single rounded hero-style photo with a floating white glass card
+ * anchored to the right that holds the heading, copy, and a gold CTA. */
+html[lang="he-il"] .section-2 {
+  padding: 80px 0;
+}
+
+html[lang="he-il"] .section-2 .main-container {
+  max-width: 1280px;
+}
+
+html[lang="he-il"] .section-2 .second-section {
+  display: block !important;
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 540px;
+  background-image:
+    linear-gradient(to left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 70%),
+    url("../images/fullin-cafe-scene.jpg");
+  background-size: cover, cover;
+  background-position: center, center;
+  box-shadow: 0 30px 80px rgba(5, 20, 10, 0.3);
+  direction: rtl;
+}
+
+/* Hide the raw <img>; we're using the CSS background layer instead so
+ * we get full control over the gradient overlay and rounded corners. */
+html[lang="he-il"] .section-2 .cell img.image-3,
+html[lang="he-il"] .section-2 .cell {
+  display: none !important;
+}
+
+/* Floating white glass card anchored to the RIGHT of the photo */
+html[lang="he-il"] .section-2 .cell-3 {
+  position: absolute !important;
+  top: 50%;
+  right: 56px;
+  transform: translateY(-50%);
+  width: 42%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 22px;
+  padding: 34px 34px 30px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  text-align: right !important;
+  align-items: flex-start !important;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+html[lang="he-il"] .section-2 .cell-3 .div-block-3 {
+  max-width: 100%;
+  margin: 0;
+}
+
+html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
+  color: #1a1a1a !important;
+  font-size: 30px !important;
+  line-height: 1.2;
+  font-weight: 800;
+  margin: 0;
+  text-align: right;
+  direction: rtl;
+}
+
+html[lang="he-il"] .section-2 .cell-3 .font-16.dark {
+  color: #3a3a3a !important;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  text-align: right;
+  direction: rtl;
+}
+
+/* Gold "הצטרפו כשותפי עסקי" CTA inside the card */
+html[lang="he-il"] .section-2 .cell-3 .div-block-4 {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #f4b400 0%, #e89b00 100%);
+  color: #1a1a1a;
+  padding: 13px 24px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(228, 149, 0, 0.38);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  align-self: flex-start !important;
+  width: auto;
+}
+
+html[lang="he-il"] .section-2 .cell-3 .div-block-4:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(228, 149, 0, 0.55);
+}
+
+html[lang="he-il"] .section-2 .cell-3 .div-block-4 .text-block {
+  color: #1a1a1a !important;
+  font-family: "Rubik", "Heebo", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+html[lang="he-il"] .section-2 .cell-3 .div-block-4 .image-10 {
+  height: 14px;
+  width: auto;
+  filter: brightness(0);
+}
+
+/* Decorative sparkle in the bottom-right corner of the card */
+html[lang="he-il"] .section-2 .second-section::after {
+  content: "✦";
+  position: absolute;
+  bottom: 22px;
+  left: 26px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 28px;
+  text-shadow: 0 0 14px rgba(244, 180, 0, 0.6);
+  pointer-events: none;
+  animation: hero-powerbank-float 4.5s ease-in-out infinite;
+}
+
+/* Mobile: card collapses below the photo instead of overlaying it */
+@media (max-width: 767px) {
+  html[lang="he-il"] .section-2 {
+    padding: 50px 0;
+  }
+  html[lang="he-il"] .section-2 .second-section {
+    min-height: 420px;
+    border-radius: 20px;
+    background-image:
+      linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 80%),
+      url("../images/fullin-cafe-scene.jpg");
+    padding-bottom: 24px;
+  }
+  html[lang="he-il"] .section-2 .cell-3 {
+    position: absolute !important;
+    top: auto;
+    bottom: 20px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+    transform: none;
+    padding: 22px 22px 20px;
+    border-radius: 18px;
+  }
+  html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
+    font-size: 22px !important;
+  }
+  html[lang="he-il"] .section-2 .cell-3 .font-16.dark {
+    font-size: 14px;
+  }
 }
 
 /* `.cell-3` is a flex column holding the heading, paragraph and CTA.
