@@ -1,0 +1,209 @@
+/* =====================================================================
+   Hebrew / RTL Overrides for FULLIN Website
+   ---------------------------------------------------------------------
+   Applies when <html lang="he-il" dir="rtl">
+   - Replaces the dark bar-photo hero with a clean brand gradient
+   - Moves the nav "current" arrow indicator to the right side of the word
+   - Uses a mirrored (left-pointing) arrow so it reads correctly in RTL
+   - Adjusts text-alignment and a few flex orderings for the Hebrew UI
+   ===================================================================== */
+
+html[lang="he-il"],
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+/* ------ Typography: Hebrew needs a clean sans-serif fallback ------ */
+html[lang="he-il"] body,
+html[lang="he-il"] .main-heading,
+html[lang="he-il"] .font-size-48,
+html[lang="he-il"] .heading-4,
+html[lang="he-il"] .heading-6,
+html[lang="he-il"] .font-16,
+html[lang="he-il"] .text-block-6,
+html[lang="he-il"] .text-block-9,
+html[lang="he-il"] .nav-link,
+html[lang="he-il"] .secondry-button,
+html[lang="he-il"] .button-primary {
+  font-family: "Rubik", "Heebo", "Assistant", "Mona Sans", Arial, sans-serif;
+}
+
+/* ------ HERO: replace the dark bar photo with a modern gradient ------ */
+html[lang="he-il"] .section {
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(59, 181, 92, 0.35) 0%, transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(59, 181, 92, 0.25) 0%, transparent 60%),
+    linear-gradient(135deg, #0b1f14 0%, #13301d 45%, #1d4a2c 100%);
+}
+
+/* Flip the hero so text starts on the right (the "start" of Hebrew reading) */
+html[lang="he-il"] .hero-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+html[lang="he-il"] .main-heading {
+  text-align: right;
+  width: 70%;
+  margin-right: 0;
+  margin-left: auto;
+  direction: rtl;
+}
+
+html[lang="he-il"] .div-block-41 {
+  justify-content: flex-end;
+  align-items: flex-end;
+  display: flex;
+  text-align: right;
+}
+
+html[lang="he-il"] .div-block-34 {
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+html[lang="he-il"] .font-16 {
+  text-align: right;
+  direction: rtl;
+}
+
+html[lang="he-il"] .font-16.center {
+  text-align: center;
+}
+
+/* Keep the app-store download badges on the right side of the hero */
+html[lang="he-il"] .div-block-2 {
+  flex-flow: row-reverse;
+  justify-content: flex-start;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ------ NAV: mirror the current-page arrow indicator ------ */
+/* English: arrow to the LEFT of the word (background-position: 0%)
+   Hebrew: arrow to the RIGHT of the word (background-position: 100%)
+   and pointing the opposite direction (mirrored via scaleX).          */
+html[lang="he-il"] .nav-link.w--current {
+  background-image: url('../images/Vector-4-rtl.svg');
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+/* Mirror the whole navbar inner row so the logo sits on the right   *
+ * and the nav items flow right-to-left as Hebrew readers expect.    */
+html[lang="he-il"] .navbar-wrapper {
+  flex-flow: row-reverse wrap;
+}
+
+html[lang="he-il"] .nav-menu {
+  flex-flow: row-reverse wrap;
+}
+
+html[lang="he-il"] .nav-button-wrapper {
+  margin-left: 0;
+  margin-right: 120px;
+}
+
+/* ------ "Low battery kills moments" row: mirror direction ------ */
+html[lang="he-il"] .second-section,
+html[lang="he-il"] .quick-stack-2,
+html[lang="he-il"] .quick-stack-3,
+html[lang="he-il"] .w-layout-layout {
+  direction: rtl;
+}
+
+html[lang="he-il"] .div-block-3 {
+  text-align: right;
+}
+
+html[lang="he-il"] .div-block-4 {
+  flex-flow: row-reverse wrap;
+}
+
+/* "How it works" section — keep Hebrew flow, right-align all copy */
+html[lang="he-il"] .div-block-6,
+html[lang="he-il"] .div-block-7,
+html[lang="he-il"] ._3-coulms,
+html[lang="he-il"] .font-16.dark {
+  text-align: right;
+  direction: rtl;
+}
+
+html[lang="he-il"] .div-block-5 {
+  justify-content: flex-end;
+  flex-flow: row-reverse;
+}
+
+/* Pricing cards: center remains center, but fix inner direction */
+html[lang="he-il"] .div-block-20,
+html[lang="he-il"] .div-block-21,
+html[lang="he-il"] .div-block-22 {
+  direction: rtl;
+  text-align: center;
+}
+
+html[lang="he-il"] .text-block-6 {
+  text-align: center;
+}
+
+/* Footer direction */
+html[lang="he-il"] .div-block-31 {
+  direction: rtl;
+}
+
+html[lang="he-il"] .div-block-32 {
+  text-align: right;
+}
+
+/* FAQ section */
+html[lang="he-il"] .div-block-24 {
+  flex-flow: row-reverse wrap;
+}
+
+html[lang="he-il"] .div-block-25 {
+  align-items: flex-end;
+  text-align: right;
+}
+
+html[lang="he-il"] .div-block-26 {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[lang="he-il"] .dropdown-toggle,
+html[lang="he-il"] .dropdown-list-2 {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Business section */
+html[lang="he-il"] .div-block-40,
+html[lang="he-il"] .heading-4,
+html[lang="he-il"] .div-block-19 {
+  text-align: center;
+}
+
+/* Contact form — labels/inputs right-aligned for Hebrew */
+html[lang="he-il"] .form-content label,
+html[lang="he-il"] .form-content .input,
+html[lang="he-il"] .form-content .text-area {
+  text-align: right;
+  direction: rtl;
+}
+
+/* ------ Responsive: keep hero legible on small screens ------ */
+@media (max-width: 767px) {
+  html[lang="he-il"] .main-heading {
+    width: 100%;
+    font-size: 52px;
+  }
+  html[lang="he-il"] .nav-button-wrapper {
+    margin-right: 0;
+  }
+}
