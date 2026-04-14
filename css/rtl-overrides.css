@@ -482,10 +482,22 @@ html[lang="he-il"] .section-10 .background-video {
 
 /* Only tweak object-fit/position on the inner <video>; DO NOT
  * override its `position: absolute` from Webflow or the centering
- * trick breaks and the video collapses to 0×0. */
+ * trick breaks and the video collapses to 0×0. Use `contain` so the
+ * whole Israel map fits inside the half-section without cropping. */
 html[lang="he-il"] .section-10 .background-video video {
   object-position: center center !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
+}
+
+/* Pull the map in a bit from the left edge and cap its width so the
+ * full shape of Israel sits comfortably inside the left half of the
+ * section without touching the container edges. */
+html[lang="he-il"] .section-10 .background-video {
+  width: 44% !important;
+  max-width: 44% !important;
+  left: 3% !important;
+  top: 8% !important;
+  bottom: 8% !important;
 }
 
 /* Business section */
