@@ -408,11 +408,43 @@ html[lang="he-il"] .quick-stack-2 {
 
 html[lang="he-il"] .div-block-35 {
   text-align: right;
+  margin-right: 0 !important;
+  margin-left: auto;
+  width: 100%;
 }
 
 html[lang="he-il"] .div-block-35 .font-size-48 {
   text-align: right;
   direction: rtl;
+}
+
+/* ------ "How it works" product image: float + soft shadow ------
+ * The new PNG has a transparent background, so give it a subtle
+ * drop-shadow so it sits nicely on the white section instead of
+ * looking flat, and a slow float animation so it doesn't feel
+ * static (matches the hero power bank float vibe). */
+html[lang="he-il"] .section-3 .cell-2 img {
+  filter:
+    drop-shadow(0 24px 40px rgba(0, 0, 0, 0.18))
+    drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+  animation: hero-powerbank-float 5.5s ease-in-out infinite;
+  /* The float keyframes use translate(0, -50%) as their rest state
+   * (they were written for the hero ::before pseudo-element which
+   * needs that centering). Override the 0%/100% transform here to
+   * translate(0,0) via a tailored animation below. */
+  animation-name: how-it-works-image-float;
+}
+
+@keyframes how-it-works-image-float {
+  0%, 100% { transform: translate(0,  0); }
+  50%      { transform: translate(0, -9px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[lang="he-il"] .section-3 .cell-2 img {
+    animation: none !important;
+    transform: none;
+  }
 }
 
 html[lang="he-il"] .div-block-6,
