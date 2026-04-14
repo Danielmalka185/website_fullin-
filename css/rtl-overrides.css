@@ -28,27 +28,45 @@ html[lang="he-il"] .button-primary {
   font-family: "Rubik", "Heebo", "Assistant", "Mona Sans", Arial, sans-serif;
 }
 
-/* ------ HERO: replace the dark bar photo with a modern gradient ------ */
+/* ------ HERO: dark brand gradient + product shot floating on the LEFT ------
+ * The hero text now hugs the right edge (Hebrew reading start) and a
+ * Fullin product image sits on the left side as an attention-grabbing
+ * visual. Built with a CSS background layer so no markup changes are
+ * needed. */
 html[lang="he-il"] .section {
   background-image:
+    url('../images/Group-1388-2.png'),
     radial-gradient(circle at 80% 20%, rgba(59, 181, 92, 0.35) 0%, transparent 55%),
     radial-gradient(circle at 20% 80%, rgba(59, 181, 92, 0.25) 0%, transparent 60%),
     linear-gradient(135deg, #0b1f14 0%, #13301d 45%, #1d4a2c 100%);
+  background-position: 8% center, 80% 20%, 20% 80%, center;
+  background-size: 38% auto, auto, auto, cover;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  position: relative;
 }
 
-/* Flip the hero so text starts on the right (the "start" of Hebrew reading) */
+/* Flip the hero so text content forms a column hugging the right edge */
 html[lang="he-il"] .hero-div {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
-}
-
-html[lang="he-il"] .main-heading {
-  text-align: right;
-  width: 70%;
+  width: 55%;
   margin-right: 0;
   margin-left: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading: flush with the right edge of the column. Drop Webflow's
+ * 60% width cap that was floating it in the middle. */
+html[lang="he-il"] .main-heading {
+  text-align: right;
+  width: 100%;
+  max-width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
   direction: rtl;
 }
 
@@ -57,12 +75,17 @@ html[lang="he-il"] .div-block-41 {
   align-items: flex-end;
   display: flex;
   text-align: right;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 html[lang="he-il"] .div-block-34 {
   margin-right: 0;
-  margin-left: auto;
+  margin-left: 0;
   text-align: right;
+  width: 100%;
+  max-width: 100%;
 }
 
 html[lang="he-il"] .font-16 {
@@ -259,25 +282,107 @@ html[lang="he-il"] .div-block-32 {
   text-align: right;
 }
 
-/* FAQ section */
+/* ------ FAQ: "צריכים עזרה?" intro on the RIGHT, questions on the LEFT ------
+ * Use explicit flex order so it doesn't depend on the markup order or
+ * on the document direction. */
 html[lang="he-il"] .div-block-24 {
-  flex-flow: row-reverse wrap;
+  flex-flow: row nowrap !important;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  display: flex;
 }
 
 html[lang="he-il"] .div-block-25 {
-  align-items: flex-end;
+  order: -1 !important;
+  align-items: flex-start !important;
   text-align: right;
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+html[lang="he-il"] .div-block-25 .heading-6,
+html[lang="he-il"] .div-block-25 .paragraph-5,
+html[lang="he-il"] .div-block-25 .text-block-8 {
+  text-align: right;
+  direction: rtl;
 }
 
 html[lang="he-il"] .div-block-26 {
-  margin-left: 0;
-  margin-right: auto;
+  order: 1 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 55%;
+  flex: 0 0 55%;
 }
 
 html[lang="he-il"] .dropdown-toggle,
 html[lang="he-il"] .dropdown-list-2 {
   text-align: right;
   direction: rtl;
+}
+
+/* The dropdown chevron in the stock layout sits on the left of the
+ * question. In RTL move it to the right of the Hebrew question text. */
+html[lang="he-il"] .dropdown-toggle .w-icon-dropdown-toggle {
+  left: auto;
+  right: 0;
+}
+
+html[lang="he-il"] .dropdown-toggle .text-block-9 {
+  padding-right: 0;
+  padding-left: 30px;
+  text-align: right;
+}
+
+/* ------ "Growing across Israel" — text on the RIGHT, map on the LEFT ------ */
+html[lang="he-il"] .section-10 {
+  position: relative;
+  overflow: hidden;
+}
+
+/* The text container — anchor it to the right edge of the section.
+ * Note: in RTL, `flex-start` points to the RIGHT (inline-start), and
+ * `flex-end` points to the LEFT — so we use flex-start to push to right. */
+html[lang="he-il"] .section-10 .main-container {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+}
+
+html[lang="he-il"] .div-block-37 {
+  justify-content: flex-start !important;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+html[lang="he-il"] .div-block-38 {
+  text-align: right !important;
+  align-items: flex-end;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+html[lang="he-il"] .div-block-38 .font-size-48,
+html[lang="he-il"] .div-block-38 .font-16,
+html[lang="he-il"] .div-block-38 p {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Push the background video map to the LEFT side of the section. */
+html[lang="he-il"] .section-10 .background-video {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  left: 0;
+  right: auto;
+}
+
+html[lang="he-il"] .section-10 .background-video video {
+  object-position: left center !important;
 }
 
 /* Business section */
