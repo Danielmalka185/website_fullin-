@@ -53,17 +53,17 @@ html[lang="he-il"] #home {
 html[lang="he-il"] #home::before {
   content: "";
   position: absolute;
-  left: 6%;
+  left: 5%;
   top: 50%;
-  width: 36%;
-  height: 82%;
+  width: 38%;
+  height: 54%;
   transform: translateY(-50%);
   background-image: url("https://raw.githubusercontent.com/Danielmalka185/website_fullin-/main/ChatGPT%20Image%20Jan%2022%2C%202026%2C%2012_10_33%20AM.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  -webkit-mask-image: radial-gradient(ellipse 38% 62% at center, #000 62%, transparent 100%);
-          mask-image: radial-gradient(ellipse 38% 62% at center, #000 62%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 48% 46% at center, #000 52%, transparent 94%);
+          mask-image: radial-gradient(ellipse 48% 46% at center, #000 52%, transparent 94%);
   pointer-events: none;
   z-index: 1;
 }
