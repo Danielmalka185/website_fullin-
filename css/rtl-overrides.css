@@ -204,11 +204,16 @@ html[lang="he-il"] .div-block-5 {
  *
  * Force the layout with explicit orders so text is ALWAYS first
  * (right side in RTL) and the screenshots block is ALWAYS second
- * (left side in RTL), regardless of which order they appear in HTML. */
+ * (left side in RTL), regardless of which order they appear in HTML.
+ *
+ * `flex-wrap: nowrap` is critical — without it the two children wrap
+ * onto separate lines and stack vertically. */
 html[lang="he-il"] .div-block-8 {
   flex-direction: row !important;
-  flex-wrap: wrap;
+  flex-wrap: nowrap !important;
   align-items: center;
+  justify-content: space-between;
+  gap: 40px;
   display: flex;
 }
 
@@ -216,6 +221,7 @@ html[lang="he-il"] .div-block-36 {
   order: -1 !important;
   text-align: right;
   align-items: flex-end !important;
+  flex: 0 1 auto;
   max-width: 50%;
 }
 
@@ -229,6 +235,7 @@ html[lang="he-il"] .div-block-36 p {
 
 html[lang="he-il"] .div-block-10 {
   order: 1 !important;
+  flex: 0 1 auto;
 }
 
 /* Pricing cards: center remains center, but fix inner direction */
