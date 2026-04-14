@@ -95,16 +95,26 @@ html[lang="he-il"] .nav-link.w--current {
   padding-right: 20px;
 }
 
-/* Mirror the whole navbar inner row so the logo sits on the right   *
- * and the nav items flow right-to-left as Hebrew readers expect.    */
-html[lang="he-il"] .navbar-wrapper {
-  flex-flow: row-reverse wrap;
-}
-
+/* Navbar order in RTL:
+ *   right → [ Logo ]  [ בית ]  [ איך זה עובד ]  [ מחיר ]  [ לעסקים ]  [ שאלות ותשובות ]  [ צור קשר ] ← left
+ *
+ * html dir="rtl" already flows flex children right-to-left with the
+ * default `flex-direction: row`. The stock Webflow CSS (and my earlier
+ * override) applied `row-reverse`, which re-inverted the order and put
+ * the logo back on the LEFT. Force normal row ordering here so the
+ * logo lands on the right and nav items read right-to-left.
+ */
+html[lang="he-il"] .navbar-wrapper,
+html[lang="he-il"] .nav-menu-wrapper,
 html[lang="he-il"] .nav-menu {
-  flex-flow: row-reverse wrap;
+  flex-direction: row !important;
+  flex-wrap: wrap;
 }
 
+/* In the stock layout `.nav-button-wrapper` has `margin-left: 120px`
+ * which pushes the CTA to the far right in LTR. In RTL we want that
+ * gap to the start of the row (right side) so the button sits on the
+ * far LEFT — flip the margins. */
 html[lang="he-il"] .nav-button-wrapper {
   margin-left: 0;
   margin-right: 120px;
@@ -118,15 +128,60 @@ html[lang="he-il"] .w-layout-layout {
   direction: rtl;
 }
 
+/* `.cell-3` is a flex column holding the heading, paragraph and CTA.
+ * In RTL context `align-items: flex-end` (set by Webflow for he-il)
+ * pushes children to the LEFT — the opposite of what's wanted.
+ * Force start-alignment so every child hugs the RIGHT edge of the
+ * cell, and right-align all text inside. */
+html[lang="he-il"] .cell-3 {
+  text-align: right !important;
+  align-items: flex-start !important;
+  justify-content: flex-start;
+}
+
+/* The heading wrapper is hard-capped at 320px which leaves a big
+ * empty gap on its right. Let it grow and right-align its h1 so the
+ * heading starts at the cell's right edge (the start of Hebrew). */
 html[lang="he-il"] .div-block-3 {
+  width: auto;
+  max-width: 520px;
   text-align: right;
 }
 
-html[lang="he-il"] .div-block-4 {
-  flex-flow: row-reverse wrap;
+html[lang="he-il"] .div-block-3 .font-size-48,
+html[lang="he-il"] .cell-3 .font-16,
+html[lang="he-il"] .cell-3 p {
+  text-align: right;
+  direction: rtl;
 }
 
-/* "How it works" section — keep Hebrew flow, right-align all copy */
+/* CTA row: icon on the LEFT of the Hebrew label (forward direction
+ * in RTL) and the whole block anchored to the right edge. */
+html[lang="he-il"] .div-block-4 {
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-self: flex-start;
+}
+
+/* "How it works" section — text on the RIGHT, product image on the LEFT.
+ * Markup is `<quick-stack-2><cell-2 = image><cell = content></quick-stack-2>`.
+ * In RTL with the default `flex-direction: row` the first child (image)
+ * lands on the right. Use `row-reverse` so in RTL the first child goes
+ * LEFT, which puts the image on the left and the content on the right. */
+html[lang="he-il"] .quick-stack-2 {
+  flex-direction: row-reverse !important;
+  display: flex;
+}
+
+html[lang="he-il"] .div-block-35 {
+  text-align: right;
+}
+
+html[lang="he-il"] .div-block-35 .font-size-48 {
+  text-align: right;
+  direction: rtl;
+}
+
 html[lang="he-il"] .div-block-6,
 html[lang="he-il"] .div-block-7,
 html[lang="he-il"] ._3-coulms,
@@ -138,6 +193,42 @@ html[lang="he-il"] .font-16.dark {
 html[lang="he-il"] .div-block-5 {
   justify-content: flex-end;
   flex-flow: row-reverse;
+}
+
+/* ------ "RENT INSTANTLY / טעינה מיידית" + "ABOUT THE APP / על האפליקציה" ------
+ * Both sections share `.div-block-8` as the flex row, but the DOM order
+ * of text vs. phone screenshots is reversed between them. The stock
+ * Webflow Hebrew rules push `.div-block-36` (text) to `order: 9999`,
+ * which sends the text to the END of the row → in RTL that's the LEFT
+ * side, the opposite of what we want.
+ *
+ * Force the layout with explicit orders so text is ALWAYS first
+ * (right side in RTL) and the screenshots block is ALWAYS second
+ * (left side in RTL), regardless of which order they appear in HTML. */
+html[lang="he-il"] .div-block-8 {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  align-items: center;
+  display: flex;
+}
+
+html[lang="he-il"] .div-block-36 {
+  order: -1 !important;
+  text-align: right;
+  align-items: flex-end !important;
+  max-width: 50%;
+}
+
+html[lang="he-il"] .div-block-36 .font-size-48,
+html[lang="he-il"] .div-block-36 .eyebrow,
+html[lang="he-il"] .div-block-36 .div-block-7,
+html[lang="he-il"] .div-block-36 p {
+  text-align: right;
+  direction: rtl;
+}
+
+html[lang="he-il"] .div-block-10 {
+  order: 1 !important;
 }
 
 /* Pricing cards: center remains center, but fix inner direction */
