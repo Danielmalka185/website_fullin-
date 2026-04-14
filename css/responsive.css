@@ -1,0 +1,743 @@
+/* =========================================================
+   FULLIN — Mobile / responsive overrides
+   Loaded after the Webflow stylesheet so every rule here
+   wins without !important where possible.
+   ========================================================= */
+
+/* ---- Safety net for all screens ---- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   TABLET  (<= 991px)
+   ========================================================= */
+@media screen and (max-width: 991px) {
+  .main-container {
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .navbar-no-shadow-container {
+    width: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  .main-heading {
+    width: 100%;
+    font-size: 64px;
+    margin-top: 90px;
+  }
+
+  .hero-div {
+    padding-bottom: 110px;
+  }
+
+  .section {
+    padding-top: 90px;
+  }
+
+  .font-size-48 {
+    font-size: 40px;
+  }
+
+  .heading-4 {
+    font-size: 64px;
+  }
+
+  .heading-6 {
+    font-size: 40px;
+  }
+
+  /* How it works cards */
+  ._3-coulms {
+    width: 100%;
+    height: auto;
+    padding: 20px 22px 28px;
+  }
+
+  .quick-stack-2 {
+    width: 100%;
+  }
+
+  .div-block-3,
+  .div-block-7,
+  .div-block-10,
+  .div-block-21,
+  .div-block-23,
+  .div-block-29,
+  .div-block-32,
+  .div-block-34,
+  .div-block-38 {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .image-3 {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+  }
+
+  .div-block-20 {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Pricing grid - two columns on tablet */
+  #w-node-_8354f0cd-20ad-14de-da5a-059303f51fae-ed7d41d2,
+  #w-node-d86f3f86-4cdf-6180-d05e-5d0358234374-fe925c03 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* For-business partner cards */
+  .div-block-44 {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Growing-across-Israel video */
+  .background-video {
+    width: 100%;
+    height: 420px;
+    margin-top: 20px;
+  }
+
+  .section-10 {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  /* FAQ */
+  .div-block-26 {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .div-block-24 {
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  /* Contact form page */
+  .section-11 {
+    height: auto;
+    min-height: 100vh;
+    padding: 120px 16px 60px;
+  }
+
+  .card.is-xl {
+    padding: 2rem;
+  }
+
+  .form-wrapper,
+  .form-wrapper.is-large {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   PHONES (<= 767px)
+   ========================================================= */
+@media screen and (max-width: 767px) {
+  .main-container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .navbar-no-shadow-container {
+    margin-top: 12px;
+    margin-left: 8px;
+    margin-right: 8px;
+    padding: 8px 14px;
+  }
+
+  .image {
+    width: 110px;
+  }
+
+  .button-primary {
+    width: auto;
+    min-width: 130px;
+    height: 46px;
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 16px;
+  }
+
+  .nav-menu {
+    padding: 16px 0 24px;
+  }
+
+  .nav-link {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  .nav-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 0;
+  }
+
+  /* Hero */
+  .section {
+    padding-top: 70px;
+  }
+
+  .hero-div {
+    padding-bottom: 80px;
+  }
+
+  .main-heading,
+  .main-heading:lang(he-il) {
+    width: 100%;
+    margin-top: 60px;
+    font-size: 44px;
+    line-height: 1em;
+    text-align: left;
+  }
+
+  .div-block-41 {
+    width: 100%;
+  }
+
+  .div-block-34 {
+    max-width: 100%;
+  }
+
+  .div-block-34:lang(he-il) {
+    margin-right: 0;
+  }
+
+  .font-16 {
+    font-size: 16px;
+  }
+
+  .div-block-2 {
+    flex-wrap: wrap;
+    margin-top: 18px;
+    margin-bottom: 26px;
+  }
+
+  .div-block-2:lang(he-il) {
+    justify-content: flex-start;
+    margin-right: 0;
+  }
+
+  .secondry-button.w-button {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+
+  /* Section 2 - Low battery kills moments */
+  .section-2 {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  #w-node-_3a342ed3-6e9c-8460-723d-4f8b0619957c-ed7d41d2 {
+    grid-template-columns: 1fr;
+  }
+
+  .cell-3,
+  .cell-3:lang(he-il) {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .second-section {
+    padding: 0 6px;
+  }
+
+  .font-size-48 {
+    font-size: 32px;
+  }
+
+  .image-3 {
+    width: 100%;
+    max-width: 320px;
+    margin: 20px auto;
+  }
+
+  /* Section 3 - How it works */
+  .section-3 {
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+
+  .div-block-35 {
+    margin-bottom: 36px;
+  }
+
+  ._3-coulms {
+    width: 100%;
+    height: auto;
+    padding: 18px 20px 26px;
+  }
+
+  ._01 {
+    font-size: 30px;
+  }
+
+  ._01.scan {
+    font-size: 18px;
+  }
+
+  .div-block-42,
+  .div-block-42:lang(he-il) {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  /* Section 4 - app showcase */
+  .section-4 {
+    padding-top: 60px;
+  }
+
+  .div-block-8,
+  .div-block-8:lang(he-il) {
+    flex-flow: column;
+    align-items: center;
+    text-align: left;
+    gap: 24px;
+  }
+
+  .div-block-36,
+  .div-block-36:lang(he-il) {
+    order: -1;
+    width: 100%;
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .div-block-7 {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .div-block-10 {
+    width: 100%;
+    padding-top: 30px;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .image-5 {
+    width: 31%;
+    height: auto;
+    min-width: 0;
+  }
+
+  /* Section 5 - first hour free banner */
+  .section-5 {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .main-container._3rd {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .div-block-11 {
+    padding: 50px 24px;
+    max-width: 100%;
+  }
+
+  .div-block-43 {
+    max-width: 100%;
+  }
+
+  .div-block-43 .font-size-48 {
+    font-size: 28px;
+  }
+
+  .div-block-12 {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .div-block-12 img {
+    width: 140px;
+    height: auto;
+  }
+
+  /* Section 6 - Pricing */
+  .section-6 {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+
+  #w-node-_8354f0cd-20ad-14de-da5a-059303f51fae-ed7d41d2 {
+    grid-template-columns: 1fr;
+  }
+
+  .div-block-20 {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .div-block-20.main,
+  .div-block-20.main._3rd {
+    padding: 26px 20px;
+  }
+
+  .div-block-21 {
+    width: 100%;
+  }
+
+  .image-8 {
+    width: 80%;
+    max-width: 360px;
+    margin-top: 20px;
+  }
+
+  .text-block-6,
+  .text-block-6._1st {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .text-block-7 {
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 12px;
+  }
+
+  /* Section 7 - for businesses */
+  .section-7 {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-size: cover;
+  }
+
+  .heading-4 {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  .div-block-19 {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .div-block-19 .font-16 {
+    text-align: center;
+  }
+
+  .div-block-44 {
+    flex-flow: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .div-block-45,
+  .div-block-45.left,
+  .div-block-45.right {
+    width: 85%;
+    max-width: 300px;
+  }
+
+  /* Section 8 - FAQ */
+  .section-8 {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+
+  .div-block-24,
+  .div-block-24:lang(he-il) {
+    flex-flow: column;
+    gap: 30px;
+  }
+
+  .div-block-25 {
+    width: 100%;
+  }
+
+  .heading-6 {
+    font-size: 34px;
+  }
+
+  .div-block-23 {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .div-block-26 {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 20px;
+  }
+
+  .text-block-9 {
+    font-size: 16px;
+    line-height: 1.3em;
+  }
+
+  .dropdown-list-2 {
+    padding-top: 16px;
+  }
+
+  .dropdown-list-2.w--open {
+    padding-bottom: 20px;
+  }
+
+  /* Section 10 - Growing across Israel */
+  .section-10 {
+    flex-flow: column;
+    align-items: stretch;
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .div-block-37 {
+    width: 100%;
+  }
+
+  .div-block-38 {
+    max-width: 100%;
+  }
+
+  .background-video {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    margin: 24px 0 0;
+  }
+
+  /* Section 9 - Footer */
+  .section-9 {
+    padding-top: 40px;
+    padding-bottom: 10px;
+  }
+
+  .div-block-31 {
+    flex-flow: column;
+    gap: 24px;
+  }
+
+  .div-block-29 {
+    width: 100%;
+    height: auto;
+  }
+
+  .div-block-33 {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+  }
+
+  .image-9 {
+    margin-top: 0;
+    width: 140px;
+    height: auto;
+  }
+
+  .div-block-30 {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .div-block-32 {
+    width: 100%;
+    padding-top: 12px;
+    gap: 14px;
+  }
+
+  .text-block-11 {
+    font-size: 13px;
+  }
+
+  /* Contact form page */
+  .section-11 {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 110px 12px 50px;
+  }
+
+  .card.is-xl {
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+  }
+
+  .grid-2-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .form-wrapper,
+  .form-wrapper.is-large {
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+  }
+
+  .input {
+    height: 3.5rem;
+    font-size: 16px;
+  }
+
+  .text-area {
+    min-height: 6.5rem;
+  }
+
+  .button.is-secondary-16 {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .button-wrapper.is-width-100-portrait {
+    width: 100%;
+  }
+
+  .text-block-13 {
+    font-size: 32px;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES (<= 479px)
+   ========================================================= */
+@media screen and (max-width: 479px) {
+  .main-container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .navbar-no-shadow-container {
+    margin-left: 6px;
+    margin-right: 6px;
+    padding: 6px 12px;
+  }
+
+  .image {
+    width: 96px;
+  }
+
+  .button-primary {
+    min-width: 110px;
+    height: 42px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 15px;
+  }
+
+  .section {
+    padding-top: 60px;
+  }
+
+  .main-heading,
+  .main-heading:lang(he-il) {
+    margin-top: 40px;
+    font-size: 36px;
+  }
+
+  .hero-div {
+    padding-bottom: 60px;
+  }
+
+  .font-size-48 {
+    font-size: 28px;
+  }
+
+  .heading-4 {
+    font-size: 40px;
+  }
+
+  .heading-6 {
+    font-size: 30px;
+  }
+
+  ._3-coulms {
+    padding: 16px 18px 22px;
+  }
+
+  ._01 {
+    font-size: 26px;
+  }
+
+  .image-5 {
+    width: 32%;
+  }
+
+  .div-block-10 {
+    gap: 8px;
+    padding-top: 24px;
+  }
+
+  .div-block-11 {
+    padding: 40px 18px;
+  }
+
+  .div-block-43 .font-size-48 {
+    font-size: 24px;
+  }
+
+  .div-block-12 img {
+    width: 130px;
+  }
+
+  .div-block-20.main {
+    padding: 22px 16px;
+  }
+
+  .text-block-6,
+  .text-block-6._1st {
+    font-size: 18px;
+  }
+
+  .background-video {
+    height: 220px;
+  }
+
+  .section-11 {
+    padding: 100px 10px 40px;
+  }
+
+  .card.is-xl {
+    padding: 1.25rem;
+  }
+
+  .input {
+    height: 3.25rem;
+  }
+
+  .text-block-13 {
+    font-size: 26px;
+  }
+}
+
+/* =========================================================
+   HEIGHT-BASED helpers — ensure short mobile landscape works
+   ========================================================= */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .main-heading {
+    margin-top: 40px;
+  }
+
+  .section {
+    padding-top: 60px;
+  }
+}
