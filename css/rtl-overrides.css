@@ -53,10 +53,10 @@ html[lang="he-il"] #home {
 html[lang="he-il"] #home::before {
   content: "";
   position: absolute;
-  left: 11%;
+  left: 7%;
   top: 50%;
-  width: 32%;
-  height: 82%;
+  width: 40%;
+  height: 96%;
   transform: translateY(-50%);
   background-image: url("../images/fullin-hero-composite.png");
   background-repeat: no-repeat;
