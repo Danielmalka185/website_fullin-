@@ -53,10 +53,10 @@ html[lang="he-il"] #home {
 html[lang="he-il"] #home::before {
   content: "";
   position: absolute;
-  left: 10%;
+  left: 11%;
   top: 50%;
-  width: 40%;
-  height: 96%;
+  width: 32%;
+  height: 82%;
   transform: translateY(-50%);
   background-image: url("../images/fullin-hero-composite.png");
   background-repeat: no-repeat;
@@ -963,5 +963,270 @@ html[lang="he-il"] .div-block-20.main .div-block-39 {
   }
   html[lang="he-il"] .nav-button-wrapper {
     margin-right: 0;
+  }
+}
+
+/* ======================================================================
+   COMPREHENSIVE MOBILE OVERRIDES — phones (≤767px) & tablets (≤991px)
+   The stock Webflow layout was built desktop-first and uses fixed-pixel
+   widths in a bunch of places (navbar, hero text, section cards) that
+   overflow small viewports. Rules below normalise the whole page so
+   everything fits within the viewport, nothing scrolls horizontally,
+   and Hebrew copy stays readable at phone widths.
+   ====================================================================== */
+
+/* Kill any accidental horizontal scroll */
+html[lang="he-il"] body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 991px) {
+  /* Generic: everything stacks vertically, no side margins sticking out */
+  html[lang="he-il"] .main-container,
+  html[lang="he-il"] .w-container {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  /* ---- Navbar ---- */
+  html[lang="he-il"] .navbar-wrapper {
+    padding: 12px 16px;
+  }
+  html[lang="he-il"] .navbar-brand img {
+    max-height: 40px;
+    width: auto;
+  }
+
+  /* ---- Hero ---- */
+  html[lang="he-il"] #home {
+    padding-top: 140px;
+    padding-bottom: 60px;
+    min-height: auto;
+  }
+  html[lang="he-il"] .hero-div {
+    width: 100%;
+    text-align: right;
+    padding: 0;
+  }
+  html[lang="he-il"] .main-heading {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+  html[lang="he-il"] .div-block-34 .font-16 {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ---- Section-2 "סוללה ריקה" ---- */
+  html[lang="he-il"] .second-section,
+  html[lang="he-il"] .w-layout-layout.second-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px;
+  }
+  html[lang="he-il"] .cell-3 {
+    width: 100% !important;
+    align-items: flex-start !important;
+    text-align: right;
+  }
+  html[lang="he-il"] .div-block-3 {
+    max-width: 100%;
+  }
+  html[lang="he-il"] .div-block-3 .font-size-48,
+  html[lang="he-il"] .font-size-48 {
+    font-size: 32px !important;
+    line-height: 1.2;
+  }
+  html[lang="he-il"] .cell .image-3,
+  html[lang="he-il"] .cell img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ---- Section-3 "איך זה עובד" ---- */
+  html[lang="he-il"] .quick-stack-2 {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 30px;
+  }
+  html[lang="he-il"] .cell-2,
+  html[lang="he-il"] .cell-2 img {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    justify-content: center !important;
+  }
+  html[lang="he-il"] .cell-2 img {
+    max-height: 420px;
+    object-fit: contain;
+    margin: 0 auto;
+  }
+  html[lang="he-il"] .div-block-42 {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  html[lang="he-il"] ._3-coulms {
+    width: 100%;
+  }
+
+  /* ---- Section-4 "טעינה מיידית" / "על האפליקציה" ---- */
+  html[lang="he-il"] .div-block-8 {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    gap: 30px !important;
+    align-items: stretch;
+  }
+  html[lang="he-il"] .div-block-36 {
+    max-width: 100% !important;
+    order: -1 !important;
+    width: 100%;
+  }
+  html[lang="he-il"] .div-block-10 {
+    order: 1 !important;
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  html[lang="he-il"] .div-block-10 img,
+  html[lang="he-il"] .image-5 {
+    flex: 0 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    height: auto;
+    width: auto;
+  }
+
+  /* ---- Section-10 "הרשת גדלה ברחבי ישראל" ---- */
+  html[lang="he-il"] .section-10 {
+    min-height: auto;
+    padding: 60px 0;
+  }
+  html[lang="he-il"] .section-10 .main-container {
+    display: block;
+  }
+  html[lang="he-il"] .div-block-37 {
+    width: 100%;
+    display: block;
+  }
+  html[lang="he-il"] .div-block-38 {
+    padding-right: 0;
+    padding-left: 0;
+    text-align: right !important;
+  }
+  /* Map video moves from absolute side to a static block below text */
+  html[lang="he-il"] .section-10 .background-video {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 260px !important;
+    margin: 30px auto 0 !important;
+  }
+
+  /* ---- Section-6 pricing: already responsive via existing rule ---- */
+  /* ---- Section-7 for business ---- */
+  html[lang="he-il"] .div-block-44 {
+    flex-flow: column !important;
+    align-items: center;
+    gap: 20px;
+  }
+  html[lang="he-il"] .div-block-45 {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* ---- Section-8 FAQ ---- */
+  html[lang="he-il"] .div-block-24 {
+    flex-direction: column !important;
+    gap: 24px;
+  }
+  html[lang="he-il"] .div-block-25,
+  html[lang="he-il"] .div-block-26 {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100%;
+  }
+  html[lang="he-il"] .heading-6 {
+    font-size: 32px;
+  }
+
+  /* ---- Footer ---- */
+  html[lang="he-il"] .div-block-31 {
+    flex-flow: column !important;
+    gap: 24px;
+    text-align: right;
+  }
+  html[lang="he-il"] .div-block-29,
+  html[lang="he-il"] .div-block-32 {
+    width: 100%;
+  }
+
+  /* ---- Typography scale ---- */
+  html[lang="he-il"] .heading-4 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+}
+
+/* Phone-specific (≤767px) */
+@media (max-width: 767px) {
+  /* Hero heading slightly smaller on narrow phones */
+  html[lang="he-il"] .main-heading {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+  html[lang="he-il"] .font-size-48 {
+    font-size: 28px !important;
+  }
+  html[lang="he-il"] .heading-4,
+  html[lang="he-il"] .heading-6 {
+    font-size: 28px;
+  }
+
+  /* Hero: hide the background product image on very narrow screens
+   * since it overflows and the page reads better as text-only */
+  html[lang="he-il"] #home::before {
+    display: none;
+  }
+
+  /* Reduce generic section padding so there's more content room */
+  html[lang="he-il"] section.section-2,
+  html[lang="he-il"] section.section-3,
+  html[lang="he-il"] section.section-4,
+  html[lang="he-il"] section.section-6,
+  html[lang="he-il"] section.section-7,
+  html[lang="he-il"] section.section-8 {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  /* Buttons full-width where appropriate */
+  html[lang="he-il"] .secondry-button.w-button,
+  html[lang="he-il"] .button-primary.w-button {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    max-width: 320px;
+  }
+
+  /* App-store badges stack neatly */
+  html[lang="he-il"] .div-block-2 {
+    flex-flow: row wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    margin: 16px 0;
+  }
+  html[lang="he-il"] .div-block-2 .app-store {
+    height: 46px;
+    width: auto;
   }
 }
