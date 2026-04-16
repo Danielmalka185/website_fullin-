@@ -933,8 +933,9 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
 }
 
@@ -1139,7 +1140,6 @@
   justify-content: center;
   width: 100%;
   max-width: 29.875rem;
-  min-height: 36rem;
   display: flex;
 }
 
@@ -1242,7 +1242,6 @@
 
   .form-wrapper.is-large {
     max-width: 100%;
-    min-height: 34.8rem;
   }
 }
 
@@ -1454,7 +1453,7 @@
   }
 
   .form-wrapper.is-large {
-    min-height: 42.4rem;
+    max-width: 100%;
   }
 }
 
@@ -1515,7 +1514,7 @@
   }
 
   .form-wrapper.is-large {
-    min-height: 39.4rem;
+    max-width: 100%;
   }
 
   .container-2 {
