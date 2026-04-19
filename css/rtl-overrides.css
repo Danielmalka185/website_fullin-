@@ -397,30 +397,49 @@ html[lang="he-il"] .section-2 .cell-3 .div-block-4 .image-10 {
   filter: brightness(0);
 }
 
-/* Mobile: card collapses below the photo instead of overlaying it */
+/* Mobile: photo and card stack as two separate blocks so the cafe
+ * scene stays fully visible instead of being hidden under the card. */
 @media (max-width: 767px) {
   html[lang="he-il"] .section-2 {
     padding: 50px 0;
   }
   html[lang="he-il"] .section-2 .second-section {
-    min-height: 420px;
-    border-radius: 20px;
-    background-image:
-      linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.1) 55%, transparent 80%),
-      url("../images/fullin-cafe-scene.jpg");
-    padding-bottom: 24px;
+    display: flex !important;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 0;
+    background: none !important;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
   }
+  /* Photo becomes its own block with a tall aspect-ratio, so the full
+   * cafe scene reads at a glance. */
+  html[lang="he-il"] .section-2 .second-section::before {
+    content: "";
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-image: url("../images/fullin-cafe-scene.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(5, 20, 10, 0.25);
+  }
+  /* Card flows naturally below the photo — no more absolute overlay. */
   html[lang="he-il"] .section-2 .cell-3 {
-    position: absolute !important;
+    position: static !important;
     top: auto;
-    bottom: 20px;
-    right: 16px;
-    left: 16px;
-    width: auto;
-    max-width: none;
-    transform: none;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    transform: none !important;
+    width: auto !important;
+    max-width: none !important;
     padding: 22px 22px 20px;
     border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
   }
   html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
     font-size: 22px !important;
@@ -2005,34 +2024,105 @@ html[lang="he-il"] img {
   }
 }
 
-/* 5) Contact-page card (contact-us.html): .card.is-xl has 3rem padding
- *    which is too tight on 360-390px phones (leaves only ~300px for the
- *    form fields). Tighten on phones and drop the outer overflow:scroll
- *    from .section-11 that came from the Webflow default — it produces
- *    an ugly double-scrollbar on iOS. */
+/* 5) Contact-page card (contact-us.html): the stock Webflow template
+ *    ships this form at 426px wide with 3rem card padding and 4-4.5rem
+ *    (64-72px) tall inputs — way too heavy for both desktop and phone.
+ *    Tighten the whole thing so it feels like a quick, friendly form
+ *    instead of a bureaucratic intake. */
+
+/* Desktop + tablet: compact card centered on the hero background */
+html[lang="he-il"] .section-11 {
+  padding: 80px 0 !important;
+  min-height: 0 !important;
+}
+html[lang="he-il"] .section-11 .container-2 {
+  width: 100%;
+  max-width: 520px !important;
+  padding: 0 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+html[lang="he-il"] .section-11 .card.is-xl {
+  padding: 2rem 1.75rem !important;
+  border-radius: 1.5rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+html[lang="he-il"] .section-11 .form-wrapper,
+html[lang="he-il"] .section-11 .form-wrapper.is-large {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  margin: 0;
+}
+html[lang="he-il"] .section-11 .grid-1-column {
+  grid-row-gap: 0.85rem !important;
+  grid-column-gap: 0.85rem !important;
+}
+html[lang="he-il"] .section-11 label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  text-align: right;
+  direction: rtl;
+}
+html[lang="he-il"] .section-11 .input {
+  height: 3rem !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background-color: #f7f9fc !important;
+  padding: 0 14px !important;
+  font-size: 15px !important;
+}
+html[lang="he-il"] .section-11 .text-area {
+  min-height: 6rem !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background-color: #f7f9fc !important;
+  padding: 12px 14px !important;
+  font-size: 15px !important;
+}
+html[lang="he-il"] .section-11 .input:focus,
+html[lang="he-il"] .section-11 .text-area:focus {
+  border-color: var(--brand-colour) !important;
+  background-color: #ffffff !important;
+  outline: none;
+}
+html[lang="he-il"] .section-11 .buttons-row {
+  margin-top: 0.5rem;
+}
+html[lang="he-il"] .section-11 .button.w-button {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.75rem;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Phone-specific tightening */
 @media (max-width: 767px) {
   html[lang="he-il"] .section-11 {
     overflow: visible !important;
-    padding: 100px 0 60px !important;
+    padding: 90px 0 50px !important;
   }
   html[lang="he-il"] .section-11 .container-2 {
-    width: 100% !important;
     padding: 0 16px;
-    box-sizing: border-box;
   }
-  html[lang="he-il"] .card.is-xl {
-    padding: 1.5rem 1.25rem !important;
+  html[lang="he-il"] .section-11 .card.is-xl {
+    padding: 1.25rem 1rem !important;
     border-radius: 1.25rem;
   }
   html[lang="he-il"] .section-11 .grid-2-columns {
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 0.85rem !important;
   }
-  html[lang="he-il"] .section-11 label {
-    text-align: right;
-    direction: rtl;
-    display: block;
-    margin-bottom: 6px;
+  html[lang="he-il"] .section-11 .input,
+  html[lang="he-il"] .section-11 .text-area {
+    font-size: 16px !important; /* prevents iOS Safari zooming on focus */
+  }
+  html[lang="he-il"] .section-11 .input {
+    height: 2.75rem !important;
   }
 }
 
