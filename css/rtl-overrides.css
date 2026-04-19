@@ -1981,10 +1981,16 @@ html[lang="he-il"] body {
 /* 2) Image safety net: every image scales down inside its container.
  *    Several <img>s in index.html use srcset + sizes="100vw" but have
  *    no CSS max-width rule, so on narrow screens the browser would
- *    sometimes pick a source wider than the viewport and push layout. */
-html[lang="he-il"] img {
-  max-width: 100%;
-  height: auto;
+ *    sometimes pick a source wider than the viewport and push layout.
+ *    SCOPED to ≤991px only — on desktop we must NOT force max-width:
+ *    100% because some images (phone screenshots, pricing card art,
+ *    how-it-works product shot) would then balloon to fill their full
+ *    column instead of showing at their intrinsic design size. */
+@media (max-width: 991px) {
+  html[lang="he-il"] img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* 3) Hero RTL flex-column alignment — on mobile align-items:flex-end
