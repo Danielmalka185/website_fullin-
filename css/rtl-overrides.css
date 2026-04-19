@@ -315,27 +315,30 @@ html[lang="he-il"] .section-2 .cell {
   display: none !important;
 }
 
-/* Floating white glass card anchored to the RIGHT of the photo */
+/* Floating white glass card anchored to the TOP-RIGHT of the photo.
+ * Sits compactly in the darker wall/lamp area so the waitress + the
+ * FULLIN power bank + the customer's phone remain fully visible. */
 html[lang="he-il"] .section-2 .cell-3 {
   position: absolute !important;
-  top: 50%;
-  right: 56px;
-  transform: translateY(-50%);
-  width: 42%;
-  max-width: 460px;
+  top: 36px;
+  right: 36px;
+  bottom: auto;
+  transform: none;
+  width: 36%;
+  max-width: 380px;
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 22px;
-  padding: 34px 34px 30px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 22px 22px 20px;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.25);
   text-align: right !important;
   align-items: flex-start !important;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 html[lang="he-il"] .section-2 .cell-3 .div-block-3 {
@@ -345,7 +348,7 @@ html[lang="he-il"] .section-2 .cell-3 .div-block-3 {
 
 html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
   color: #1a1a1a !important;
-  font-size: 30px !important;
+  font-size: 24px !important;
   line-height: 1.2;
   font-weight: 800;
   margin: 0;
@@ -355,8 +358,8 @@ html[lang="he-il"] .section-2 .cell-3 .font-size-48 {
 
 html[lang="he-il"] .section-2 .cell-3 .font-16.dark {
   color: #3a3a3a !important;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
   margin: 0;
   text-align: right;
   direction: rtl;
