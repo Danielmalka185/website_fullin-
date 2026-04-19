@@ -1937,3 +1937,214 @@ html[lang="he-il"] body {
     gap: 4px 16px;
   }
 }
+
+/* ======================================================================
+   MOBILE BUG FIXES — targeted cleanups on top of the earlier overrides
+   ---------------------------------------------------------------------
+   Users reported that the site looked broken on phones. The earlier
+   blocks had a few real conflicts that caused horizontal overflow and
+   misaligned hero content in RTL. This block fixes them specifically.
+   ====================================================================== */
+
+/* 1) Prevent horizontal overflow at the root too. `body { overflow-x:
+ *    hidden }` above only clips the body; the html element itself can
+ *    still scroll horizontally on iOS Safari when a descendant overflows.
+ *    Clamping both + max-width: 100vw makes the fix airtight. */
+html[lang="he-il"],
+html[lang="he-il"] body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* 2) Image safety net: every image scales down inside its container.
+ *    Several <img>s in index.html use srcset + sizes="100vw" but have
+ *    no CSS max-width rule, so on narrow screens the browser would
+ *    sometimes pick a source wider than the viewport and push layout. */
+html[lang="he-il"] img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 3) Hero RTL flex-column alignment — on mobile align-items:flex-end
+ *    (from the desktop .hero-div rule) maps to the LEFT edge in RTL
+ *    column context, which was pushing the heading/paragraph/CTAs to
+ *    the LEFT on phones. Flip to flex-start so every child hugs the
+ *    RIGHT edge of the hero column on phones. */
+@media (max-width: 991px) {
+  html[lang="he-il"] .hero-div {
+    align-items: flex-start !important; /* RTL cross-start = RIGHT */
+  }
+  html[lang="he-il"] .hero-div .div-block-41,
+  html[lang="he-il"] .hero-div .div-block-34,
+  html[lang="he-il"] .hero-div .div-block-2 {
+    align-self: stretch;
+    width: 100%;
+    justify-content: flex-start !important;
+  }
+  html[lang="he-il"] .hero-div .div-block-2 {
+    margin-right: 0;
+    margin-left: auto;
+  }
+}
+
+/* 4) Section-2 "cafe" card — the ≤991px rule forces
+ *    `.cell-3 { width: 100% !important }` which, combined with the
+ *    ≤767px absolute positioning (left: 14px; right: 14px), was
+ *    making the card 100% wide AND offset 14px from each side, so it
+ *    overflowed its photo by ~28 px on every phone. Force auto width
+ *    so right/left:14px are honored and the card stays inside. */
+@media (max-width: 767px) {
+  html[lang="he-il"] .section-2 .cell-3 {
+    width: auto !important;
+    max-width: none !important;
+  }
+  /* Give the background photo a taller aspect so the card has room
+   * to sit below the scene without covering the cafe imagery. */
+  html[lang="he-il"] .section-2 .second-section {
+    min-height: 460px;
+  }
+}
+
+/* 5) Contact-page card (contact-us.html): .card.is-xl has 3rem padding
+ *    which is too tight on 360-390px phones (leaves only ~300px for the
+ *    form fields). Tighten on phones and drop the outer overflow:scroll
+ *    from .section-11 that came from the Webflow default — it produces
+ *    an ugly double-scrollbar on iOS. */
+@media (max-width: 767px) {
+  html[lang="he-il"] .section-11 {
+    overflow: visible !important;
+    padding: 100px 0 60px !important;
+  }
+  html[lang="he-il"] .section-11 .container-2 {
+    width: 100% !important;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+  html[lang="he-il"] .card.is-xl {
+    padding: 1.5rem 1.25rem !important;
+    border-radius: 1.25rem;
+  }
+  html[lang="he-il"] .section-11 .grid-2-columns {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  html[lang="he-il"] .section-11 label {
+    text-align: right;
+    direction: rtl;
+    display: block;
+    margin-bottom: 6px;
+  }
+}
+
+/* 6) Hero nav padding: on iOS the fixed/sticky navbar can collide with
+ *    the notch. Add safe-area padding so the logo isn't clipped. */
+@supports (padding: max(0px)) {
+  html[lang="he-il"] .navbar-no-shadow-container {
+    padding-top: max(0px, env(safe-area-inset-top));
+  }
+}
+
+/* 7) Business section (.section-7): on phones the icon-chip cards
+ *    (.div-block-45) were fine but the eyebrow/body copy wrapper
+ *    (.div-block-19) still had a stock desktop width. Let it flow. */
+@media (max-width: 767px) {
+  html[lang="he-il"] .section-7 .div-block-40 {
+    padding: 0 4px;
+  }
+  html[lang="he-il"] .section-7 .div-block-19 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  html[lang="he-il"] .section-7 .div-block-19 .font-16 {
+    font-size: 15px;
+    line-height: 1.65;
+    text-align: center;
+  }
+  html[lang="he-il"] .section-7 .heading-4 {
+    font-size: 32px !important;
+    line-height: 1.15;
+    text-align: center;
+  }
+  html[lang="he-il"] .section-7 .div-block-45 {
+    width: 100% !important;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+/* 8) Pricing card height: .div-block-20.main has a 300px min-height
+ *    from the desktop flip-card rule. On phones the card-front is
+ *    hidden and only card-back shows — the 300px min-height left a
+ *    huge empty gap below the short copy. Collapse it so each card
+ *    is only as tall as its content. */
+@media (max-width: 767px) {
+  html[lang="he-il"] .div-block-20.main,
+  html[lang="he-il"] .div-block-20.main .div-block-22,
+  html[lang="he-il"] .div-block-20.main .card-back {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  html[lang="he-il"] .div-block-20.main .card-back {
+    padding: 28px 22px !important;
+    gap: 10px;
+  }
+}
+
+/* 9) Hero scene particles — confine to 100% width on mobile (the
+ *    desktop rule is 50%, which is fine, but the `translate(14px, …)`
+ *    on particles nth-child(6,7,10) near left: 40-48% could creep
+ *    past the right edge of the left half on narrow phones). */
+@media (max-width: 767px) {
+  html[lang="he-il"] .hero-scene {
+    width: 100%;
+    opacity: 0.35;
+  }
+}
+
+/* 10) Section-4 screenshot row: on phones the 3 WhatsApp images were
+ *     being laid out as flex-wrap: wrap with each at calc(50% - 10px),
+ *     leaving the third image alone in a second row taking half width.
+ *     Use a single centered row on very narrow phones so the third
+ *     image doesn't look orphaned. */
+@media (max-width: 480px) {
+  html[lang="he-il"] .div-block-10 {
+    gap: 8px !important;
+  }
+  html[lang="he-il"] .div-block-10 img,
+  html[lang="he-il"] .image-5 {
+    flex: 0 1 calc(33.333% - 8px) !important;
+    max-width: calc(33.333% - 8px) !important;
+  }
+}
+
+/* 11) FAQ dropdown polish on phones: make the full row tappable and
+ *     give a subtle divider between questions so the list reads well. */
+@media (max-width: 767px) {
+  html[lang="he-il"] .div-block-26 .dropdown {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  html[lang="he-il"] .div-block-26 .dropdown:last-child {
+    border-bottom: none;
+  }
+  html[lang="he-il"] .dropdown-toggle.w-dropdown-toggle {
+    width: 100%;
+    padding: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* 12) Footer legal links: ensure the two "החברה"/"עזרה" columns sit
+ *     side-by-side on phones (they currently stretch full width and
+ *     leave a lot of empty space). */
+@media (max-width: 767px) {
+  html[lang="he-il"] .div-block-31 {
+    display: flex;
+    flex-flow: column;
+    gap: 28px;
+  }
+  html[lang="he-il"] .div-block-31 .div-block-32 {
+    flex: 1 1 auto;
+  }
+}
