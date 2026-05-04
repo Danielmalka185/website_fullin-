@@ -300,10 +300,11 @@ html[lang="he-il"] .section-2 .second-section {
   overflow: hidden;
   min-height: 540px;
   background-image:
-    linear-gradient(to left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.15) 45%, transparent 70%),
+    linear-gradient(to left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.1) 45%, transparent 70%),
     url("../images/fullin-cafe-scene.jpg");
   background-size: cover, cover;
-  background-position: center, center;
+  /* Shift photo so the FULLIN station stays visible on the left, away from the right-side text card */
+  background-position: center, 65% center;
   box-shadow: 0 30px 80px rgba(5, 20, 10, 0.3);
   direction: rtl;
 }
@@ -319,10 +320,10 @@ html[lang="he-il"] .section-2 .cell {
 html[lang="he-il"] .section-2 .cell-3 {
   position: absolute !important;
   top: 50%;
-  right: 56px;
+  right: 40px;
   transform: translateY(-50%);
-  width: 42%;
-  max-width: 460px;
+  width: 36%;
+  max-width: 420px;
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);

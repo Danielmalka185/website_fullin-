@@ -47,54 +47,244 @@ select:focus-visible,
   outline: none;
 }
 
-/* ---- Accessibility floating button ---- */
-.a11y-btn {
+/* ---- Accessibility widget ---- */
+.a11y-widget {
   position: fixed;
   bottom: 24px;
   left: 24px;
   z-index: 9999;
+  font-family: "Rubik", "Heebo", sans-serif;
+  direction: rtl;
+}
+
+/* Toggle button */
+.a11y-widget__toggle {
   display: flex;
   align-items: center;
   gap: 8px;
   background: #0f5a2b;
   color: #fff;
-  font-family: "Rubik", "Heebo", sans-serif;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
-  text-decoration: none;
   padding: 10px 16px;
   border-radius: 999px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.28);
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  direction: rtl;
   white-space: nowrap;
+  min-height: 44px;
 }
-.a11y-btn:hover {
+.a11y-widget__toggle:hover {
   background: #1a7a3a;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  color: #fff;
-  text-decoration: none;
 }
-.a11y-btn:focus-visible {
+.a11y-widget__toggle:focus-visible {
   outline: 3px solid #ffd700;
   outline-offset: 3px;
 }
-.a11y-btn__icon {
+.a11y-widget__icon {
   font-size: 20px;
   line-height: 1;
-  flex-shrink: 0;
 }
 
-/* ---- High-contrast mode support ---- */
+/* Panel */
+.a11y-widget__panel {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  width: 260px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: a11y-panel-in 0.18s ease;
+}
+@keyframes a11y-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.a11y-widget__panel[hidden] {
+  display: none;
+}
+
+/* Panel header */
+.a11y-widget__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0f5a2b;
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  direction: rtl;
+}
+.a11y-widget__close {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+  min-height: 32px;
+  min-width: 32px;
+}
+.a11y-widget__close:hover { background: rgba(255,255,255,0.15); }
+.a11y-widget__close:focus-visible { outline: 2px solid #ffd700; outline-offset: 1px; }
+
+/* Sections inside panel */
+.a11y-widget__section {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.a11y-widget__row-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  direction: rtl;
+}
+.a11y-widget__row {
+  display: flex;
+  gap: 8px;
+  direction: rtl;
+}
+
+/* Font size buttons */
+.a11y-widget__btn {
+  flex: 1;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a1a;
+  padding: 10px 6px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  min-height: 44px;
+  text-align: center;
+}
+.a11y-widget__btn:hover { background: #e8f5ee; border-color: #0f5a2b; color: #0f5a2b; }
+.a11y-widget__btn:focus-visible { outline: 2px solid #0f5a2b; outline-offset: 2px; }
+.a11y-widget__btn--mid { background: #fff; font-size: 18px; }
+
+/* Toggle buttons (contrast / links) */
+.a11y-widget__toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  padding: 10px 14px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  direction: rtl;
+  text-align: right;
+  min-height: 44px;
+}
+.a11y-widget__toggle-btn:hover { background: #e8f5ee; border-color: #0f5a2b; }
+.a11y-widget__toggle-btn.is-active { background: #0f5a2b; border-color: #0f5a2b; color: #fff; }
+.a11y-widget__toggle-btn:focus-visible { outline: 2px solid #0f5a2b; outline-offset: 2px; }
+.a11y-widget__toggle-icon { font-size: 18px; }
+
+/* Footer */
+.a11y-widget__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  direction: rtl;
+}
+.a11y-widget__reset {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  color: #555;
+  padding: 7px 12px;
+  transition: background 0.15s ease;
+  min-height: 36px;
+}
+.a11y-widget__reset:hover { background: #f5f5f5; }
+.a11y-widget__reset:focus-visible { outline: 2px solid #0f5a2b; outline-offset: 2px; }
+.a11y-widget__stmt {
+  font-size: 13px;
+  color: #0f5a2b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-skip-ink: auto;
+}
+
+/* ---- High-contrast mode ---- */
+html.a11y-high-contrast,
+html.a11y-high-contrast body {
+  background: #000 !important;
+  color: #fff !important;
+}
+html.a11y-high-contrast a { color: #ffff00 !important; }
+html.a11y-high-contrast button,
+html.a11y-high-contrast .w-button,
+html.a11y-high-contrast .button-primary,
+html.a11y-high-contrast .secondry-button {
+  background: #ffff00 !important;
+  color: #000 !important;
+  border: 2px solid #fff !important;
+}
+html.a11y-high-contrast .navbar-no-shadow-container,
+html.a11y-high-contrast .section,
+html.a11y-high-contrast .section-2,
+html.a11y-high-contrast .section-3,
+html.a11y-high-contrast .section-4,
+html.a11y-high-contrast .section-5,
+html.a11y-high-contrast .section-6,
+html.a11y-high-contrast .section-7,
+html.a11y-high-contrast .section-8,
+html.a11y-high-contrast .section-9,
+html.a11y-high-contrast .section-10 {
+  background: #000 !important;
+  background-image: none !important;
+}
+html.a11y-high-contrast .nav-link,
+html.a11y-high-contrast .footer-link { color: #ffff00 !important; }
+html.a11y-high-contrast .a11y-widget__panel { background: #111 !important; border: 2px solid #fff; }
+html.a11y-high-contrast .a11y-widget__btn,
+html.a11y-high-contrast .a11y-widget__toggle-btn { background: #222 !important; color: #fff !important; border-color: #888 !important; }
+
+/* ---- Highlight links mode ---- */
+html.a11y-highlight-links a:not(.button-primary):not(.secondry-button):not(.a11y-widget__stmt) {
+  text-decoration: underline !important;
+  text-underline-offset: 4px !important;
+  text-decoration-thickness: 2px !important;
+  outline: 2px dotted currentColor;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---- High-contrast mode support (OS level) ---- */
 @media (forced-colors: active) {
-  .a11y-btn {
+  .a11y-widget__toggle {
     border: 2px solid ButtonText;
     forced-color-adjust: none;
   }
-  :focus-visible {
-    outline: 3px solid Highlight;
-  }
+  :focus-visible { outline: 3px solid Highlight; }
 }
 
 /* ---- Accessibility statement page ---- */
