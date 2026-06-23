@@ -48,19 +48,43 @@
     }
     .whatsapp-float svg { flex-shrink: 0; }
 
-    /* Mobile contact improvements */
+    /* ===== DESKTOP: compact & centered ===== */
+    @media (min-width: 768px) {
+      .whatsapp-float { display: none; }
+
+      /* limit card width so it doesn't stretch wall-to-wall */
+      .container-2 { max-width: 620px !important; padding: 0 20px !important; }
+      .card.is-xl { padding: 36px 40px !important; border-radius: 20px !important; }
+      .form-wrapper { padding: 0 !important; }
+
+      /* tighten gaps between fields */
+      .w-layout-grid.grid-1-column.is-gap-2xs { gap: 14px !important; }
+
+      /* compact inputs */
+      .input, .text-area { padding: 10px 14px !important; font-size: 14px !important; border-radius: 10px !important; }
+      label { font-size: 13px !important; margin-bottom: 4px !important; display: block; }
+      .text-area { min-height: 90px !important; max-height: 120px !important; }
+
+      /* email + phone side by side */
+      .email-phone-row { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 16px !important; }
+
+      /* submit button */
+      .button.is-secondary-16 { padding: 11px 28px !important; font-size: 14px !important; border-radius: 10px !important; }
+
+      /* whatsapp inline section */
+      .whatsapp-contact-inline { margin-top: 12px !important; }
+    }
+
+    /* ===== MOBILE ===== */
     @media (max-width: 767px) {
-      .section-11 { padding: 20px 0 40px; }
+      .section-11 { padding: 16px 0 40px; }
       .card.is-xl { border-radius: 20px; margin: 0 12px; padding: 24px 20px !important; }
-      .form-content { gap: 14px !important; }
+      .w-layout-grid.grid-1-column.is-gap-2xs { gap: 14px !important; }
       .grid-2-columns.is-secondary-10 { grid-template-columns: 1fr !important; gap: 14px !important; }
-      .input, .text-area { font-size: 16px !important; /* prevents iOS zoom */ border-radius: 12px !important; padding: 14px 16px !important; }
+      .input, .text-area { font-size: 16px !important; border-radius: 12px !important; padding: 14px 16px !important; }
       .text-area { min-height: 100px !important; }
       .button.is-secondary-16 { width: 100% !important; padding: 16px !important; font-size: 16px !important; border-radius: 12px !important; }
-      .whatsapp-contact-inline { display: none !important; } /* hide inline one on mobile, floating is enough */
-    }
-    @media (min-width: 768px) {
-      .whatsapp-float { display: none; } /* show only on mobile */
+      .whatsapp-contact-inline { display: none !important; }
     }
   </style>
 </head>
@@ -116,9 +140,9 @@
                     <div><label for="First-Name">שם פרטי</label><input class="input is-secondary-12 w-input" maxlength="256" name="First-Name" data-name="First Name" placeholder="לדוגמה: ישראל" type="text" id="First-Name" required=""></div>
                     <div><label for="Last-Name">שם משפחה</label><input class="input is-secondary-12 w-input" maxlength="256" name="Last-Name" data-name="Last Name" placeholder="לדוגמה: ישראלי" type="text" id="Last-Name" required=""></div>
                   </div>
-                  <div><label for="email">כתובת אימייל</label><input class="input is-secondary-12 w-input" maxlength="256" name="email" data-name="Email" placeholder="example@youremail.com" type="email" id="email" required=""></div>
-                  <div class="w-layout-grid grid-2-columns is-secondary-10">
-                    <div id="w-node-_375e8201-b0ba-013a-9b53-6b083f74a417-71b5d0cc"><label for="Phone">מספר טלפון</label><input class="input is-secondary-12 w-input" maxlength="256" name="Phone" data-name="Phone" placeholder="050-000-0000" type="tel" id="Phone" required=""></div>
+                  <div class="email-phone-row">
+                    <div><label for="email">כתובת אימייל</label><input class="input is-secondary-12 w-input" maxlength="256" name="email" data-name="Email" placeholder="example@youremail.com" type="email" id="email" required=""></div>
+                    <div><label for="Phone">מספר טלפון</label><input class="input is-secondary-12 w-input" maxlength="256" name="Phone" data-name="Phone" placeholder="050-000-0000" type="tel" id="Phone" required=""></div>
                   </div>
                   <div><label for="Message">הודעה</label><textarea id="Message" name="Message" maxlength="5000" data-name="Message" placeholder="כתבו את ההודעה שלכם כאן..." class="text-area is-secondary-13 w-input"></textarea></div>
                   <div class="buttons-row is-align-center-start is-secondary-14">
