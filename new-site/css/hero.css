@@ -52,29 +52,43 @@
 @keyframes stutter { 50% { filter: brightness(.7); } }
 @keyframes punch { 0% { transform: scale(1); } 40% { transform: scale(1.06); box-shadow: 0 0 40px var(--green-glow); } 100% { transform: scale(1); } }
 
-/* Stage */
-.hero__stage { position: relative; inline-size: min(100%, 440px); aspect-ratio: 1 / 1.06; margin-inline: auto; }
-.stage__disc { position: absolute; inset: 14% 8% 10%; border-radius: 50%; background: radial-gradient(closest-side, rgba(47,195,83,.5), rgba(47,195,83,.12) 60%, transparent 100%); filter: blur(10px); animation: breathe 6s ease-in-out infinite; }
-@keyframes breathe { 50% { transform: scale(1.08); opacity: .8; } }
-.stage__rings i { position: absolute; inset: 6% 2%; border-radius: 50%; border: 1px solid rgba(47,195,83,.22); animation: spin 40s linear infinite; }
-.stage__rings i:nth-child(2) { inset: 18% 14%; border-style: dashed; border-color: rgba(232,242,58,.2); animation-duration: 60s; animation-direction: reverse; }
-.stage__rings i:nth-child(3) { inset: -4% -4%; border-color: rgba(255,255,255,.06); animation-duration: 90s; }
+/* Stage: code-drawn FULLIN hardware (inline SVG) */
+.hero__stage { position: relative; inline-size: min(100%, 440px); aspect-ratio: 640 / 720; margin-inline: auto; }
+.stage__rings i { position: absolute; inset: 4% 0 14%; border-radius: 50%; border: 1px solid rgba(47,195,83,.16); animation: spin 60s linear infinite; }
+.stage__rings i:nth-child(2) { inset: 16% 12% 26%; border-style: dashed; border-color: rgba(232,242,58,.14); animation-duration: 90s; animation-direction: reverse; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.px { position: absolute; will-change: transform; transition: transform .25s linear; }
-.float { animation: floaty var(--fd, 6s) ease-in-out infinite; animation-delay: var(--fdel, 0s); will-change: transform; }
-@keyframes floaty { 50% { transform: translate3d(0, var(--fy, -12px), 0) rotate(.4deg); } }
-.px img { inline-size: 100%; block-size: 100%; object-fit: cover; filter: drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
-.st24 { inset-block: 0; inset-inline-end: 34%; aspect-ratio: .27; block-size: 100%; z-index: 1; }
-.st24 .float, .phone .float, .st6 .float { inline-size: 100%; block-size: 100%; }
-.st24 img { filter: drop-shadow(0 0 50px rgba(47,195,83,.35)) drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
-.phone { inset-block-end: 6%; inset-inline-end: -6%; inline-size: 50%; aspect-ratio: .93; z-index: 3; }
-.phone img { transform: scale(1.12); }
-.st6 { inset-block-end: 0; inset-inline-start: -6%; inline-size: 50%; aspect-ratio: 1.06; z-index: 2; }
-.st6 img { transform: scale(1.9); }
-.spark { position: absolute; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 14px 2px var(--yellow); z-index: 4; animation: twinkle 3s ease-in-out infinite; }
-.s1 { inset-block-start: 14%; inset-inline-start: 18%; } .s2 { inset-block-start: 30%; inset-inline-end: 4%; animation-delay: -1s; background: var(--green); box-shadow: 0 0 14px 2px var(--green); }
-.s3 { inset-block-start: 58%; inset-inline-start: 6%; animation-delay: -2s; } .s4 { inset-block-start: 8%; inset-inline-end: 22%; animation-delay: -.5s; background: var(--green); box-shadow: 0 0 14px 2px var(--green); }
-@keyframes twinkle { 0%, 100% { opacity: .1; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.2); } }
+.hart { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; overflow: visible; }
+.hart .px { transition: transform .25s linear; will-change: transform; }
+.stage__grain { position: absolute; inset: -6%; pointer-events: none; opacity: .08; mix-blend-mode: overlay; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>"); }
+.hart .halo { animation: breathe 7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes breathe { 50% { transform: scale(1.07); opacity: .75; } }
+.hart .orbit { animation: march 24s linear infinite; }
+@keyframes march { to { stroke-dashoffset: -240; } }
+.hart .led { animation: ledwave 3.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.hart .led6 { animation-duration: 4.4s; }
+@keyframes ledwave { 0%, 100% { opacity: .16; } 10% { opacity: 1; } 26% { opacity: .42; } 40% { opacity: .16; } }
+.hart .ring { animation: ringfill 7s var(--ease-in-out) infinite; }
+@keyframes ringfill { 0% { stroke-dashoffset: 100; } 62% { stroke-dashoffset: 6; } 90%, 100% { stroke-dashoffset: 0; } }
+.hart .bar { transform-box: fill-box; transform-origin: left center; animation: barfill 7s var(--ease-in-out) infinite; }
+@keyframes barfill { 0% { transform: scaleX(.04); } 62% { transform: scaleX(.97); } 100% { transform: scaleX(1); } }
+/* scan -> unlock -> power bank slides out (one 9s story) */
+.hart .scan { animation: scanline 9s linear infinite; }
+@keyframes scanline { 0% { transform: translateY(-4px); opacity: 0; } 3% { opacity: .85; } 12% { transform: translateY(38px); opacity: .85; } 14% { transform: translateY(-4px); } 24% { transform: translateY(38px); opacity: .85; } 27%, 100% { transform: translateY(38px); opacity: 0; } }
+.hart .unlock { opacity: 0; animation: unlock 9s linear infinite; }
+@keyframes unlock { 0%, 27% { opacity: 0; } 30% { opacity: 1; } 56% { opacity: 1; } 60%, 100% { opacity: 0; } }
+.hart .ucirc { animation: udraw 9s linear infinite; stroke-dashoffset: 100; }
+.hart .utick { animation: udraw2 9s linear infinite; stroke-dashoffset: 100; }
+@keyframes udraw { 0%, 29% { stroke-dashoffset: 100; } 38%, 100% { stroke-dashoffset: 0; } }
+@keyframes udraw2 { 0%, 36% { stroke-dashoffset: 100; } 43%, 100% { stroke-dashoffset: 0; } }
+.hart .bankmove { animation: eject 9s var(--ease) infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes eject { 0%, 36% { transform: translate(-50px, 270px) scale(.18); opacity: 0; } 38% { opacity: 1; } 56%, 92% { transform: none; opacity: 1; } 97%, 100% { transform: translate(-12px, 300px) scale(.2); opacity: 0; } }
+.hart .bglow { animation: breathe 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.hart .bankfloat { animation: floaty 5.5s ease-in-out infinite; }
+@keyframes floaty { 50% { transform: translate3d(0, -9px, 0); } }
+.hart .cab { transform-box: fill-box; transform-origin: 50% 0; animation: sway 3.4s ease-in-out infinite; animation-delay: calc(var(--c) * -.5s); }
+@keyframes sway { 50% { transform: rotate(5deg); } }
+.hart .sp { animation: twinkle 3s ease-in-out infinite; animation-delay: var(--sd, 0s); transform-box: fill-box; transform-origin: center; }
+@keyframes twinkle { 0%, 100% { opacity: .1; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.3); } }
 
 /* Scroll hint */
 .hero__scroll { position: absolute; inset-block-end: 1.25rem; inset-inline: 0; margin-inline: auto; inline-size: max-content; display: none; flex-direction: column; align-items: center; gap: .5rem; color: var(--muted); font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; z-index: 3; transition: color var(--t); }
@@ -95,7 +109,7 @@
   .px { transition: none; }
 }
 @media (max-width: 400px) { .hero__cta .btn { inline-size: 100%; } }
-@media (prefers-reduced-motion: reduce) { .float, .stage__disc, .stage__rings i, .spark { animation: none !important; } .spark { opacity: .6; } }
+@media (prefers-reduced-motion: reduce) { .stage__rings i, .hart *, .hart *::before { animation: none !important; transition: none !important; } .hart .led { opacity: .85; } .hart .ring, .hart .ucirc, .hart .utick { stroke-dashoffset: 0; } .hart .unlock { opacity: 0; } .hart .sp { opacity: .6; } }
 
 @media (max-width: 959px) {
   .hero__inner { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
@@ -118,3 +132,6 @@
   .hero__cta { margin-block-start: var(--s-4); gap: .6rem; }
   .hero__stage { inline-size: min(78%, 340px); margin-block: .6rem .25rem; }
 }
+
+/* small phones: keep the whole stage above the fold */
+@media (max-width: 639px) and (max-height: 780px) { .hero__stage { inline-size: min(60%, 240px); margin-block-start: -.1rem; } }

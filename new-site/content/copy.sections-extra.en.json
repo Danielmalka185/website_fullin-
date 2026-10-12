@@ -12,5 +12,26 @@
     "links": {
       "accessibility": "Accessibility statement"
     }
+  },
+  "art": {
+    "alt": {
+      "station6": "Illustration of a FULLIN 6-slot station",
+      "station24": "Illustration of a FULLIN 24-slot station with a screen",
+      "station48": "Illustration of a FULLIN 48-slot station with a large ad screen",
+      "powerbank": "A phone resting on a FULLIN power bank on a bar counter, with built-in yellow cables",
+      "venueCafe": "Illustration: a FULLIN 6-slot station on a warm, lit bar counter",
+      "venueRestaurant": "Illustration: a FULLIN 6-slot station in a restaurant with an octopus mural",
+      "venueBeach": "Illustration: a FULLIN station on a wooden counter at a beach at sunset",
+      "venueHotel": "Illustration: a FULLIN 24-slot station in a hotel bar",
+      "venueMall": "Illustration: a FULLIN 24-slot station in a mall corridor",
+      "venueEvents": "Illustration: a FULLIN station among a crowd at a night party",
+      "backview": "A woman seen from behind filming with a phone and a FULLIN power bank at a festival",
+      "poster": "FULLIN campaign poster: battery dying? Grab a portable charger, first hour free",
+      "pile": "A pile of FULLIN power banks on the grass at the foot of a station"
+    }
+  },
+  "proof": {
+    "fieldCaption5": "Scan, shoot, carry on",
+    "fieldCaption6": "From our campaign"
   }
 }
