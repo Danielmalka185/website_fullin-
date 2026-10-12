@@ -105,3 +105,16 @@
   .hero__copy .hero__trust { order: 3; }
   .bat { order: 4; }
 }
+
+/* QA: keep CTAs inside the container for long translations */
+@media (max-width: 959px) { .hero__cta { max-inline-size: 100%; } .hero__cta .btn { max-inline-size: 100%; white-space: normal; text-align: center; line-height: 1.2; padding-block: .6rem; } }
+@media (max-width: 639px) { .hero__cta { inline-size: 100%; } .hero__cta .btn { flex: 1 1 100%; } }
+
+/* QA: phone first screen = headline + CTA + whole stage above the fold */
+@media (max-width: 639px) {
+  .hero { padding-block-start: calc(var(--header-h) + .25rem); }
+  .hero__eyebrow { margin-block-end: var(--s-3); }
+  .hero__sub { margin-block-start: var(--s-3); }
+  .hero__cta { margin-block-start: var(--s-4); gap: .6rem; }
+  .hero__stage { inline-size: min(78%, 340px); margin-block: .6rem .25rem; }
+}

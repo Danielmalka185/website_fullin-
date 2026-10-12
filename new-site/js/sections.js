@@ -201,4 +201,11 @@
   // JSON-LD once i18n is ready (copy may load async)
   doc.addEventListener('fullin:lang', buildFaqLd);
   window.addEventListener('load', buildFaqLd);
+
+  /* scrollable steps list is keyboard-focusable only when it actually scrolls */
+  (function () {
+    var l = doc.querySelector('.steps__list'); if (!l) return;
+    function f() { if (l.scrollWidth > l.clientWidth + 1) l.setAttribute('tabindex', '0'); else l.removeAttribute('tabindex'); }
+    f(); window.addEventListener('resize', f); window.addEventListener('load', f);
+  })();
 })();

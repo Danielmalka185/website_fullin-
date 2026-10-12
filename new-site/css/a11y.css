@@ -270,3 +270,6 @@ html[dir="rtl"] .sp-logo-crop img { inset-inline-start: auto; left: 3px; right: 
 .sp-flink:hover { color: var(--brand, #2FC353); text-decoration: underline; }
 .sp-footer p { margin: 0; }
 html[data-a11y-contrast] .sp-btn { border: 2px solid #fff !important; }
+
+.sp-logo-img { display: block; block-size: 40px; inline-size: auto; }
+.a11yw__g::before { content: attr(data-g); }

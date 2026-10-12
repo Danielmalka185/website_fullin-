@@ -219,3 +219,4 @@
 .s-station__media--6 img{max-width:80%;max-height:90%}
 .s-fest{flex-wrap:wrap;justify-content:center;font-size:clamp(1.05rem,3vw,1.7rem);letter-spacing:.08em;gap:12px}
 @media (max-width:639px){.s-benefit{padding:20px}.s-benefit__icon{margin-block-end:12px}}
+.s-footer__logo{display:block;block-size:44px;inline-size:auto}
