@@ -187,7 +187,16 @@
     });
   }
 
-  function init() { initTabs(); initFaq(); initLightbox(); initForm(); buildFaqLd(); }
+  function applyExtras() {
+    $$('[data-x]').forEach(function (e) { var v = t(e.getAttribute('data-x'), ''); if (v) e.textContent = v; });
+    $$('[data-x-attr]').forEach(function (e) {
+      e.getAttribute('data-x-attr').split(',').forEach(function (pr) {
+        var kv = pr.split(':'), v = t(kv[1].trim(), ''); if (v) e.setAttribute(kv[0].trim(), v);
+      });
+    });
+  }
+  doc.addEventListener('fullin:lang', applyExtras);
+  function init() { applyExtras(); initTabs(); initFaq(); initLightbox(); initForm(); buildFaqLd(); }
   if (doc.readyState === 'loading') doc.addEventListener('DOMContentLoaded', init); else init();
   // JSON-LD once i18n is ready (copy may load async)
   doc.addEventListener('fullin:lang', buildFaqLd);

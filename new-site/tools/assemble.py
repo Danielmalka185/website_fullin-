@@ -11,10 +11,26 @@ def inc(m):
         print('WARN missing partial', m.group(1), file=sys.stderr); return ''
     return open(p, encoding='utf8').read()
 out = re.sub(r'<!--#include ([\w-]+)-->', inc, src)
-blocks = []
+def merge(a, b):
+    for k, v in b.items():
+        if isinstance(v, dict) and isinstance(a.get(k), dict):
+            merge(a[k], v)
+        else:
+            a[k] = v
+    return a
+# copy.<lang>.json is the base; copy.<name>.<lang>.json are extras deep-merged on top (e.g. copy.sections-extra.he.json)
+langs = {}
 for f in sorted(glob.glob(os.path.join(root, 'content', 'copy.*.json'))):
-    lang = os.path.basename(f).split('.')[1]
+    parts = os.path.basename(f).split('.')[1:-1]
+    lang, name = parts[-1], '.'.join(parts[:-1])
+    langs.setdefault(lang, {'base': {}, 'extras': []})
     data = json.load(open(f, encoding='utf8'))
+    if name: langs[lang]['extras'].append(data)
+    else: langs[lang]['base'] = data
+blocks = []
+for lang, d in langs.items():
+    data = d['base']
+    for e in d['extras']: merge(data, e)
     blocks.append('<script type="application/json" id="copy-%s">%s</script>' % (lang, json.dumps(data, ensure_ascii=False).replace('</', '<\\/')))
 out = out.replace('<!--#copy-->', '\n'.join(blocks))
 open(os.path.join(root, 'index.html'), 'w', encoding='utf8').write(out)

@@ -206,10 +206,15 @@
 .s-footer{border-block-start:1px solid var(--s-line);padding-block:48px 36px;background:var(--s-bg);color:var(--s-text)}
 .s-footer__top{display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between}
 .s-footer__brand{display:inline-flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
-.s-footer__brand img{height:48px;width:auto}
+
 .s-footer__tag{font-family:"Space Grotesk",sans-serif;letter-spacing:.2em;text-transform:uppercase;font-size:.8rem;color:var(--s-muted);direction:ltr}
 .s-footer__nav{display:flex;flex-wrap:wrap;gap:6px 24px}
 .s-footer__nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--s-muted);text-decoration:none;transition:color .2s}
 .s-footer__nav a:hover{color:var(--s-brand)}
 .s-footer__bottom{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;margin-block-start:28px;padding-block-start:22px;border-block-start:1px solid var(--s-line);color:var(--s-muted);font-size:.88rem}
 .s-footer__bottom p{margin:0}
+
+.s-station__body .s-chip{align-self:flex-start}
+.s-station__media--6 img{max-width:80%;max-height:90%}
+.s-fest{flex-wrap:wrap;justify-content:center;font-size:clamp(1.05rem,3vw,1.7rem);letter-spacing:.08em;gap:12px}
+@media (max-width:639px){.s-benefit{padding:20px}.s-benefit__icon{margin-block-end:12px}}
