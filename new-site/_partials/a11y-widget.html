@@ -1,0 +1,34 @@
+<!-- Accessibility widget (owned by a11y agent). Needs css/a11y.css + js/a11y.js. Strings: a11yw.* in copy; Hebrew fallbacks are the visible text/attrs below. -->
+<div class="a11yw" data-a11yw>
+  <button type="button" class="a11yw__fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="a11yw-panel" aria-label="תפריט נגישות" data-a11yw-t="a11yw.open" data-a11yw-attr="aria-label">
+    <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><circle cx="12" cy="4.2" r="2.2" fill="currentColor"/><path fill="currentColor" d="M4 8.2c0-.6.5-1.1 1.1-1.1h13.8a1.1 1.1 0 0 1 .1 2.2l-4.9.5v3.3l2.2 6.8a1.1 1.1 0 1 1-2.1.7L12 14.2l-2.2 6.5a1.1 1.1 0 1 1-2.1-.7l2.2-6.8V9.8l-4.8-.5A1.1 1.1 0 0 1 4 8.2Z"/></svg>
+  </button>
+  <div class="a11yw__panel" id="a11yw-panel" role="dialog" aria-modal="true" aria-labelledby="a11yw-title" hidden>
+    <div class="a11yw__head">
+      <h2 class="a11yw__title" id="a11yw-title" data-a11yw-t="a11yw.title">הגדרות נגישות</h2>
+      <button type="button" class="a11yw__close" aria-label="סגירת תפריט הנגישות" data-a11yw-t="a11yw.close" data-a11yw-attr="aria-label"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="a11yw__body">
+      <div class="a11yw__size" role="group" aria-labelledby="a11yw-size-label">
+        <span class="a11yw__label" id="a11yw-size-label" data-a11yw-t="a11yw.textSize">גודל טקסט</span>
+        <div class="a11yw__sizebtns">
+          <button type="button" class="a11yw__btn" data-a11yw-size="-1" aria-label="הקטנת טקסט" data-a11yw-t="a11yw.smaller" data-a11yw-attr="aria-label"><span aria-hidden="true">A&minus;</span></button>
+          <button type="button" class="a11yw__btn" data-a11yw-size="1" aria-label="הגדלת טקסט" data-a11yw-t="a11yw.larger" data-a11yw-attr="aria-label"><span aria-hidden="true">A+</span></button>
+        </div>
+        <p class="a11yw__status" role="status" aria-live="polite" data-a11yw-status>גודל טקסט: רגיל</p>
+      </div>
+      <div class="a11yw__grid">
+        <button type="button" class="a11yw__btn a11yw__toggle" data-a11yw-toggle="contrast" aria-pressed="false" data-a11yw-t="a11yw.contrast">ניגודיות גבוהה</button>
+        <button type="button" class="a11yw__btn a11yw__toggle" data-a11yw-toggle="gray" aria-pressed="false" data-a11yw-t="a11yw.grayscale">גווני אפור</button>
+        <button type="button" class="a11yw__btn a11yw__toggle" data-a11yw-toggle="links" aria-pressed="false" data-a11yw-t="a11yw.links">הדגשת קישורים</button>
+        <button type="button" class="a11yw__btn a11yw__toggle" data-a11yw-toggle="sysfont" aria-pressed="false" data-a11yw-t="a11yw.font">גופן קריא</button>
+        <button type="button" class="a11yw__btn a11yw__toggle" data-a11yw-toggle="motion" aria-pressed="false" data-a11yw-t="a11yw.motion">עצירת אנימציות</button>
+        <button type="button" class="a11yw__btn a11yw__toggle" data-a11yw-toggle="cursor" aria-pressed="false" data-a11yw-t="a11yw.cursor">סמן גדול</button>
+      </div>
+      <div class="a11yw__foot">
+        <button type="button" class="a11yw__btn a11yw__reset" data-a11yw-reset data-a11yw-t="a11yw.reset">איפוס הגדרות</button>
+        <a class="a11yw__link" href="accessibility.html" data-a11yw-t="a11yw.statement">הצהרת נגישות</a>
+      </div>
+    </div>
+  </div>
+</div>

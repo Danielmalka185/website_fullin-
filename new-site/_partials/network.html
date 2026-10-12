@@ -1,0 +1,90 @@
+<section id="network" class="s-section s-network" aria-labelledby="network-title">
+  <div class="container">
+    <div class="s-network__top">
+      <div class="s-network__intro reveal">
+        <p class="eyebrow" data-i18n="network.eyebrow">הרשת</p>
+        <h2 class="s-title" id="network-title" data-i18n="network.title">פריסה רחבה ברחבי הארץ</h2>
+        <p class="s-sub" data-i18n="network.sub"></p>
+        <p class="s-map-caption"><span class="s-map-caption__dot" aria-hidden="true"></span><span data-i18n="network.mapCaption"></span></p>
+      </div>
+      <figure class="s-map reveal" aria-describedby="network-map-cap">
+        <div class="s-map__glow" aria-hidden="true"></div>
+        <svg class="s-map__svg" viewBox="0 0 300 570" role="img" aria-labelledby="network-map-cap" focusable="false">
+          <defs>
+            <radialGradient id="s-map-fill" cx="50%" cy="40%" r="70%">
+              <stop offset="0" stop-color="#2FC353" stop-opacity=".30"/>
+              <stop offset="1" stop-color="#2FC353" stop-opacity=".05"/>
+            </radialGradient>
+            <pattern id="s-map-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r=".8" fill="#2FC353" fill-opacity=".35"/>
+            </pattern>
+            <clipPath id="s-map-clip"><path id="s-il" d="M148 6 L166 12 L178 30 L184 52 L192 74 L190 104 L180 130 L184 158 L178 190 L186 224 L194 262 L192 300 L198 340 L206 382 L200 420 L192 456 L184 494 L176 528 L171 552 L165 546 L152 506 L132 468 L112 430 L92 392 L72 356 L58 326 L66 296 L78 262 L86 232 L92 204 L94 176 L88 150 L74 134 L92 124 L98 100 L96 76 L104 52 L128 26 Z"/></clipPath>
+          </defs>
+          <use href="#s-il" class="s-map__shape-glow"/>
+          <g clip-path="url(#s-map-clip)">
+            <rect width="300" height="570" fill="url(#s-map-fill)"/>
+            <rect width="300" height="570" fill="url(#s-map-grid)"/>
+          </g>
+          <use href="#s-il" class="s-map__outline"/>
+          <path class="s-map__link" d="M118 112 L86 236 L132 288 L112 392 L171 548" fill="none"/>
+          <g class="s-map__dots">
+            <g class="s-dot" style="--d:0s"><circle class="s-dot__ring" cx="136" cy="62" r="5"/><circle class="s-dot__core" cx="136" cy="62" r="4"/></g>
+            <g class="s-dot" style="--d:.5s"><circle class="s-dot__ring" cx="108" cy="116" r="5"/><circle class="s-dot__core" cx="108" cy="116" r="4"/></g>
+            <g class="s-dot" style="--d:1s"><circle class="s-dot__ring" cx="88" cy="238" r="5"/><circle class="s-dot__core" cx="88" cy="238" r="4"/></g>
+            <g class="s-dot" style="--d:1.5s"><circle class="s-dot__ring" cx="132" cy="288" r="5"/><circle class="s-dot__core" cx="132" cy="288" r="4"/></g>
+            <g class="s-dot" style="--d:.8s"><circle class="s-dot__ring" cx="116" cy="396" r="5"/><circle class="s-dot__core" cx="116" cy="396" r="4"/></g>
+            <g class="s-dot" style="--d:1.2s"><circle class="s-dot__ring" cx="171" cy="544" r="5"/><circle class="s-dot__core" cx="171" cy="544" r="4"/></g>
+          </g>
+        </svg>
+        <figcaption id="network-map-cap" class="s-map__cap" data-i18n="network.mapCaption"></figcaption>
+      </figure>
+    </div>
+
+    <h3 class="s-h3 reveal" data-i18n="network.stationsTitle">שלוש עמדות, לכל סוג של מקום</h3>
+    <div class="s-stations">
+      <article class="s-card s-station reveal">
+        <div class="s-station__media s-station__media--6">
+          <img src="assets/products/station-6.webp" width="1000" height="949" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:network.stations.0.name">
+        </div>
+        <div class="s-station__body">
+          <span class="s-chip" data-i18n="network.stations.0.tag"></span>
+          <h4 data-i18n="network.stations.0.name"></h4>
+          <p data-i18n="network.stations.0.text"></p>
+          <p class="s-spec" data-i18n="network.stations.0.spec"></p>
+        </div>
+      </article>
+      <article class="s-card s-station reveal">
+        <div class="s-station__media s-station__media--24">
+          <img src="assets/products/station-24.webp" width="1400" height="1866" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:network.stations.1.name">
+        </div>
+        <div class="s-station__body">
+          <span class="s-chip" data-i18n="network.stations.1.tag"></span>
+          <h4 data-i18n="network.stations.1.name"></h4>
+          <p data-i18n="network.stations.1.text"></p>
+          <p class="s-spec" data-i18n="network.stations.1.spec"></p>
+        </div>
+      </article>
+      <article class="s-card s-station s-station--flag reveal">
+        <div class="s-station__media s-station__media--48">
+          <img src="assets/products/station-48-real.webp" width="1200" height="1600" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:network.stations.2.name">
+        </div>
+        <div class="s-station__body">
+          <span class="s-chip" data-i18n="network.stations.2.tag"></span>
+          <h4 data-i18n="network.stations.2.name"></h4>
+          <p data-i18n="network.stations.2.text"></p>
+          <p class="s-spec" data-i18n="network.stations.2.spec"></p>
+        </div>
+      </article>
+      <article class="s-card s-station s-station--pb reveal">
+        <div class="s-station__media s-station__media--pb">
+          <img src="assets/products/phone-powerbank.webp" width="900" height="1600" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:network.powerbankTitle">
+        </div>
+        <div class="s-station__body">
+          <span class="s-cables" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h4 data-i18n="network.powerbankTitle"></h4>
+          <p data-i18n="network.powerbankText"></p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

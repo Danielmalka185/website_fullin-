@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "lightboxClose": "סגירה",
+    "selectPlaceholder": "בחרו סוג עסק",
+    "appStoreSmall": "הורדה מ-",
+    "googlePlaySmall": "זמין ב-",
+    "appStoreLabel": "הורדה מ-App Store",
+    "googlePlayLabel": "זמין ב-Google Play",
+    "waLabel": "פתיחת וואטסאפ"
+  },
+  "footer": {
+    "links": {
+      "accessibility": "הצהרת נגישות"
+    }
+  }
+}
