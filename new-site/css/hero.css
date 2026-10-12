@@ -25,7 +25,7 @@
 .hero__l2 { filter: drop-shadow(0 0 28px rgba(47,195,83,.35)); }
 .hero__sub { margin-block-start: var(--s-5); max-inline-size: 31rem; font-size: var(--fs-md); color: var(--muted-2); }
 .hero__cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-block-start: var(--s-6); }
-.hero__trust { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: var(--s-5) 0 0; list-style: none; }
+.hero__copy .hero__trust { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: var(--s-5) 0 0; list-style: none; }
 .hero__trust .pill { padding: .4rem .85rem; font-size: var(--fs-xs); min-block-size: 32px; }
 .hero__trust svg { inline-size: 1rem; block-size: 1rem; color: var(--green); flex: none; }
 .pill--free { border-color: rgba(232,242,58,.4); color: var(--yellow); background: rgba(232,242,58,.08); }
@@ -64,12 +64,12 @@
 .float { animation: floaty var(--fd, 6s) ease-in-out infinite; animation-delay: var(--fdel, 0s); will-change: transform; }
 @keyframes floaty { 50% { transform: translate3d(0, var(--fy, -12px), 0) rotate(.4deg); } }
 .px img { inline-size: 100%; block-size: 100%; object-fit: cover; filter: drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
-.st24 { inset-block: 0; inset-inline-end: 16%; aspect-ratio: .27; block-size: 100%; z-index: 1; }
+.st24 { inset-block: 0; inset-inline-end: 34%; aspect-ratio: .27; block-size: 100%; z-index: 1; }
 .st24 .float, .phone .float, .st6 .float { inline-size: 100%; block-size: 100%; }
 .st24 img { filter: drop-shadow(0 0 50px rgba(47,195,83,.35)) drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
-.phone { inset-block-end: 3%; inset-inline-end: -4%; inline-size: 48%; aspect-ratio: .93; z-index: 3; }
+.phone { inset-block-end: 6%; inset-inline-end: -6%; inline-size: 50%; aspect-ratio: .93; z-index: 3; }
 .phone img { transform: scale(1.12); }
-.st6 { inset-block-end: 0; inset-inline-start: -2%; inline-size: 46%; aspect-ratio: 1.06; z-index: 2; }
+.st6 { inset-block-end: 0; inset-inline-start: -6%; inline-size: 50%; aspect-ratio: 1.06; z-index: 2; }
 .st6 img { transform: scale(1.9); }
 .spark { position: absolute; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--yellow); box-shadow: 0 0 14px 2px var(--yellow); z-index: 4; animation: twinkle 3s ease-in-out infinite; }
 .s1 { inset-block-start: 14%; inset-inline-start: 18%; } .s2 { inset-block-start: 30%; inset-inline-end: 4%; animation-delay: -1s; background: var(--green); box-shadow: 0 0 14px 2px var(--green); }
