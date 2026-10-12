@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "lightboxClose": "Close",
+    "selectPlaceholder": "Choose business type",
+    "appStoreSmall": "Download on the",
+    "googlePlaySmall": "Get it on",
+    "appStoreLabel": "Download on the App Store",
+    "googlePlayLabel": "Get it on Google Play",
+    "waLabel": "Open WhatsApp"
+  },
+  "footer": {
+    "links": {
+      "accessibility": "Accessibility statement"
+    }
+  }
+}

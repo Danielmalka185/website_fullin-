@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "lightboxClose": "إغلاق",
+    "selectPlaceholder": "اختاروا نوع العمل",
+    "appStoreSmall": "حمّلوه من",
+    "googlePlaySmall": "متوفر على",
+    "appStoreLabel": "التحميل من App Store",
+    "googlePlayLabel": "متوفر على Google Play",
+    "waLabel": "فتح واتساب (WhatsApp)"
+  },
+  "footer": {
+    "links": {
+      "accessibility": "بيان إمكانية الوصول"
+    }
+  }
+}

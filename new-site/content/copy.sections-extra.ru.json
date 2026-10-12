@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "lightboxClose": "Закрыть",
+    "selectPlaceholder": "Выберите тип бизнеса",
+    "appStoreSmall": "Загрузите в",
+    "googlePlaySmall": "Доступно в",
+    "appStoreLabel": "Загрузить в App Store",
+    "googlePlayLabel": "Доступно в Google Play",
+    "waLabel": "Открыть WhatsApp"
+  },
+  "footer": {
+    "links": {
+      "accessibility": "Заявление о доступности"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "a11yw": {
+    "open": "Accessibility menu",
+    "title": "Accessibility settings",
+    "close": "Close accessibility menu",
+    "textSize": "Text size",
+    "smaller": "Decrease text size",
+    "larger": "Increase text size",
+    "sizeStatus": "Text size: {n} of 3",
+    "sizeNormal": "Text size: normal",
+    "contrast": "High contrast",
+    "grayscale": "Grayscale",
+    "links": "Highlight links",
+    "font": "Readable font",
+    "motion": "Pause animations",
+    "cursor": "Large cursor",
+    "reset": "Reset settings",
+    "statement": "Accessibility statement",
+    "on": "On",
+    "off": "Off",
+    "resetDone": "Settings reset"
+  }
+}
