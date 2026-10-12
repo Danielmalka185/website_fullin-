@@ -59,7 +59,7 @@
 @media (min-width: 640px) { .total { grid-template-columns: auto 1fr; gap: 2.5rem; } }
 @media (min-width: 960px) {
   .ptl .ptl__list { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; padding-block-start: 0; }
-  .pstep { grid-template-columns: 1fr; gap: 1.25rem; justify-items: start; align-content: start; }
+  .pstep { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 1.25rem; justify-items: start; }
   .pstep__body { inline-size: 100%; block-size: 100%; }
   .ptl__track { inset-block: 1.6rem auto; inset-inline: 1.6rem calc(20% - 2.4rem); block-size: 3px; inline-size: auto; margin: 0; margin-block-start: -1.5px; }
   .ptl__fill { inset-inline-start: 0; inset-block: 0; inline-size: calc(var(--p) * 100%); block-size: auto; background: linear-gradient(90deg, var(--green), var(--yellow) 80%, var(--danger)); }
