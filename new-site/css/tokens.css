@@ -1,20 +1,27 @@
 /* FULLIN design tokens */
 :root {
-  --bg: #07090b;
-  --surface: #0e1215;
-  --surface-2: #141a1f;
-  --text: #f2f5f3;
-  --muted: #8b9a93;
-  --muted-2: #a9b8b1;
-  --green: #2FC353;
-  --green-glow: rgba(47, 195, 83, .45);
+  /* LIGHT theme: bright, fresh, energetic */
+  --bg: #F6F8F4;
+  --surface: #FFFFFF;
+  --surface-2: #EAF6EC;          /* mint tint */
+  --cream: #FBF8F0;              /* warm tint */
+  --text: #0E1512;
+  --muted: #55645C;
+  --muted-2: #3F4D45;
+  --green: #2FC353;              /* fills, glows, buttons */
+  --green-ink: #137A38;          /* green TEXT / links on light (AA) */
+  --green-glow: rgba(47, 195, 83, .38);
   --green-soft: rgba(47, 195, 83, .12);
-  --yellow: #E8F23A;
-  --danger: #ff6b4a;
-  --line: rgba(255, 255, 255, .08);
-  --line-strong: rgba(255, 255, 255, .16);
-  --glass: rgba(20, 26, 31, .55);
-  --focus: #E8F23A;
+  --yellow: #E8F23A;             /* highlights, underlines, badges only */
+  --danger: #C2410C;
+  --line: rgba(14, 21, 18, .09);
+  --line-strong: rgba(14, 21, 18, .16);
+  --glass: rgba(255, 255, 255, .72);
+  --focus: #0E1512;
+  --dark: #0B1A12;               /* deliberate dark accent bands */
+  --dark-2: #12281B;
+  --on-dark: #F2F7F3;
+  --on-dark-muted: #A9C0B1;
 
   --font-he: "Heebo", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
   --font-latin: "Space Grotesk", "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -40,8 +47,8 @@
 
   --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-xl: 32px; --r-pill: 999px;
 
-  --shadow-1: 0 8px 24px rgba(0, 0, 0, .35);
-  --shadow-2: 0 24px 60px rgba(0, 0, 0, .55);
+  --shadow-1: 0 1px 2px rgba(14, 21, 18, .04), 0 10px 30px -12px rgba(14, 40, 24, .16);
+  --shadow-2: 0 2px 4px rgba(14, 21, 18, .04), 0 28px 60px -24px rgba(14, 40, 24, .28);
   --shadow-glow: 0 0 0 1px rgba(47, 195, 83, .35), 0 10px 40px -8px var(--green-glow);
 
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -50,7 +57,7 @@
   --t: .45s;
   --t-slow: .9s;
 
-  color-scheme: dark;
+  color-scheme: light;
 }
 html[lang="he"], html[lang="ar"] { --font: var(--font-he); }
 @media (min-width: 640px) { :root { --header-h: 76px; } }
