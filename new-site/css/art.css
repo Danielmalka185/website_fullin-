@@ -29,7 +29,6 @@
 @media (min-width: 640px) { .s-station__media.ph { height: auto; aspect-ratio: 4 / 5; } }
 .s-station:hover .ph:not(.ph--stage) > img { --zoom: 1.14; }
 .s-station__media > .s-badge { z-index: 5; }
-.s-station__media--6 > img, .s-station__media--24 > img, .s-station__media--48 > img { position: relative; }
 
 /* VENUES: clean framed photo inside a white card */
 .s-venue { position: relative; border-radius: var(--ph-r); padding: 10px; gap: 6px; }
