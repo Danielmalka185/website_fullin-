@@ -1,270 +1,280 @@
 {
-  "meta": {
-    "title": "FULLIN | Power bank rental, anywhere in Israel",
-    "description": "Scan a QR, grab a power bank, return it at any FULLIN station. First hour free, no subscription, no hidden fees. Business owner? A station at your place, zero cost, zero installation.",
-    "ogTitle": "FULLIN | The last 1% is a liar",
-    "ogDescription": "Power bank rental in a single scan. First hour free, return at any station. Power To Move."
+ "meta": {
+  "title": "FULLIN | Power bank rental, anywhere in Israel",
+  "description": "Scan a QR, grab a power bank, return it at any FULLIN station. First hour free when you download the app, no subscription, no hidden fees. Business owner? A station at your place, zero cost, zero installation.",
+  "ogTitle": "FULLIN | The last 1% is a liar",
+  "ogDescription": "Power bank rental in a single scan. First hour free in the app, return at any station. Power To Move."
+ },
+ "nav": {
+  "how": "How it works",
+  "price": "Pricing",
+  "network": "Network",
+  "business": "For business",
+  "proof": "Who's with us",
+  "faq": "FAQ",
+  "contact": "Contact",
+  "ctaHost": "Want a station?",
+  "ctaApp": "Get the app",
+  "menuOpen": "Open menu",
+  "menuClose": "Close menu",
+  "lang": "Language"
+ },
+ "hero": {
+  "eyebrow": "Power To Move",
+  "titleLine1": "That last 1%",
+  "titleLine2": "is a liar.",
+  "sub": "Scan, grab a power bank, get on with your life. Return it at any FULLIN station. No more hunting for an outlet.",
+  "ctaApp": "Get the app",
+  "ctaHost": "Want a station at your place?",
+  "batteryLabel": "Charging",
+  "batteryStall": "99%... any second now... any second now...",
+  "batteryPunch": "Told you. With FULLIN, it really is 100.",
+  "scrollHint": "Scroll for more",
+  "videoAlt": "A FULLIN station in a bar at night, with power banks ready to rent",
+  "trust1": "Pay by scanning a QR",
+  "trust2": "Return at any station",
+  "trust3": "First hour free in the app"
+ },
+ "how": {
+  "eyebrow": "How it works",
+  "title": "Three steps. Zero drama.",
+  "sub": "From the moment your battery turns red to the moment it's green again.",
+  "steps": [
+   {
+    "num": "01",
+    "title": "Scan and pay",
+    "text": "Scan the QR code on the station, confirm with Apple Pay, Google Pay or a credit card, and your power bank pops out. No app, no sign-up."
+   },
+   {
+    "num": "02",
+    "title": "Charge anywhere",
+    "text": "The power bank goes where you go. Three built-in cables, so it fits any phone, iPhone or Android."
+   },
+   {
+    "num": "03",
+    "title": "Return at any station",
+    "text": "Done? Drop it at any FULLIN station, not necessarily the one you took it from."
+   }
+  ],
+  "note": "The app is optional, but it helps you find a nearby station and manage your rentals."
+ },
+ "price": {
+  "eyebrow": "Pricing",
+  "title": "A price you can explain in one breath",
+  "sub": "First hour free when you download the app, and there's always a cap after that. No surprises.",
+  "steps": [
+   {
+    "label": "First hour",
+    "amount": "Free",
+    "text": "Download the app and your first charge is on us.",
+    "badge": "In the app"
+   },
+   {
+    "label": "After the first hour",
+    "amount": "₪12 per hour",
+    "text": "You only pay for the time you actually use."
+   },
+   {
+    "label": "Daily cap",
+    "amount": "₪50 per day",
+    "text": "Even if you forget it in your bag until tonight, you'll never pay more than ₪50 a day."
+   },
+   {
+    "label": "Day two",
+    "amount": "Another ₪50",
+    "text": "A new day, a new cap. ₪100 in total for two days."
+   },
+   {
+    "label": "If it's not returned",
+    "amount": "Another ₪100",
+    "text": "The maximum total charge is ₪200, not a shekel more."
+   }
+  ],
+  "totalTitle": "So what's the most you can pay?",
+  "totalText": "₪200 in total, even in the worst case, when the power bank never comes back.",
+  "footnote": "The free hour is a benefit for app users. No subscription. No hidden fees. Pay with Apple Pay, Google Pay or a credit card.",
+  "noApp": "Without the app: ₪12 per hour from the first minute"
+ },
+ "network": {
+  "eyebrow": "The network",
+  "title": "Wide deployment across Israel",
+  "sub": "Cafés, bars, restaurants, beaches, hotels, malls and events. When your battery dies, there's usually a station close by.",
+  "mapCaption": "Wide deployment across Israel. Schematic illustration, not an exact map.",
+  "stationsTitle": "Three stations, for every kind of place",
+  "stations": [
+   {
+    "name": "6-slot station",
+    "tag": "Small",
+    "text": "Small and quiet. Sits on the counter and stays out of everyone's way.",
+    "spec": "6 slots"
+   },
+   {
+    "name": "24-slot station",
+    "tag": "Medium",
+    "text": "A station with a 21.5\" screen, for places with rhythm and foot traffic.",
+    "spec": "24 slots · 21.5\" screen"
+   },
+   {
+    "name": "48-slot station",
+    "tag": "Large",
+    "text": "Our flagship. A huge 43\" ad screen for malls, events and busy venues.",
+    "spec": "48 slots · 43\" ad screen"
+   }
+  ],
+  "powerbankTitle": "One power bank that understands every phone",
+  "powerbankText": "Three built-in cables: Lightning, USB-C and Micro USB. Works with iPhone and Android, and there's no need to bring a cable from home."
+ },
+ "business": {
+  "eyebrow": "For business",
+  "title": "A station at your place. You do nothing.",
+  "sub": "We bring it, install it and maintain it. You get happy guests who stay longer.",
+  "benefits": [
+   {
+    "title": "Zero cost",
+    "text": "The station is on us. You don't pay for it, not today and not later."
+   },
+   {
+    "title": "Zero installation",
+    "text": "We show up, place it, plug it in. No drilling, no renovations."
+   },
+   {
+    "title": "Zero effort for your staff",
+    "text": "Nobody has to explain, hand out or count power banks. It all runs by itself."
+   },
+   {
+    "title": "Revenue share",
+    "text": "The station earns, and you share in the revenue. Terms are set with each business individually."
+   },
+   {
+    "title": "Guests who stay longer",
+    "text": "A charged phone is a guest in no hurry to leave. One more round, one more coffee."
+   }
+  ],
+  "venuesTitle": "Where a station feels at home",
+  "venues": [
+   {
+    "id": "cafe",
+    "name": "Cafés and bars",
+    "text": "Customers sit, talk, take photos. The battery is the only thing that can ruin it."
+   },
+   {
+    "id": "restaurant",
+    "name": "Restaurants",
+    "text": "A long meal with no battery anxiety. Guests who aren't watching the percentage order another dessert."
+   },
+   {
+    "id": "beach",
+    "name": "Beaches",
+    "text": "Sun, music, photos. A phone that charges in between."
+   },
+   {
+    "id": "hotel",
+    "name": "Hotels",
+    "text": "A small service guests appreciate, and one that doesn't burden the front desk."
+   },
+   {
+    "id": "mall",
+    "name": "Malls",
+    "text": "Shoppers who stay connected stay at the mall. And there's room for advertising on the big screen."
+   },
+   {
+    "id": "events",
+    "name": "Events and festivals",
+    "text": "Thousands of phones, one outlet that isn't enough. A station at your event fixes that."
+   }
+  ],
+  "illustrationNote": "Illustration",
+  "cta": "I want a station at my business"
+ },
+ "proof": {
+  "eyebrow": "Who's with us",
+  "title": "They're already charging with us",
+  "sub": "Businesses and events that chose to make battery life someone else's problem.",
+  "clientsTitle": "Businesses and events with us",
+  "fieldTitle": "From the field",
+  "fieldCaption1": "A FULLIN station at an event",
+  "fieldCaption2": "Power banks ready to rent",
+  "fieldCaption3": "Return it and carry on"
+ },
+ "faq": {
+  "eyebrow": "Questions and answers",
+  "title": "Frequently asked questions",
+  "items": [
+   {
+    "q": "How do I rent a power bank?",
+    "a": "Scan the QR code on the station with your phone's camera or through the FULLIN app, pay, and your power bank is released."
+   },
+   {
+    "q": "Do I need to download the app?",
+    "a": "Not required. You can also rent by scanning the QR on the station, and then you pay ₪12 per hour from the first minute. In the app the first hour is free, and it also finds nearby stations and keeps track of your rental."
+   },
+   {
+    "q": "Where do I return the power bank?",
+    "a": "At any FULLIN station. It doesn't have to be the one you took it from."
+   },
+   {
+    "q": "How much does it cost?",
+    "a": "With the app: first hour free. Without the app: ₪12 per hour from the first minute. Either way, it's ₪12 per hour after that, capped at ₪50 per day. Day two is another ₪50 at most, so ₪100 for two days. No subscription and no hidden fees."
+   },
+   {
+    "q": "Who gets the free first hour?",
+    "a": "The free first hour is a benefit for people who download the app. If you rent without the app, by scanning the QR on the station, you pay ₪12 per hour from the first minute."
+   },
+   {
+    "q": "What happens if I don't return the power bank?",
+    "a": "A further ₪100 is charged, and the maximum total is ₪200."
+   },
+   {
+    "q": "Which payment methods can I use?",
+    "a": "Apple Pay, Google Pay and credit card."
+   },
+   {
+    "q": "How does a business join?",
+    "a": "Leave your details in the form or message us on WhatsApp, and we'll get back to you. The station comes at no cost and with no installation, and your business enjoys a revenue share."
+   }
+  ]
+ },
+ "contact": {
+  "eyebrow": "Contact",
+  "title": "Let's talk",
+  "sub": "Business owners: leave your details and we'll get back to you on WhatsApp. Users: the app is just below.",
+  "form": {
+   "name": "Full name",
+   "business": "Business name",
+   "type": "Business type",
+   "typeOptions": [
+    "Café / Bar",
+    "Restaurant",
+    "Beach",
+    "Hotel",
+    "Mall",
+    "Event",
+    "Other"
+   ],
+   "phone": "Phone",
+   "city": "City",
+   "submit": "Send us a WhatsApp",
+   "errors": {
+    "required": "Required field",
+    "phone": "That phone number doesn't look right"
+   }
   },
-  "nav": {
-    "how": "How it works",
-    "price": "Pricing",
-    "network": "Network",
-    "business": "For business",
-    "proof": "Who's with us",
-    "faq": "FAQ",
-    "contact": "Contact",
-    "ctaHost": "Want a station?",
-    "ctaApp": "Get the app",
-    "menuOpen": "Open menu",
-    "menuClose": "Close menu",
-    "lang": "Language"
+  "whatsapp": "Or talk to us directly on WhatsApp",
+  "appTitle": "Looking to rent a power bank? Get the app",
+  "waMessageTemplate": "Hi FULLIN, I'm interested in a station at my business. (שלום FULLIN, אני מעוניין/ת בעמדה בעסק)\nName (שם): {name}\nBusiness (עסק): {business}\nType (סוג): {type}\nPhone (טלפון): {phone}\nCity (עיר): {city}",
+  "successNote": "Opening WhatsApp with your message ready. Just hit send."
+ },
+ "footer": {
+  "tagline": "Power To Move",
+  "links": {
+   "privacy": "Privacy policy",
+   "terms": "Terms of use"
   },
-  "hero": {
-    "eyebrow": "Power To Move",
-    "titleLine1": "That last 1%",
-    "titleLine2": "is a liar.",
-    "sub": "Scan, grab a power bank, get on with your life. Return it at any FULLIN station. No more hunting for an outlet.",
-    "ctaApp": "Get the app",
-    "ctaHost": "Want a station at your place?",
-    "batteryLabel": "Charging",
-    "batteryStall": "99%... any second now... any second now...",
-    "batteryPunch": "Told you. With FULLIN, it really is 100.",
-    "scrollHint": "Scroll for more",
-    "videoAlt": "A FULLIN station in a bar at night, with power banks ready to rent",
-    "trust1": "Pay by scanning a QR",
-    "trust2": "Return at any station",
-    "trust3": "First hour free"
-  },
-  "how": {
-    "eyebrow": "How it works",
-    "title": "Three steps. Zero drama.",
-    "sub": "From the moment your battery turns red to the moment it's green again.",
-    "steps": [
-      {
-        "num": "01",
-        "title": "Scan and pay",
-        "text": "Scan the QR code on the station, confirm with Apple Pay, Google Pay or a credit card, and your power bank pops out. No app, no sign-up."
-      },
-      {
-        "num": "02",
-        "title": "Charge anywhere",
-        "text": "The power bank goes where you go. Three built-in cables, so it fits any phone, iPhone or Android."
-      },
-      {
-        "num": "03",
-        "title": "Return at any station",
-        "text": "Done? Drop it at any FULLIN station, not necessarily the one you took it from."
-      }
-    ],
-    "note": "The app is optional, but it helps you find a nearby station and manage your rentals."
-  },
-  "price": {
-    "eyebrow": "Pricing",
-    "title": "A price you can explain in one breath",
-    "sub": "First hour free, and there's always a cap after that. No surprises.",
-    "steps": [
-      {
-        "label": "First hour",
-        "amount": "Free",
-        "text": "Your first charge is on us."
-      },
-      {
-        "label": "After the first hour",
-        "amount": "₪12 per hour",
-        "text": "You only pay for the time you actually use."
-      },
-      {
-        "label": "Daily cap",
-        "amount": "₪50 per day",
-        "text": "Even if you forget it in your bag until tonight, you'll never pay more than ₪50 a day."
-      },
-      {
-        "label": "Day two",
-        "amount": "Another ₪50",
-        "text": "A new day, a new cap. ₪100 in total for two days."
-      },
-      {
-        "label": "If it's not returned",
-        "amount": "Another ₪100",
-        "text": "The maximum total charge is ₪200, not a shekel more."
-      }
-    ],
-    "totalTitle": "So what's the most you can pay?",
-    "totalText": "₪200 in total, even in the worst case, when the power bank never comes back.",
-    "footnote": "No subscription. No hidden fees. Pay with Apple Pay, Google Pay or a credit card."
-  },
-  "network": {
-    "eyebrow": "The network",
-    "title": "Wide deployment across Israel",
-    "sub": "Cafés, bars, restaurants, beaches, hotels, malls and events. When your battery dies, there's usually a station close by.",
-    "mapCaption": "Wide deployment across Israel. Schematic illustration, not an exact map.",
-    "stationsTitle": "Three stations, for every kind of place",
-    "stations": [
-      {
-        "name": "6-slot station",
-        "tag": "Small",
-        "text": "Small and quiet. Sits on the counter and stays out of everyone's way.",
-        "spec": "6 slots"
-      },
-      {
-        "name": "24-slot station",
-        "tag": "Medium",
-        "text": "A station with a 21.5\" screen, for places with rhythm and foot traffic.",
-        "spec": "24 slots · 21.5\" screen"
-      },
-      {
-        "name": "48-slot station",
-        "tag": "Large",
-        "text": "Our flagship. A huge 43\" ad screen for malls, events and busy venues.",
-        "spec": "48 slots · 43\" ad screen"
-      }
-    ],
-    "powerbankTitle": "One power bank that understands every phone",
-    "powerbankText": "Three built-in cables: Lightning, USB-C and Micro USB. Works with iPhone and Android, and there's no need to bring a cable from home."
-  },
-  "business": {
-    "eyebrow": "For business",
-    "title": "A station at your place. You do nothing.",
-    "sub": "We bring it, install it and maintain it. You get happy guests who stay longer.",
-    "benefits": [
-      {
-        "title": "Zero cost",
-        "text": "The station is on us. You don't pay for it, not today and not later."
-      },
-      {
-        "title": "Zero installation",
-        "text": "We show up, place it, plug it in. No drilling, no renovations."
-      },
-      {
-        "title": "Zero effort for your staff",
-        "text": "Nobody has to explain, hand out or count power banks. It all runs by itself."
-      },
-      {
-        "title": "Revenue share",
-        "text": "The station earns, and you share in the revenue. Terms are set with each business individually."
-      },
-      {
-        "title": "Guests who stay longer",
-        "text": "A charged phone is a guest in no hurry to leave. One more round, one more coffee."
-      }
-    ],
-    "venuesTitle": "Where a station feels at home",
-    "venues": [
-      {
-        "id": "cafe",
-        "name": "Cafés and bars",
-        "text": "Customers sit, talk, take photos. The battery is the only thing that can ruin it."
-      },
-      {
-        "id": "restaurant",
-        "name": "Restaurants",
-        "text": "A long meal with no battery anxiety. Guests who aren't watching the percentage order another dessert."
-      },
-      {
-        "id": "beach",
-        "name": "Beaches",
-        "text": "Sun, music, photos. A phone that charges in between."
-      },
-      {
-        "id": "hotel",
-        "name": "Hotels",
-        "text": "A small service guests appreciate, and one that doesn't burden the front desk."
-      },
-      {
-        "id": "mall",
-        "name": "Malls",
-        "text": "Shoppers who stay connected stay at the mall. And there's room for advertising on the big screen."
-      },
-      {
-        "id": "events",
-        "name": "Events and festivals",
-        "text": "Thousands of phones, one outlet that isn't enough. A station at your event fixes that."
-      }
-    ],
-    "illustrationNote": "Illustration",
-    "cta": "I want a station at my business"
-  },
-  "proof": {
-    "eyebrow": "Who's with us",
-    "title": "They're already charging with us",
-    "sub": "Businesses and events that chose to make battery life someone else's problem.",
-    "clientsTitle": "Businesses and events with us",
-    "fieldTitle": "From the field",
-    "fieldCaption1": "A FULLIN station at an event",
-    "fieldCaption2": "Power banks ready to rent",
-    "fieldCaption3": "Return it and carry on"
-  },
-  "faq": {
-    "eyebrow": "Questions and answers",
-    "title": "Frequently asked questions",
-    "items": [
-      {
-        "q": "How do I rent a power bank?",
-        "a": "Scan the QR code on the station with your phone's camera or through the FULLIN app, pay, and your power bank is released."
-      },
-      {
-        "q": "Do I need to download the app?",
-        "a": "No. You can rent directly by scanning the QR. The app helps you find nearby stations and manage your rentals."
-      },
-      {
-        "q": "Where do I return the power bank?",
-        "a": "At any FULLIN station. It doesn't have to be the one you took it from."
-      },
-      {
-        "q": "How much does it cost?",
-        "a": "First hour free. After that, ₪12 per hour, capped at ₪50 per day. Day two is another ₪50 at most, so ₪100 for two days. No subscription and no hidden fees."
-      },
-      {
-        "q": "Is the first hour really free?",
-        "a": "Yes. The first hour costs nothing, and only after it does the ₪12 per hour meter start."
-      },
-      {
-        "q": "What happens if I don't return the power bank?",
-        "a": "A further ₪100 is charged, and the maximum total is ₪200."
-      },
-      {
-        "q": "Which payment methods can I use?",
-        "a": "Apple Pay, Google Pay and credit card."
-      },
-      {
-        "q": "How does a business join?",
-        "a": "Leave your details in the form or message us on WhatsApp, and we'll get back to you. The station comes at no cost and with no installation, and your business enjoys a revenue share."
-      }
-    ]
-  },
-  "contact": {
-    "eyebrow": "Contact",
-    "title": "Let's talk",
-    "sub": "Business owners: leave your details and we'll get back to you on WhatsApp. Users: the app is just below.",
-    "form": {
-      "name": "Full name",
-      "business": "Business name",
-      "type": "Business type",
-      "typeOptions": ["Café / Bar", "Restaurant", "Beach", "Hotel", "Mall", "Event", "Other"],
-      "phone": "Phone",
-      "city": "City",
-      "submit": "Send us a WhatsApp",
-      "errors": {
-        "required": "Required field",
-        "phone": "That phone number doesn't look right"
-      }
-    },
-    "whatsapp": "Or talk to us directly on WhatsApp",
-    "appTitle": "Looking to rent a power bank? Get the app",
-    "waMessageTemplate": "Hi FULLIN, I'm interested in a station at my business. (שלום FULLIN, אני מעוניין/ת בעמדה בעסק)\nName (שם): {name}\nBusiness (עסק): {business}\nType (סוג): {type}\nPhone (טלפון): {phone}\nCity (עיר): {city}",
-    "successNote": "Opening WhatsApp with your message ready. Just hit send."
-  },
-  "footer": {
-    "tagline": "Power To Move",
-    "links": {
-      "privacy": "Privacy policy",
-      "terms": "Terms of use"
-    },
-    "rights": "© 2026 FULLIN. All rights reserved.",
-    "madeWith": "Built in Israel, on a full battery."
-  },
-  "a11y": {
-    "skipToContent": "Skip to main content",
-    "langSwitcher": "Switch language"
-  }
+  "rights": "© 2026 FULLIN. All rights reserved.",
+  "madeWith": "Built in Israel, on a full battery."
+ },
+ "a11y": {
+  "skipToContent": "Skip to main content",
+  "langSwitcher": "Switch language"
+ }
 }

@@ -8,8 +8,8 @@ FULLIN rents power banks from self-service charging stations in cafés, bars, re
 Two audiences, equal weight: **consumers** (rent) and **business owners** (host a station). Business pitch: zero cost, zero installation, zero staff effort, revenue share, guests stay longer.
 
 ## Hard facts (use EXACTLY, never invent)
-- Price: **first hour free**. After that 12 NIS/hour. Daily cap **50 NIS per day**; second day another 50 (= 100 total). If not returned: **a further 100 NIS, 200 NIS maximum in total**. No subscription, no hidden fees.
-- Payment: Apple Pay, Google Pay, credit card. App optional for renting via QR; app helps find stations and manage rentals.
+- Price: **first hour free ONLY for people who download the app** (owner-confirmed). Renting WITHOUT the app (QR scan on the station) = **12 NIS/hour from the very first minute, no free hour**. Never promise a free hour to everyone. After the app's free hour: 12 NIS/hour. Daily cap **50 NIS per day**; second day another 50 (= 100 total). If not returned: **a further 100 NIS, 200 NIS maximum in total**. No subscription, no hidden fees.
+- Payment: Apple Pay, Google Pay, credit card. App optional for renting via QR (no free hour without the app); app gives the free first hour, helps find stations and track rentals.
 - Power bank: 3 built-in cables (Lightning / USB-C / Micro USB), works with iPhone and Android.
 - Stations: 6-slot (small, countertop), 24-slot (medium, 21.5" screen), 48-slot (large, 43" ad screen).
 - Real references the owners approved to show by NAME/logo: Lager & Ale, Vert, Frishman beach, Troya, Tea Wei, ICON Fitness, Kanyon HaAmakim (Afula), and events Genesis festival, Infected festival.
@@ -49,7 +49,7 @@ assets/...            already optimized webp/svg/mp4. Do not modify. Read the fi
 ## Section content intent
 1. **Hero** — dark, 6/24 station cutouts + phone/powerbank floating over green glow, nightclub/bar ambience video or image behind, live battery counter that climbs and "stalls" at 99% then punchline; CTAs: download app / host a station.
 2. **How it works** — 3 steps (scan & pay; charge anywhere; return at any station), sticky/animated.
-3. **Pricing** — stepped timeline card: 1st hour free -> 12 NIS/hr -> 50/day cap -> day 2 +50 -> not returned +100 (200 max). Clear, honest, no fine-print feel.
+3. **Pricing** — stepped timeline card: 1st hour free (app users only; no-app renters pay 12/hr from minute one) -> 12 NIS/hr -> 50/day cap -> day 2 +50 -> not returned +100 (200 max). Clear, honest, no fine-print feel.
 4. **Network** — "wide deployment across Israel" stylised map/graphic of Israel with soft pulsing dots (NO counts), station family (6/24/48) cards with real cutouts.
 5. **Business** — what the owner gets (0 cost, 0 install, 0 effort, revenue share, guests stay longer) + venue-type tabs/cards: café/bar, restaurant, beach, hotel, mall, events — use AI scene images labeled "הדמיה".
 6. **Proof** — client logo marquee (Lager & Ale, Vert, Frishman, Troya, Tea Wei, ICON, Kanyon HaAmakim; use logos in assets/logos where present, styled text wordmarks otherwise) + real festival field photos (no faces) in a bento grid.

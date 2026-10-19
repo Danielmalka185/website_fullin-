@@ -4,48 +4,67 @@
  },
  "app": {
   "eyebrow": "The app",
-  "title": "Nearest station? The app already knows.",
-  "sub": "It finds stations, rents with a scan and manages your rental. Prefer to skip it? Scanning the QR on a station is enough.",
+  "title": "The simplest way to rent a power bank",
+  "sub": "Find a station on the map, scan and rent in seconds, follow your rental and return at any station. And the first hour? On us, when you download the app.",
+  "cap": "Screenshots from the app",
+  "swipe": "Swipe to see all the screens",
+  "shots": [
+   {
+    "step": "1",
+    "title": "Find a station nearby",
+    "text": "A map of the stations around you and the way to the closest one. No more panic-hunting for an outlet.",
+    "alt": "The FULLIN app map screen: a map of Tel Aviv with station pins and a scan button"
+   },
+   {
+    "step": "2",
+    "title": "Scan and rent in seconds",
+    "text": "The station card shows how many power banks are available and how many slots are free for returns, then you tap to rent.",
+    "alt": "A station card in the app: available power banks, free return slots, rent and navigate buttons"
+   },
+   {
+    "step": "3",
+    "title": "Return at any station",
+    "text": "When you finish you get a summary with the rental time and the return location, and billing stops.",
+    "alt": "The rental complete screen: a check mark, rental time, return location and a star rating"
+   }
+  ],
   "features": [
    {
-    "title": "Find a station nearby",
-    "text": "A map of the stations around you and the way to the closest one. No more panic-hunting for an outlet."
+    "title": "Simplest",
+    "text": "Map, scan, power bank in hand. No forms, no searching."
    },
    {
-    "title": "Rent in seconds",
-    "text": "Scan the QR, confirm payment and the power bank is released. No sign-up, no forms."
+    "title": "Follow your rental",
+    "text": "See your rental in one place, and get a summary with the rental time and return location when it ends."
    },
    {
-    "title": "Manage and return",
-    "text": "See your active rental and return it at any station, not only the one you took it from."
+    "title": "Return anywhere",
+    "text": "No need to go back to the same station. Any FULLIN station takes the power bank."
    },
    {
     "title": "In four languages",
     "text": "Hebrew, English, Arabic and Russian. The battery may run out, but never the words."
    }
   ],
+  "badge": {
+   "title": "First hour free",
+   "sub": "App only"
+  },
   "pay": {
    "title": "Pay your way",
    "card": "Credit card",
-   "text": "Apple Pay, Google Pay or a credit card. The authorization on your card or digital wallet is confirmed the moment the power bank is released.",
-   "rates": "First hour free. After that ₪12 per hour, capped at ₪50 per day. No subscription, no hidden fees."
+   "text": "Apple Pay, Google Pay or a credit card. No subscription.",
+   "rates": "After the first hour: ₪12 per hour, capped at ₪50 per day. No hidden fees."
   },
   "dl": {
    "title": "Get the app",
-   "noapp": "No app needed: scan the QR on any station with your phone camera and rent right away."
+   "noapp": "No app? You can still rent by scanning the QR on the station, at ₪12 per hour from the first minute."
   },
-  "pause": "Pause the demo",
-  "play": "Play the demo",
-  "ui": {
-   "nearest": "Nearest station",
-   "available": "Available now",
-   "scan": "Scan to rent",
-   "scanning": "Point at the QR code",
-   "free": "First hour free",
-   "confirmed": "Payment confirmed",
-   "released": "Power bank released!",
-   "take": "Grab it and go",
-   "caption": "Illustrative screen"
+  "compare": {
+   "with": "With the app",
+   "withValue": "First hour free",
+   "without": "Without the app",
+   "withoutValue": "₪12 per hour from minute one"
   }
  }
 }

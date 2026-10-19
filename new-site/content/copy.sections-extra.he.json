@@ -1,37 +1,37 @@
 {
-  "sections": {
-    "lightboxClose": "סגירה",
-    "selectPlaceholder": "בחרו סוג עסק",
-    "appStoreSmall": "הורדה מ-",
-    "googlePlaySmall": "זמין ב-",
-    "appStoreLabel": "הורדה מ-App Store",
-    "googlePlayLabel": "זמין ב-Google Play",
-    "waLabel": "פתיחת וואטסאפ"
-  },
-  "footer": {
-    "links": {
-      "accessibility": "הצהרת נגישות"
-    }
-  },
-  "art": {
-    "alt": {
-      "station6": "עמדת FULLIN בת 6 תאים על דלפק, עם מסך, קוד QR ומחזיק פלייר",
-      "station24": "עמדת FULLIN בת 24 תאים עומדת, עם מסך 21.5 אינץ׳ ומסוף תשלום בכרטיס",
-      "station48": "עמדת FULLIN בת 48 תאים עומדת, עם מסך פרסום גדול בגודל 43 אינץ׳ ומסוף תשלום",
-      "powerbank": "טלפון מונח על מטען FULLIN על דלפק בר, עם כבלים צהובים מובנים",
-      "venueCafe": "הדמיה: עמדת FULLIN בת 6 תאים על דלפק בר חם ומואר",
-      "venueRestaurant": "הדמיה: עמדת FULLIN בת 6 תאים במסעדה עם ציור קיר של תמנון",
-      "venueBeach": "הדמיה: עמדת FULLIN בת 6 תאים על דלפק עץ בבר פתוח",
-      "venueHotel": "הדמיה: עמדת FULLIN בת 24 תאים בבר של מלון",
-      "venueMall": "הדמיה: עמדת FULLIN בת 24 תאים בלובי מרווח ומואר",
-      "venueEvents": "הדמיה: עמדת FULLIN בין קהל במסיבת לילה",
-      "backview": "אישה מצולמת מאחור מצלמת עם טלפון ומטען FULLIN בפסטיבל",
-      "poster": "פוסטר קמפיין של FULLIN: סוללה נגמרת? קחו מטען נייד, שעה מתנה",
-      "pile": "ערימת מטענים ניידים של FULLIN על הדשא ליד תחתית העמדה"
-    }
-  },
-  "proof": {
-    "fieldCaption5": "סורקים, מצלמים, ממשיכים",
-    "fieldCaption6": "מהקמפיין שלנו"
+ "sections": {
+  "lightboxClose": "סגירה",
+  "selectPlaceholder": "בחרו סוג עסק",
+  "appStoreSmall": "הורדה מ-",
+  "googlePlaySmall": "זמין ב-",
+  "appStoreLabel": "הורדה מ-App Store",
+  "googlePlayLabel": "זמין ב-Google Play",
+  "waLabel": "פתיחת וואטסאפ"
+ },
+ "footer": {
+  "links": {
+   "accessibility": "הצהרת נגישות"
   }
+ },
+ "art": {
+  "alt": {
+   "station6": "עמדת FULLIN בת 6 תאים על דלפק, עם מסך, קוד QR ומחזיק פלייר",
+   "station24": "עמדת FULLIN בת 24 תאים עומדת, עם מסך 21.5 אינץ׳ ומסוף תשלום בכרטיס",
+   "station48": "עמדת FULLIN בת 48 תאים עומדת, עם מסך פרסום גדול בגודל 43 אינץ׳ ומסוף תשלום",
+   "powerbank": "טלפון מונח על מטען FULLIN על דלפק בר, עם כבלים צהובים מובנים",
+   "venueCafe": "הדמיה: עמדת FULLIN בת 6 תאים על דלפק בר חם ומואר",
+   "venueRestaurant": "הדמיה: עמדת FULLIN בת 6 תאים במסעדה עם ציור קיר של תמנון",
+   "venueBeach": "הדמיה: עמדת FULLIN בת 6 תאים על דלפק עץ בבר פתוח",
+   "venueHotel": "הדמיה: עמדת FULLIN בת 24 תאים בבר של מלון",
+   "venueMall": "הדמיה: עמדת FULLIN בת 24 תאים בלובי מרווח ומואר",
+   "venueEvents": "הדמיה: עמדת FULLIN בין קהל במסיבת לילה",
+   "backview": "אישה מצולמת מאחור מצלמת עם טלפון ומטען FULLIN בפסטיבל",
+   "poster": "פוסטר קמפיין של FULLIN: סוללה נגמרת? קחו מטען נייד, שעה מתנה בהורדת האפליקציה",
+   "pile": "ערימת מטענים ניידים של FULLIN על הדשא ליד תחתית העמדה"
+  }
+ },
+ "proof": {
+  "fieldCaption5": "סורקים, מצלמים, ממשיכים",
+  "fieldCaption6": "מהקמפיין שלנו"
+ }
 }

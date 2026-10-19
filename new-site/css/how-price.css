@@ -65,3 +65,7 @@
   .ptl__track { inset-block: 1.6rem auto; inset-inline: 1.6rem calc(20% - 2.4rem); block-size: 3px; inline-size: auto; margin: 0; margin-block-start: -1.5px; }
   .ptl__fill { inset-inline-start: 0; inset-block: 0; inline-size: calc(var(--p) * 100%); block-size: auto; background: linear-gradient(90deg, var(--green), #C6D318 80%, var(--danger)); }
 }
+
+.pstep__badge { display: inline-block; margin-inline-start: .4rem; padding: .12rem .6rem; border-radius: var(--r-pill); background: var(--yellow); color: #0E1512; font-size: var(--fs-xs); font-weight: 800; letter-spacing: 0; vertical-align: middle; }
+.price__noapp { display: flex; align-items: center; justify-content: center; gap: .6rem; margin: 1.5rem auto 0; inline-size: fit-content; max-inline-size: 100%; padding: .65rem 1.2rem; border-radius: var(--r-pill); background: #fff; border: 1px solid var(--line-strong); color: var(--text); font-weight: 700; font-size: var(--fs-sm); text-align: center; }
+.price__noapp svg { flex: none; color: var(--muted-2); }
