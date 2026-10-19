@@ -1,0 +1,51 @@
+{
+ "nav": {
+  "app": "The app"
+ },
+ "app": {
+  "eyebrow": "The app",
+  "title": "Nearest station? The app already knows.",
+  "sub": "It finds stations, rents with a scan and manages your rental. Prefer to skip it? Scanning the QR on a station is enough.",
+  "features": [
+   {
+    "title": "Find a station nearby",
+    "text": "A map of the stations around you and the way to the closest one. No more panic-hunting for an outlet."
+   },
+   {
+    "title": "Rent in seconds",
+    "text": "Scan the QR, confirm payment and the power bank is released. No sign-up, no forms."
+   },
+   {
+    "title": "Manage and return",
+    "text": "See your active rental and return it at any station, not only the one you took it from."
+   },
+   {
+    "title": "In four languages",
+    "text": "Hebrew, English, Arabic and Russian. The battery may run out, but never the words."
+   }
+  ],
+  "pay": {
+   "title": "Pay your way",
+   "card": "Credit card",
+   "text": "Apple Pay, Google Pay or a credit card. The authorization on your card or digital wallet is confirmed the moment the power bank is released.",
+   "rates": "First hour free. After that ₪12 per hour, capped at ₪50 per day. No subscription, no hidden fees."
+  },
+  "dl": {
+   "title": "Get the app",
+   "noapp": "No app needed: scan the QR on any station with your phone camera and rent right away."
+  },
+  "pause": "Pause the demo",
+  "play": "Play the demo",
+  "ui": {
+   "nearest": "Nearest station",
+   "available": "Available now",
+   "scan": "Scan to rent",
+   "scanning": "Point at the QR code",
+   "free": "First hour free",
+   "confirmed": "Payment confirmed",
+   "released": "Power bank released!",
+   "take": "Grab it and go",
+   "caption": "Illustrative screen"
+  }
+ }
+}
