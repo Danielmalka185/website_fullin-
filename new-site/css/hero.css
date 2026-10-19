@@ -54,39 +54,6 @@
 @keyframes stutter { 50% { filter: brightness(.7); } }
 @keyframes punch { 0% { transform: scale(1); } 40% { transform: scale(1.06); box-shadow: 0 0 40px var(--green-glow); } 100% { transform: scale(1); } }
 
-/* Stage: REAL product cutouts on light, soft floor shadows + reflections */
-.hero__stage { position: relative; inline-size: min(100%, 440px); aspect-ratio: 4 / 5; margin-inline: auto; }
-.stage__bd { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; border-radius: 34px; object-fit: cover; box-shadow: 0 0 0 1px rgba(14,21,18,.06), 0 40px 80px -40px rgba(14,60,30,.5); }
-.stage__glow { position: absolute; inset: -6% -10% 0; border-radius: 50%; background: radial-gradient(closest-side, rgba(47,195,83,.5), rgba(47,195,83,.16) 58%, transparent 74%); filter: blur(10px); animation: breathe 7s ease-in-out infinite; }
-@keyframes breathe { 50% { transform: scale(1.06); opacity: .8; } }
-.stage__rings i { position: absolute; inset: 2% 0 8%; border-radius: 50%; border: 1px solid rgba(19,122,56,.16); animation: spin 70s linear infinite; }
-.stage__rings i:nth-child(2) { inset: 14% 12% 20%; border-style: dashed; border-color: rgba(19,122,56,.18); animation-duration: 100s; animation-direction: reverse; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.stage__floor { position: absolute; inset-inline: 0; inset-block-end: 8%; block-size: 11%; border-radius: 50%; background: radial-gradient(closest-side, rgba(14,50,28,.3), rgba(14,50,28,.08) 60%, transparent 72%); filter: blur(6px); }
-.st { position: absolute; will-change: transform; }
-.st__in { position: relative; animation: floaty 7s ease-in-out infinite; }
-@keyframes floaty { 50% { transform: translate3d(0, -8px, 0); } }
-.st__img { position: relative; z-index: 1; display: block; inline-size: 100%; block-size: auto; filter: drop-shadow(10px 12px 14px rgba(14,40,24,.22)); }
-.st__refl { display: none; position: absolute; inset-inline: 0; inset-block-start: 100%; inline-size: 100%; block-size: auto; transform: scaleY(-1); opacity: .22; pointer-events: none; -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,.9), transparent 16%); mask-image: linear-gradient(to top, rgba(0,0,0,.9), transparent 16%); }
-.st--t24 { inset-inline-start: 7%; inset-block-end: 14%; inline-size: 19%; }
-.st--t24 .st__in { animation-delay: -1s; }
-.st--t48 { inset-inline-start: 24%; inset-block-end: 15.5%; inline-size: 30%; z-index: 2; }
-.st--t48 .st__in { animation-delay: -2.2s; animation-duration: 8.5s; }
-.st--s6 { inset-inline-end: 8%; inset-block-end: 20%; inline-size: 25%; z-index: 3; }
-.st--s6 .st__in { animation-delay: -3.5s; animation-duration: 8s; }
-.st--s6 .st__img { filter: drop-shadow(6px 10px 10px rgba(14,40,24,.28)); }
-.st__counter { position: absolute; inset-inline: -9%; inset-block-start: calc(100% - 3px); block-size: 26%; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #fff 0, #eef7f0 18%, #b9d8c3 100%); box-shadow: 0 0 0 1px rgba(19,122,56,.14), 0 24px 30px -12px rgba(14,50,28,.4); }
-.st__counter::before { content: ""; position: absolute; inset: 0 8px auto; block-size: 2px; background: rgba(47,195,83,.35); border-radius: 2px; }
-.st--pb { inset-inline-end: 9%; inset-block-start: 8%; inline-size: 36%; }
-.st--pb .st__in { animation-duration: 6s; animation-delay: -2s; transform-origin: 50% 60%; }
-.st--pb .st__img { transform: rotate(8deg); filter: drop-shadow(0 26px 24px rgba(14,40,24,.26)) drop-shadow(0 2px 3px rgba(14,40,24,.18)); }
-.st--chip { z-index: 4; inline-size: auto; }
-.chip { display: inline-flex; align-items: center; gap: .45rem; padding: .5rem .9rem; border-radius: var(--r-pill); background: rgba(255,255,255,.9); border: 1px solid #fff; outline: 1px solid var(--line); outline-offset: -1px; color: var(--text); font-family: var(--font-latin); font-weight: 700; font-size: var(--fs-sm); box-shadow: 0 14px 30px -14px rgba(14,40,24,.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); animation: floaty 5s ease-in-out infinite; }
-.chip svg { inline-size: 1.05em; block-size: 1.05em; color: var(--green-ink); }
-.chip b { font-weight: 700; }
-.st--chip1 { inset-inline-start: 4%; inset-block-start: 7%; }
-.st--chip2 { inset-inline-end: 5%; inset-block-end: 6%; }
-.st--chip2 .chip { animation-delay: -2.5s; }
 
 /* Scroll hint */
 .hero__scroll { position: absolute; inset-block-end: 1.25rem; inset-inline: 0; margin-inline: auto; inline-size: max-content; display: none; flex-direction: column; align-items: center; gap: .5rem; color: var(--muted); font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; z-index: 3; transition: color var(--t); }
@@ -97,23 +64,18 @@
 @media (min-height: 700px) and (min-width: 640px) { .hero__scroll { display: flex; } }
 
 @media (min-width: 960px) {
-  .hero__inner { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); }
-  .hero__stage { inline-size: min(100%, 470px); }
+  .hero__inner { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 }
-@media (min-width: 1280px) { .hero__stage { inline-size: min(100%, 490px); } }
 @media (max-width: 959px) {
   .hero { padding-block-end: 3rem; }
-  .hero__stage { inline-size: min(86%, 380px); margin-block-start: 1rem; }
-  .px { transition: none; }
 }
 @media (max-width: 400px) { .hero__cta .btn { inline-size: 100%; } }
-@media (prefers-reduced-motion: reduce) { .stage__rings i, .st__in, .chip, .hero__orb, .stage__glow { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .hero__orb { animation: none !important; } }
 
 @media (max-width: 959px) {
   .hero__inner { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
   .hero__copy { display: contents; }
   .hero__eyebrow, .hero__title, .hero__sub, .hero__cta { order: 1; }
-  .hero__stage { order: 2; align-self: center; margin-block: 1.75rem .5rem; }
   .hero__copy .hero__trust { order: 3; }
   .bat { order: 4; }
 }
@@ -128,8 +90,60 @@
   .hero__eyebrow { margin-block-end: var(--s-3); }
   .hero__sub { margin-block-start: var(--s-3); }
   .hero__cta { margin-block-start: var(--s-4); gap: .6rem; }
-  .hero__stage { inline-size: min(78%, 340px); margin-block: .6rem .25rem; }
 }
 
-/* small phones: keep the whole stage above the fold */
-@media (max-width: 639px) and (max-height: 780px) { .hero__stage { inline-size: min(60%, 240px); margin-block-start: -.1rem; } }
+
+
+/* ===================================================================
+   HERO SCENE. A = Showroom lineup (default) . B = Cinematic venue (?hero=b)
+   One composed image per scene: shared floor + wall + key light, grounded products.
+   Motion = transform/opacity only: slow zoom of the scene (anchored on the floor), counter-drifting bokeh, pulsing screen glow.
+   =================================================================== */
+.hero__stage { position: relative; container-type: size; order: 2; align-self: stretch; inline-size: 100vw; margin-inline: calc(50% - 50vw); margin-block: .5rem -2.4rem; aspect-ratio: 1000 / 1010; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
+.hero--b .hero__stage { aspect-ratio: 4 / 5; }
+.scene { --ar: 1.5; position: absolute; inset-block-end: 0; inset-inline-end: 0; inline-size: max(100cqw, calc(100cqh * var(--ar))); aspect-ratio: var(--ar); }
+.scene--a { --ar: .990; }
+.scene--b { --ar: .8; inline-size: 100cqw; }
+.hero:not(.hero--b) .scene--b, .hero--b .scene--a { display: none; }
+.scene__zoom { position: absolute; inset: 0; transform-origin: 50% 88%; animation: scenezoom 34s ease-in-out infinite alternate; will-change: transform; }
+@keyframes scenezoom { to { transform: scale(1.035); } }
+.scene__pic, .scene__pic img, .scene__b-img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; display: block; object-fit: cover; }
+.scene__pic--ltr { display: none; }
+:root[dir="ltr"] .scene__pic--rtl { display: none; }
+:root[dir="ltr"] .scene__pic--ltr { display: block; }
+@media (max-width: 959px) { .scene__pic--ltr { display: none !important; } :root[dir="ltr"] .scene__pic--rtl { display: block; } }
+.fx { position: absolute; display: block; pointer-events: none; border-radius: 50%; }
+/* screen glow: lifts the emissive screens (screen blend) + a green light wash around them (multiply) */
+.fx--scr { mix-blend-mode: screen; background: radial-gradient(closest-side, rgba(70,255,120,.55), rgba(47,195,83,.18) 62%, transparent 100%); animation: scrpulse 5.2s ease-in-out infinite; opacity: .45; }
+.fx--scr48 { inset-inline-start: calc(var(--a-t48x) - var(--a-t48w) * .33); inset-block-start: calc(var(--a-t48y) - var(--a-t48h) * .30); inline-size: calc(var(--a-t48w) * .66); block-size: calc(var(--a-t48h) * .60); border-radius: 18%; }
+.fx--scr24 { inset-inline-start: calc(var(--a-t24x) - var(--a-t24w) * .33); inset-block-start: calc(var(--a-t24y) - var(--a-t24h) * .30); inline-size: calc(var(--a-t24w) * .66); block-size: calc(var(--a-t24h) * .60); border-radius: 18%; animation-delay: -2.4s; }
+.fx--halo { mix-blend-mode: multiply; background: radial-gradient(closest-side, rgba(47,195,83,.26), rgba(47,195,83,.09) 60%, transparent 100%); animation: halopulse 5.2s ease-in-out infinite; opacity: .8; }
+.fx--halo48 { inset-inline-start: calc(var(--a-t48x) - var(--a-t48w) * .9); inset-block-start: calc(var(--a-t48y) - var(--a-t48h) * .75); inline-size: calc(var(--a-t48w) * 1.8); block-size: calc(var(--a-t48h) * 1.5); }
+.fx--halo24 { inset-inline-start: calc(var(--a-t24x) - var(--a-t24w) * .9); inset-block-start: calc(var(--a-t24y) - var(--a-t24h) * .75); inline-size: calc(var(--a-t24w) * 1.8); block-size: calc(var(--a-t24h) * 1.5); animation-delay: -2.4s; }
+@keyframes scrpulse { 50% { opacity: .85; } }
+@keyframes halopulse { 50% { opacity: 1; } }
+/* bokeh on the free (copy) side of the wall: drifts opposite to the zoom for depth. fixed positions, transform-only */
+.scene__bk { position: absolute; inset: 0; pointer-events: none; }
+.bk { position: absolute; display: block; border-radius: 50%; filter: blur(7px); animation: bkdrift 26s ease-in-out infinite alternate; will-change: transform; }
+.bk--1 { inset-inline-start: 70%; inset-block-start: 8%; inline-size: 9%; aspect-ratio: 1; background: radial-gradient(closest-side, rgba(232,242,58,.55), rgba(232,242,58,0)); }
+.bk--2 { inset-inline-start: 84%; inset-block-start: 20%; inline-size: 6%; aspect-ratio: 1; background: radial-gradient(closest-side, rgba(47,195,83,.42), rgba(47,195,83,0)); animation-duration: 32s; animation-direction: alternate-reverse; }
+.bk--3 { inset-inline-start: 74%; inset-block-start: 36%; inline-size: 7%; aspect-ratio: 1; background: radial-gradient(closest-side, rgba(255,255,255,.8), rgba(255,255,255,0)); animation-duration: 38s; }
+.bk--4 { inset-inline-start: 92%; inset-block-start: 6%; inline-size: 5%; aspect-ratio: 1; background: radial-gradient(closest-side, rgba(120,226,150,.6), rgba(120,226,150,0)); animation-duration: 29s; animation-direction: alternate-reverse; }
+@keyframes bkdrift { to { transform: translate3d(-18%, 14%, 0); } }
+@media (max-width: 959px) { .scene__bk { display: none; } }
+
+/* ---- B: the render fades softly into the light page; the real unit stands on the render's floor */
+.scene--b .scene__fade { position: absolute; inset: 0; -webkit-mask-image: linear-gradient(to left, transparent 0, #000 30%); mask-image: linear-gradient(to left, transparent 0, #000 30%); }
+:root[dir="ltr"] .scene--b .scene__fade { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 30%); mask-image: linear-gradient(to right, transparent 0, #000 30%); }
+.fx--scrb { inset-inline-start: calc(var(--b-cx) - 13%); inset-block-start: calc(var(--b-top) + 2%); inline-size: 26%; block-size: 22%; border-radius: 12%; }
+.scene__badge { inset-block-start: auto; inset-block-end: 17%; inset-inline-start: auto; inset-inline-end: 4%; z-index: 3; }
+.hero--b .hero__glow { opacity: .65; }
+
+@media (min-width: 960px) {
+  .hero__stage { position: absolute; inset: 0; z-index: -1; inline-size: auto; margin: 0; aspect-ratio: auto; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 0, #000 88%, transparent 100%); mask-image: linear-gradient(180deg, #000 0, #000 88%, transparent 100%); }
+  .scene--a { --ar: 1.5; }
+  .scene--b { --ar: .8; inline-size: auto; block-size: 100cqh; inset-inline-end: 2%; }
+  .scene__badge { inset-block-end: 14%; }
+}
+@media (prefers-reduced-motion: reduce) { .scene__zoom, .bk, .fx { animation: none !important; } .fx--scr { opacity: .5; } }
