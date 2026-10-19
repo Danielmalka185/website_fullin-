@@ -1,0 +1,50 @@
+{
+ "pay": {
+  "eyebrow": "Payment",
+  "title": "Scan, pay. That's it.",
+  "sub": "No app to download, no sign-up form. Scan the QR on the station, a secure payment page opens in your browser, you pay, and the power bank is released.",
+  "steps": [
+   {
+    "title": "Scan the QR",
+    "text": "Point your phone camera at the code on the station. Nothing to install."
+   },
+   {
+    "title": "A secure payment page opens",
+    "text": "It opens right in your browser. No app, no sign-up."
+   },
+   {
+    "title": "Pay with a tap",
+    "text": "Apple Pay, Google Pay or a credit card."
+   },
+   {
+    "title": "The power bank is released",
+    "text": "Take it, charge, and return it at any FULLIN station."
+   }
+  ],
+  "cap": "Payment page screens",
+  "swipe": "Swipe to see the screens",
+  "shots": [
+   {
+    "title": "Apple Pay, Google Pay or card",
+    "text": "The payment page opens in your browser with quick-pay buttons.",
+    "alt": "FULLIN's secure payment page in a browser: Apple Pay and Google Pay buttons, credit card fields and a pay 12 NIS per hour button"
+   },
+   {
+    "title": "Or enter card details",
+    "text": "You are charged ₪12 per hour. The ₪100 shown on the page is a credit-frame hold only, not an actual charge.",
+    "alt": "The payment page: cardholder name, card number, expiry and CVV fields, and a pay 12 NIS per hour button"
+   }
+  ],
+  "trust": {
+   "title": "Simple, and secure",
+   "card": "Credit card",
+   "secure": "Secure payment page",
+   "noreg": "No registration",
+   "noapp": "No app to download"
+  },
+  "vs": {
+   "text": "Scan and pay: ₪12 per hour from the first minute. A free first hour? That's for people who download the app.",
+   "link": "See the app"
+  }
+ }
+}

@@ -53,8 +53,9 @@
   "pay": {
    "title": "Pay your way",
    "card": "Credit card",
-   "text": "Apple Pay, Google Pay or a credit card. No subscription.",
-   "rates": "After the first hour: ₪12 per hour, capped at ₪50 per day. No hidden fees."
+   "text": "Scan the QR on the station and pay on a secure payment page, even without the app. ₪12 per hour from the first minute.",
+   "rates": "After the first hour: ₪12 per hour, capped at ₪50 per day. No hidden fees.",
+   "link": "See the payment page"
   },
   "dl": {
    "title": "Get the app",

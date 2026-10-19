@@ -43,7 +43,7 @@
    {
     "num": "01",
     "title": "Scan and pay",
-    "text": "Scan the QR code on the station, confirm with Apple Pay, Google Pay or a credit card, and your power bank pops out. No app, no sign-up."
+    "text": "Scan the QR code on the station, a secure payment page opens in your browser, pay with Apple Pay, Google Pay or a credit card, and your power bank is released. No app, no sign-up."
    },
    {
     "num": "02",
@@ -56,7 +56,8 @@
     "text": "Done? Drop it at any FULLIN station, not necessarily the one you took it from."
    }
   ],
-  "note": "The app is optional, but it helps you find a nearby station and manage your rentals."
+  "note": "The app is optional, but it helps you find a nearby station and manage your rentals.",
+  "payLink": "See the payment page"
  },
  "price": {
   "eyebrow": "Pricing",
