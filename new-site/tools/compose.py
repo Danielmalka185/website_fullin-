@@ -130,7 +130,7 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     out['counter'] = (cx, ytop, Lc.width, Lc.height)
     # shadows of both towers fall right/back: draw far-to-near so nothing is covered wrongly: 24 (back) -> 48 -> counter
     r24 = h24 / t24.height; i24 = t24.resize((int(t24.width * r24), h24), Image.LANCZOS)
-    b24 = base48 - int(23 * s); x24 = int(X(960) - i24.width / 2)
+    b24 = base48 - int(23 * s); x24 = int(X(945) - i24.width / 2)
     r48 = h48 / t48.height; i48 = t48.resize((int(t48.width * r48), h48), Image.LANCZOS)
     x48 = int(X(700) - i48.width / 2)
     order = [('t24', i24, x24, b24), ('t48', i48, x48, base48)]
@@ -144,9 +144,9 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
 
 def hero_a(W=1800, H=1200, mirror=False, mobile=False):
     if mobile:
-        W, H = 1000, 1010; s = .80; ox = 65; base48 = 885
+        W, H = 1000, 960; s = .80; ox = 65; base48 = 850
     else:
-        s = 1.0; ox = 30; base48 = 1035
+        s = 1.0; ox = -12; base48 = 1035
     h48 = int(H48_D * s); cam = 1.4
     y_h = base48 - h48 * cam / 1.8
     wall_y = int(base48 - (base48 - y_h) * .62) if not mobile else int(base48 - (base48 - y_h) * .66)
@@ -206,6 +206,28 @@ def hero_b():
     a = a * (1 - np.clip(dd - .5, 0, 1)[..., None] * .22)
     return Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGB'), dict(cx=(cx - 200) / 1248 * 100, top=(y - 40) / 1560 * 100)
 
+def card(kind):
+    """network cards 1000x1250: same camera, same wall/floor line (wall_y), same key light, same counter material."""
+    W, H = 1000, 1250; wall_y = 800; base = 1135; h48 = 1010; cam = 1.4
+    y_h = base - h48 * cam / 1.8
+    room = SC.Room(W, H, wall_y, vp_x=500, horizon_y=y_h, f=1100, cam=cam, glow_cx=500, glow_cy=wall_y * .50, glow_rx=W * .62,
+                   seed={'6': 31, '24': 32, '48': 33}[kind], wash=1.0)
+    if kind == '6':
+        s = 1.38
+        L, head = build_counter(s, items='slot+pb', w=400)
+        b = base + 20; room.ground(L, int(500 - L.width / 2), b - L.height, b, strength=1.05, refl=.07, shadow_len=.85)
+    else:
+        t = SC.grade(SC.defringe(SC.real('station-' + kind)))
+        h = h48 if kind == '48' else int(h48 * .85 * .985)
+        r = h / t.height; im = t.resize((int(t.width * r), h), Image.LANCZOS)
+        room.ground(im, int(500 - im.width / 2), base - h, base, strength=1.0, refl=.10, shadow_len=1.0)
+    room.vignette(.05)
+    return room.canvas
+
+def render_cards():
+    for k in ('6', '24', '48'):
+        save_webp(card(k), outp('card-%s.webp' % k), target_kb=140)
+
 def render_scenes():
     res = {}
     for name, kw in (('hero-a', {}), ('hero-a-ltr', dict(mirror=True)), ('hero-a-m', dict(mobile=True))):
@@ -225,13 +247,9 @@ def render_scenes():
     open(os.path.join(root, 'css', 'scene-pos.css'), 'w').write(css)
 
 if __name__=='__main__' and 'scenes' in sys.argv:
-    render_scenes(); sys.exit(0)
+    render_scenes(); render_cards(); sys.exit(0)
+if __name__=='__main__' and 'cards' in sys.argv:
+    render_cards(); sys.exit(0)
 
 if __name__=='__main__':
-    s6,s24,s48=[finish(real(n)) for n in ('station-6','station-24','station-48')]
-    TOP6=H-400
-    bg=counter(backdrop(),TOP6,x0=130,x1=W-130); save(place(bg,s6,640,TOP6+2,refl=0),'card-6')
-    save(place(backdrop(),s24,865,H-175),'card-24')
-    save(place(backdrop(warm=1),s48,1010,H-175),'card-48')
-    save(backdrop(),'hero-backdrop')
-    save_hero(s48,'real-48',1000); save_hero(s24,'real-24',900); save_hero(s6,'real-6',620)
+    render_scenes(); render_cards()
