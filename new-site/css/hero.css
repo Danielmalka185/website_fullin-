@@ -68,10 +68,15 @@
 @keyframes floaty { 50% { transform: translate3d(0, -8px, 0); } }
 .st__img { position: relative; z-index: 1; display: block; inline-size: 100%; block-size: auto; filter: drop-shadow(10px 12px 14px rgba(14,40,24,.22)); }
 .st__refl { display: none; position: absolute; inset-inline: 0; inset-block-start: 100%; inline-size: 100%; block-size: auto; transform: scaleY(-1); opacity: .22; pointer-events: none; -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,.9), transparent 16%); mask-image: linear-gradient(to top, rgba(0,0,0,.9), transparent 16%); }
-.st--t24 { inset-inline-start: 16%; inset-block-end: 16.5%; inline-size: 26%; }
+.st--t24 { inset-inline-start: 7%; inset-block-end: 14%; inline-size: 19%; }
 .st--t24 .st__in { animation-delay: -1s; }
-.st--s6 { inset-inline-end: 6%; inset-block-end: 15%; inline-size: 44%; }
+.st--t48 { inset-inline-start: 24%; inset-block-end: 15.5%; inline-size: 30%; z-index: 2; }
+.st--t48 .st__in { animation-delay: -2.2s; animation-duration: 8.5s; }
+.st--s6 { inset-inline-end: 8%; inset-block-end: 20%; inline-size: 25%; z-index: 3; }
 .st--s6 .st__in { animation-delay: -3.5s; animation-duration: 8s; }
+.st--s6 .st__img { filter: drop-shadow(6px 10px 10px rgba(14,40,24,.28)); }
+.st__counter { position: absolute; inset-inline: -9%; inset-block-start: calc(100% - 3px); block-size: 26%; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #fff 0, #eef7f0 18%, #b9d8c3 100%); box-shadow: 0 0 0 1px rgba(19,122,56,.14), 0 24px 30px -12px rgba(14,50,28,.4); }
+.st__counter::before { content: ""; position: absolute; inset: 0 8px auto; block-size: 2px; background: rgba(47,195,83,.35); border-radius: 2px; }
 .st--pb { inset-inline-end: 9%; inset-block-start: 8%; inline-size: 36%; }
 .st--pb .st__in { animation-duration: 6s; animation-delay: -2s; transform-origin: 50% 60%; }
 .st--pb .st__img { transform: rotate(8deg); filter: drop-shadow(0 26px 24px rgba(14,40,24,.26)) drop-shadow(0 2px 3px rgba(14,40,24,.18)); }
