@@ -58,3 +58,4 @@ html[dir="rtl"] .pay-sec { --dir: -1; }
 .how__pay a, .pay__link { color: var(--green-ink); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-block-size: 44px; }
 .how__pay a:focus-visible, .pay__link:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
 .how__pay { margin-block-start: .25rem; }
+.pay-trust__vs + .pay-trust__vs { border-block-start: 0; padding-block-start: 0; margin-block-start: 0; }
