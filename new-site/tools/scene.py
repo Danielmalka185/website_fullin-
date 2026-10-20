@@ -44,12 +44,14 @@ def unit(n):
     if n in PLINTH:
         a = np.array(c).astype('float32'); h, w = a.shape[:2]; y0 = int(h * PLINTH[n])
         t = np.clip((np.arange(h) - y0) / max(1, h - y0), 0, 1)[:, None]
-        k = 1 - .20 * (t ** .8)                                   # lit top face -> shaded front lip
-        hl = np.clip(1 - np.abs(np.arange(h) - y0 - 6) / 10, 0, 1)[:, None] * 5     # thin highlight on the plinth edge
+        k = 1 - .30 * (t ** .8)                                   # lit top face -> shaded front lip
+        hl = np.clip(1 - np.abs(np.arange(h) - y0 - 6) / 10, 0, 1)[:, None] * 9     # thin highlight on the plinth edge
         cool = np.array([.985, 1.0, 1.0], 'float32')
         rgb = a[..., :3] * (k[..., None] * (1 + (cool - 1) * (t[..., None] > 0))) + hl[..., None]
         side = 1 - .06 * (np.abs(np.linspace(-1, 1, w)) ** 2.2)[None, :, None] * (t[..., None] > 0)
         a[..., :3] = np.clip(rgb * side, 0, 255)
+        lip = np.clip(1 - np.abs(np.arange(h) - (h - 5)) / 3, 0, 1)[:, None, None] * (a[..., 3:4] > 128) * 34   # faint dark underline at the very bottom edge
+        a[..., :3] = np.clip(a[..., :3] - lip, 0, 255)
         c = Image.fromarray(a.astype('uint8'), 'RGBA')
     return c
 def defringe(c):
@@ -256,49 +258,44 @@ class Room:
 
 
 # ---------------------------------------------------------------- the bar counter piece (shared material: white stone top, light fluted oak front)
-def counter_layer(w, top_h, thick, panel_h, toe=26, depth=60, seed=5, side=0):
-    """Frontal bar counter, all edges strictly horizontal/vertical: white stone top (thin visible top face + front edge),
-    dark slim body with a soft lime under-glow line, recessed dark plinth. layer height = depth + thick + panel_h + toe."""
+def counter_layer(w, top_h, thick, panel_h, toe=16, depth=50, seed=5, side=0):
+    """Light frontal bar counter, every edge strictly horizontal/vertical: ivory stone top (thin top face + visible front edge),
+    light warm-oak fluted front panel, slim recessed plinth in soft warm grey. layer height = depth + thick + panel_h + toe."""
     H = depth + thick + panel_h + toe; W = w
     L = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-    # ---- stone top face: bright, soft gradient (far edge catches the green wash), faint veining
-    top = np.zeros((depth, w, 3), 'float32'); top[:] = np.array([249, 250, 248])
+    def put(arr, y): L.alpha_composite(Image.fromarray(np.clip(arr, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, y))
+    # ---- stone top face (ivory, far edge picks up the mint wash)
+    top = np.zeros((depth, w, 3), 'float32'); top[:] = np.array([251, 249, 243])
     gy = np.linspace(0, 1, depth)[:, None, None]
-    top = top * (1 - .06 * gy) + np.array([226, 242, 232]) * .06 * (1 - gy)
+    top = top * (1 - .05 * gy) + np.array([232, 244, 236]) * .05 * (1 - gy)
     vein = noise(w, depth, 90, 6, seed + 1); v = np.clip(1 - np.abs(vein - .5) * 14, 0, 1) ** 2
-    top = top - v[..., None] * 8 + grain(w, depth, seed)[..., None] * .7
-    L.alpha_composite(Image.fromarray(np.clip(top, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, 0))
-    # ---- stone front edge
-    fe = np.zeros((thick, w, 3), 'float32'); fe[:] = np.array([236, 238, 235])
+    top = top - v[..., None] * 6 + grain(w, depth, seed)[..., None] * .6
+    put(top, 0)
+    # ---- stone front edge (thin, slightly shaded under the lip)
+    fe = np.zeros((thick, w, 3), 'float32'); fe[:] = np.array([238, 234, 226])
     ty = np.linspace(0, 1, thick)[:, None, None]
-    fe = fe * (1 - .09 * ty) + (noise(w, thick, 120, 4, seed + 3)[..., None] - .5) * 5 + grain(w, thick, seed + 4)[..., None] * .7
-    fe = fe * (1 - np.linspace(0, .03, w)[None, :, None])
-    L.alpha_composite(Image.fromarray(np.clip(fe, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, depth))
+    fe = fe * (1 - .08 * ty) + (noise(w, thick, 120, 4, seed + 3)[..., None] - .5) * 4 + grain(w, thick, seed + 4)[..., None] * .6
+    put(fe, depth)
     d = ImageDraw.Draw(L, 'RGBA')
     d.line((0, depth, w, depth), fill=(255, 255, 255, 255), width=2)
-    d.line((0, depth + thick - 1, w, depth + thick - 1), fill=(110, 120, 114, 150), width=2)
-    # ---- dark slim body: charcoal with a soft vertical gradient + very quiet vertical ribbing; slab shadow on top
+    d.line((0, depth + thick - 1, w, depth + thick - 1), fill=(150, 136, 118, 110), width=1)
+    # ---- light warm-oak front panel: fine vertical flutes + soft grain, gentle top-to-bottom light falloff
     ph = panel_h
-    body = np.zeros((ph, w, 3), 'float32'); body[:] = np.array([66, 72, 70])
+    body = np.zeros((ph, w, 3), 'float32'); body[:] = np.array([222, 196, 160])
     py = np.linspace(0, 1, ph)[:, None, None]
-    body = body * (1 - .26 * py) + np.array([30, 80, 50]) * .05 * (1 - py)
-    rib = (np.cos((np.arange(w)[None, :] % 20) / 20 * 2 * np.pi) * .5 + .5)
-    body = body + (rib[..., None] - .5) * 5 + (noise(w, ph, 3, 90, seed + 5)[..., None] - .5) * 3 + grain(w, ph, seed + 6)[..., None] * .7
-    body = body * (1 - np.linspace(0, .07, w)[None, :, None])
-    L.alpha_composite(Image.fromarray(np.clip(body, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, depth + thick))
-    sdw = Image.new('L', (w, ph), 0); ImageDraw.Draw(sdw).rectangle((0, 0, w, 5), fill=170); sdw = blur(sdw, 6)
-    Ls = Image.new('RGBA', (w, ph), (0, 0, 0, 0)); Ls.putalpha(sdw.point(lambda v: int(v * .6))); L.alpha_composite(Ls, (0, depth + thick))
-    # lime under-glow line right under the slab (glow + crisp hairline), strictly horizontal
-    gl = Image.new('RGBA', (w, 40), (0, 0, 0, 0)); ImageDraw.Draw(gl).rectangle((8, 8, w - 8, 10), fill=LIME + (200,))
-    gl = blur(gl, 5); L.alpha_composite(gl, (0, depth + thick + 4))
-    d.line((8, depth + thick + 12, w - 8, depth + thick + 12), fill=(236, 244, 120, 235), width=1)
-    # ---- recessed dark plinth (toe): inset on both sides, so the counter stands on the floor
-    inset = max(6, int(w * .025))
-    tk = np.zeros((toe, w - 2 * inset, 3), 'float32'); tk[:] = np.array([22, 26, 25])
-    tk = tk * np.linspace(1.15, .8, toe)[None, :, None].transpose(1, 0, 2) + grain(w - 2 * inset, toe, seed + 9)[..., None] * .6
+    body = body * (1 - .10 * py) + np.array([255, 244, 224]) * .06 * (1 - py)
+    per = 16; rib = np.cos((np.arange(w)[None, :] % per) / per * 2 * np.pi) * .5 + .5
+    body = body + (rib[..., None] - .5) * 7 + (noise(w, ph, 3, 70, seed + 5)[..., None] - .5) * 5 + grain(w, ph, seed + 6)[..., None] * .8
+    put(body, depth + thick)
+    # soft shadow the stone slab throws on the panel (quiet, warm)
+    sdw = Image.new('L', (w, ph), 0); ImageDraw.Draw(sdw).rectangle((0, 0, w, max(3, int(ph * .03))), fill=150); sdw = blur(sdw, max(3, ph * .03))
+    Ls = Image.new('RGBA', (w, ph), (96, 66, 38, 0)); Ls.putalpha(sdw.point(lambda v: int(v * .55))); L.alpha_composite(Ls, (0, depth + thick))
+    # ---- slim recessed plinth: inset both sides, soft warm grey (shadowed reveal, not black)
+    inset = max(6, int(w * .03))
+    tk = np.zeros((toe, w - 2 * inset, 3), 'float32'); tk[:] = np.array([136, 124, 112])
+    tk = tk * np.linspace(1.0, .78, toe)[None, :, None].transpose(1, 0, 2) + grain(w - 2 * inset, toe, seed + 9)[..., None] * .5
     L.alpha_composite(Image.fromarray(np.clip(tk, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (inset, depth + thick + ph))
-    # the body's lower edge is a dark arris line
-    d.line((0, depth + thick + ph - 1, w, depth + thick + ph - 1), fill=(8, 10, 9, 200), width=2)
+    d.line((0, depth + thick + ph - 1, w, depth + thick + ph - 1), fill=(120, 98, 74, 120), width=1)
     return L
 
 

@@ -90,7 +90,7 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene as SC
 import json
 
-H48_D = 820          # tower-48 height (px) in the 1800x1200 reference scene
+H48_D = 790          # tower-48 height (px) in the 1800x1200 reference scene
 def outp(name, folder='assets/composed'): return os.path.join(root, folder, name)
 def save_webp(im, path, q=78, target_kb=None):
     im = im.convert('RGB'); lo, hi = 40, 90; best = None
@@ -99,19 +99,19 @@ def save_webp(im, path, q=78, target_kb=None):
         if not target_kb or os.path.getsize(path) <= target_kb * 1024: break
     print(os.path.basename(path), im.size, os.path.getsize(path) // 1024, 'KB'); return path
 
-def build_counter(s, with_items=True, items='slot+pb', w=420):
-    """shared counter piece (white stone top, fluted light oak front). dims scale with s. Returns RGBA layer incl. headroom for items."""
-    w = int(w * s); depth = int(66 * s); thick = int(32 * s); toe = int(22 * s)
-    panel_h = int(235 * s); head = int(250 * s)
+def build_counter(s, with_items=True, items='slot+pb', w=460):
+    """shared counter piece: ivory stone top, light oak front. Counter top ~38% of a 48-tower's height (bar height). dims scale with s."""
+    w = int(w * s); depth = int(50 * s); thick = int(26 * s); toe = int(16 * s)
+    panel_h = int(215 * s); head = int(300 * s)
     C = SC.counter_layer(w, depth + thick + panel_h + toe, thick, panel_h, toe=toe, depth=depth)
     L = Image.new('RGBA', (C.width, C.height + head), (0, 0, 0, 0)); L.alpha_composite(C, (0, head))
     if with_items:
         s6 = SC.grade(SC.unit('station-6'))
-        h6 = int(205 * s); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
-        SC.LAST.clear(); SC.cutout_on(L, s6, cx=int(w * .34), base_y=head + int(depth * .58), lim=head + depth, lim0=head, strength=1.0)
+        h6 = int(225 * s); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
+        SC.LAST.clear(); SC.cutout_on(L, s6, cx=int(w * .36), base_y=head + int(depth * .58), lim=head + depth, lim0=head, strength=1.0)
         if items == 'slot+pb':
-            pb = SC.lying(SC.real('powerbank-front-horizontal', 'assets/curated/cutouts'), int(104 * s))
-            SC.cutout_on(L, SC.grade(pb), cx=int(w * .74), base_y=head + int(depth * .80), lim=head + depth, lim0=head, strength=1.0)
+            pb = SC.lying(SC.real('powerbank-front-horizontal', 'assets/curated/cutouts'), int(112 * s))
+            SC.cutout_on(L, SC.grade(pb), cx=int(w * .76), base_y=head + int(depth * .80), lim=head + depth, lim0=head, strength=1.0)
     return L, head
 
 def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
@@ -124,14 +124,14 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     # counter (front-most, slightly nearer than the towers)
     base_c = base48 + int(37 * s)
     Lc, head = build_counter(s, items='slot+pb' if with_pb else 'slot'); s6box = SC.LAST[0]
-    cxc = X(260); cx = int(cxc - Lc.width / 2)
+    cxc = X(285); cx = int(cxc - Lc.width / 2)
     ytop = base_c - Lc.height
     out['counter'] = (cx, ytop, Lc.width, Lc.height)
     # shadows of both towers fall right/back: draw far-to-near so nothing is covered wrongly: 24 (back) -> 48 -> counter
     r24 = h24 / t24.height; i24 = t24.resize((int(t24.width * r24), h24), Image.LANCZOS)
-    b24 = base48 - int(23 * s); x24 = int(X(945) - i24.width / 2)
+    b24 = base48 - int(23 * s); x24 = int(X(985) - i24.width / 2)
     r48 = h48 / t48.height; i48 = t48.resize((int(t48.width * r48), h48), Image.LANCZOS)
-    x48 = int(X(700) - i48.width / 2)
+    x48 = int(X(745) - i48.width / 2)
     order = [('t24', i24, x24, b24), ('t48', i48, x48, base48)]
     if mirror: pass
     for n, im, x, b in order:
@@ -144,14 +144,14 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
 
 def hero_a(W=1800, H=1200, mirror=False, mobile=False):
     if mobile:
-        W, H = 1000, 960; s = .80; ox = 65; base48 = 850
+        W, H = 1000, 960; s = .88; ox = 12; base48 = 845
     else:
-        s = 1.0; ox = -12; base48 = 1035
+        s = 1.0; ox = 0; base48 = 995
     h48 = int(H48_D * s); cam = 1.4
     y_h = base48 - h48 * cam / 1.8
     wall_y = int(base48 - (base48 - y_h) * .62) if not mobile else int(base48 - (base48 - y_h) * .66)
     f = 1400 if not mobile else 1000
-    gx = (ox + 700 * s) if not mirror else (W - (ox + 700 * s))
+    gx = (ox + 745 * s) if not mirror else (W - (ox + 745 * s))
     room = SC.Room(W, H, wall_y, vp_x=gx + (80 if not mirror else -80), horizon_y=y_h, f=f, cam=cam, mirror=mirror,
                    glow_cx=gx, glow_cy=wall_y * .50, glow_rx=W * (.40 if not mobile else .55), seed=7 if not mirror else 8)
     lay = lineup(room, s, ox, base48, mirror=mirror, W=W)
@@ -209,18 +209,18 @@ def hero_b():
 CARD_LAYOUT = {}
 def card(kind):
     """network cards 1000x1250: same camera, same wall/floor line (wall_y), same key light, same counter material."""
-    W, H = 1000, 1250; wall_y = 800; base = 1135; h48 = 1010; cam = 1.4
+    W, H = 1000, 1250; wall_y = 790; base = 1105; h48 = 1030; cam = 1.4
     y_h = base - h48 * cam / 1.8
     room = SC.Room(W, H, wall_y, vp_x=500, horizon_y=y_h, f=1100, cam=cam, glow_cx=500, glow_cy=wall_y * .50, glow_rx=W * .62,
                    seed={'6': 31, '24': 32, '48': 33}[kind], wash=1.0)
     if kind == '6':
-        s = 1.38
-        L, head = build_counter(s, items='slot+pb', w=400)
+        s = 1.30
+        L, head = build_counter(s, items='slot+pb', w=550)
         b = base + 20; s6b = SC.LAST[0]; CARD_LAYOUT['6'] = dict(counter=[int(500 - L.width / 2), b - L.height, L.width, L.height], s6=[int(500 - L.width / 2) + s6b[0], b - L.height + s6b[1], s6b[2], s6b[3]])
         room.ground(L, int(500 - L.width / 2), b - L.height, b, strength=1.05, refl=.10, shadow_len=.85)
     else:
         t = SC.grade(SC.unit('station-' + kind))
-        h = h48 if kind == '48' else int(h48 * .85 * .985)
+        h = h48 if kind == '48' else int(h48 * .85)
         r = h / t.height; im = t.resize((int(t.width * r), h), Image.LANCZOS)
         CARD_LAYOUT[kind] = dict(unit=[int(500 - im.width / 2), base - h, im.width, im.height])
         room.ground(im, int(500 - im.width / 2), base - h, base, strength=1.0, refl=.10, shadow_len=1.0)
