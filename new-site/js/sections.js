@@ -134,7 +134,7 @@
   }
   function initForm() {
     var form = doc.getElementById('lead-form'); if (!form) return;
-    var fields = ['name', 'business', 'type', 'phone', 'city'];
+    var fields = ['interest', 'name', 'business', 'type', 'phone', 'city'];
     var state = {}; // field -> error key or ''
     function el(n) { return doc.getElementById('lf-' + n); }
     function errEl(n) { return doc.getElementById('lf-' + n + '-err'); }
@@ -160,7 +160,16 @@
       el(n).addEventListener('input', function () { if (state[n]) { state[n] = check(n); render(n); } });
       el(n).addEventListener('change', function () { if (state[n]) { state[n] = check(n); render(n); } });
     });
+    // event interest: relabel business/type so the form reads naturally for an event
+    function relabel() {
+      var ev = el('interest').value === '2';
+      var b = doc.getElementById('lf-business-label'), ty = doc.getElementById('lf-type-label');
+      if (b) b.textContent = t(ev ? 'contact.form.businessEvent' : 'contact.form.business', b.textContent);
+      if (ty) ty.textContent = t(ev ? 'contact.form.typeEvent' : 'contact.form.type', ty.textContent);
+    }
+    el('interest').addEventListener('change', relabel);
     doc.addEventListener('fullin:lang', function () {
+      relabel();
       fields.forEach(function (n) { if (state[n]) render(n); });
       buildFaqLd();
     });
@@ -174,7 +183,10 @@
       var tpl = (c && c.waMessageTemplate) || t('contact.waMessageTemplate', '');
       var types = (c && c.form && c.form.typeOptions) || [];
       var idx = parseInt(el('type').value, 10);
+      var ints = (c && c.form && c.form.interestOptions) || [];
+      var iidx = parseInt(el('interest').value, 10);
       var map = {
+        interest: ints[iidx] != null ? ints[iidx] : String(el('interest').selectedOptions[0].textContent).trim(),
         name: el('name').value.trim(), business: el('business').value.trim(),
         type: types[idx] != null ? types[idx] : String(el('type').selectedOptions[0].textContent).trim(),
         phone: el('phone').value.trim(), city: el('city').value.trim()
