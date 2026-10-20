@@ -243,6 +243,20 @@ html[dir="rtl"] .sp-logo-crop img { inset-inline-start: auto; left: 3px; right: 
 }
 .sp-content a { text-decoration: underline; }
 .sp-content a:hover { color: #0E1512; }
+/* legal pages: table of contents, notes, definitions */
+.sp-content section[id] { scroll-margin-block-start: 16px; }
+.sp-toc { margin: 0 0 32px; padding: 18px 22px; border: 1px solid rgba(14, 21, 18, .14); border-radius: 14px; background: #fff; max-width: 70ch; }
+.sp-toc h2 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 700; }
+.sp-toc ol, .sp-toc ul { margin: 0; padding-inline-start: 1.4em; columns: 2 260px; column-gap: 32px; }
+.sp-toc li { margin: 0; break-inside: avoid; }
+.sp-toc a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text, #0E1512); text-decoration: underline; text-underline-offset: 3px; }
+.sp-toc a:hover { color: var(--green-ink, #137A38); }
+.sp-note { margin: 0 0 24px; max-width: 70ch; color: var(--muted, #55645C); font-size: .95rem; }
+.sp-content .sp-defs { margin: 0 0 16px; max-width: 70ch; }
+.sp-content .sp-defs dt { font-weight: 700; margin-block-start: 12px; }
+.sp-content .sp-defs dd { margin: 2px 0 0; margin-inline-start: 0; }
+.sp-content .sp-contact { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+.sp-content .sp-contact dt, .sp-content .sp-contact dd { margin: 0; }
 .sp-todo {
   border: 1px dashed #8a7a00; border-radius: 12px; padding: 12px 16px; margin-block: 16px;
   background: rgba(232, 242, 58, .25);
