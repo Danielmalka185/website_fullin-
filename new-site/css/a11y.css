@@ -296,3 +296,6 @@ html[data-a11y-contrast] .sp-btn { border: 2px solid #fff !important; }
 
 /* light theme: dark logo marks must stay visible in high-contrast mode */
 html[data-a11y-contrast] .brand img, html[data-a11y-contrast] .sp-logo-img { filter: invert(1) brightness(2); }
+
+/* Full-screen mobile menu: tuck the floating widget button behind it so it never covers the last nav items */
+.menu-open .a11yw__fab { z-index: 50; }
