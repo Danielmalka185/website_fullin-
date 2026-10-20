@@ -53,7 +53,107 @@ def unit(n):
         lip = np.clip(1 - np.abs(np.arange(h) - (h - 5)) / 3, 0, 1)[:, None, None] * (a[..., 3:4] > 128) * 34   # faint dark underline at the very bottom edge
         a[..., :3] = np.clip(a[..., :3] - lip, 0, 255)
         c = Image.fromarray(a.astype('uint8'), 'RGBA')
-    return c
+    return light_screen(c, n)
+
+# ---------------------------------------------------------------- emissive screens (pixel-level only: NO geometry change)
+# screen rect S and the dark glass frame F of each source unit, in source pixels (x0, y0, x1, y1)
+SCREENS = {
+    'station-48': dict(S=(58, 60, 748, 1326), F=(0, 0, 804, 1374)),
+    'station-24': dict(S=(112, 52, 474, 711), F=(62, 0, 528, 760)),
+    'station-6':  dict(S=(172, 130, 1318, 570), F=(104, 84, 1400, 660)),
+}
+def _smooth(x, a, b):
+    t = np.clip((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t)
+def light_screen(c, n):
+    """turn the photographed screen into a bright, lit display: lifted luminance + saturation of the REAL creative (text/art untouched),
+    crisp edge, thin inner highlight, glass sheen, lighter graphite bezel with a green tint where the screen light falls on it."""
+    if n not in SCREENS: return c
+    a = np.array(c).astype('float32'); h, w = a.shape[:2]
+    rgb = a[..., :3] / 255.; al = a[..., 3] / 255.
+    x0, y0, x1, y1 = SCREENS[n]['S']; fx0, fy0, fx1, fy1 = SCREENS[n]['F']
+    yy, xx = np.mgrid[0:h, 0:w].astype('float32')
+    inS = ((xx >= x0) & (xx < x1) & (yy >= y0) & (yy < y1)).astype('float32')
+    sw, sh_ = x1 - x0, y1 - y0
+    lum = lambda t: t @ np.array([.299, .587, .114], 'float32')
+    six = (n == 'station-6')
+    # ---- bezel: lift the black glass frame to a lighter graphite (keeps the frame's silhouette exactly where it is)
+    inF = ((xx >= fx0) & (xx < fx1) & (yy >= fy0) & (yy < fy1)).astype('float32') * (1 - inS)
+    L0 = lum(rgb)
+    dark = 1 - _smooth(L0, .22, .50)                       # only the dark glass, never the white cabinet
+    ty = np.clip((yy - fy0) / max(1, fy1 - fy0), 0, 1)
+    graphite = np.stack([.15 + .06 * (1 - ty), .17 + .07 * (1 - ty), .165 + .06 * (1 - ty)], -1)
+    # distance (px) outside the screen rect
+    dx = np.maximum(np.maximum(x0 - xx, xx - (x1 - 1)), 0); dy = np.maximum(np.maximum(y0 - yy, yy - (y1 - 1)), 0)
+    dist = np.sqrt(dx * dx + dy * dy)
+    near = np.exp(-dist / (sw * .035))                      # screen light falling on the bezel
+    wgt = (inF * dark * .92)[..., None]
+    rgb = rgb * (1 - wgt) + graphite * wgt
+    rgb = rgb + (inF * dark * near * .13)[..., None] * np.array([.10, .62, .26], 'float32')
+    # ---- the display itself
+    sc = rgb.copy()
+    sc = np.clip(sc, 0, 1) ** (.86 if six else .70)
+    g = lum(sc)[..., None]; sc = g + (sc - g) * (1.12 if six else 1.45)
+    sc = sc * (1.06 if six else 1.30)
+    # soft highlight roll-off then clip
+    sc = np.where(sc > .86, .86 + (sc - .86) * .55, sc); sc = np.clip(sc, 0, 1)
+    if not six:
+        # emissive centre: the creative's own green glow reaches further out (light is brightest mid-screen, falls toward the edges)
+        u = (xx - (x0 + x1) / 2) / (sw / 2); v = (yy - (y0 + y1) / 2) / (sh_ / 2)
+        em = np.clip(1 - (u * u * .8 + v * v * .55), 0, 1) ** 1.2
+        sc = sc + (1 - sc) * (em[..., None] * np.array([.05, .20, .08], 'float32'))
+        sc = np.clip(sc * (1 + .10 * em[..., None]), 0, 1)
+    # glass sheen: soft diagonal veil from the upper-left + one thin streak
+    u = (xx - x0) / sw; v = (yy - y0) / sh_
+    d = u * (1.0 if six else 1.4) + v * (.55 if six else .9)
+    sheen = np.clip(1 - d / 1.1, 0, 1) ** 2.2 * (.12 if six else .13) + np.clip(1 - np.abs(d - (.62 if six else .48)) / .018, 0, 1) * (.05 if six else .06) * np.clip(1 - d * .6, 0, 1)
+    sc = sc + (1 - sc) * sheen[..., None]
+    # crisp inner highlight line 3px inside the screen edge (thin lit rim instead of a heavy bezel)
+    ex = np.minimum(xx - x0, x1 - 1 - xx); ey = np.minimum(yy - y0, y1 - 1 - yy); e = np.minimum(ex, ey)
+    rim = np.clip(1 - np.abs(e - 1.5) / 1.8, 0, 1) * inS
+    sc = sc + (1 - sc) * (rim[..., None] * np.array([.50, .78, .55], 'float32') * (.38 if six else .55))
+    rgb = rgb * (1 - inS[..., None]) + sc * inS[..., None]
+    out = np.clip(rgb, 0, 1) * 255
+    # local contrast on the screen only (text/QR crispness)
+    im = Image.fromarray(out.astype('uint8'), 'RGB')
+    sharp = im.filter(ImageFilter.UnsharpMask(radius=max(1.2, sw / 330), percent=70 if not six else 40, threshold=2))
+    m = Image.fromarray((np.clip(inS + 0 * xx, 0, 1) * 255).astype('uint8'), 'L')
+    im = Image.composite(sharp, im, m)
+    o = im.convert('RGBA'); o.putalpha(c.getchannel('A')); return o
+
+def bloom(canvas, pos, size, n, strength=1.0, base_y=None, unit_alpha=None):
+    """baked emissive bloom of a screen: tight halo + wide wash on wall/floor, light spill on the cabinet face just below the screen,
+    faint green pool on the floor at the foot. Pure compositing on the scene canvas (no geometry change of any unit)."""
+    S = SCREENS[n]['S']; src = {'station-48': (804, 2700), 'station-24': (591, 2476), 'station-6': (1501, 1576)}[n]
+    x, y = pos; w, h = size; rx, ry = w / src[0], h / src[1]
+    sx0, sy0, sx1, sy1 = x + S[0] * rx, y + S[1] * ry, x + S[2] * rx, y + S[3] * ry
+    W, H = canvas.size; sw, sh = sx1 - sx0, sy1 - sy0
+    m = Image.new('L', (W, H), 0); ImageDraw.Draw(m).rectangle((sx0, sy0, sx1, sy1), fill=255)
+    near = np.asarray(blur(m, sw * .045)).astype('float32') / 255; mid = np.asarray(blur(m, sw * .20)).astype('float32') / 255
+    far = np.asarray(blur(m, sw * .55)).astype('float32') / 255
+    inside = np.asarray(m).astype('float32') / 255
+    I = (near * .55 + mid * .45 + far * .30) * strength * (1 - inside)
+    arr = np.asarray(canvas.convert('RGB')).astype('float32')
+    col = np.array([40, 225, 100], 'float32'); core = np.array([150, 255, 185], 'float32')
+    a1 = np.clip(I * .55, 0, .62)[..., None]
+    arr = arr * (1 - a1) + col * a1
+    a2 = np.clip(near * (1 - inside) * .5 * strength, 0, .5)[..., None]
+    arr = arr * (1 - a2 * .6) + core * a2 * .6
+    # spill on the cabinet face directly below the screen (only where the unit is opaque)
+    yy, xx = np.mgrid[0:H, 0:W].astype('float32')
+    below = np.clip(1 - (yy - sy1) / (sh * .16), 0, 1) ** 1.6 * (yy > sy1)
+    lat = np.clip(1 - np.abs(xx - (sx0 + sx1) / 2) / (sw * .62), 0, 1) ** .8
+    sp = (below * lat * .50 * strength)
+    if unit_alpha is not None:
+        pad = np.zeros((H, W), 'float32'); ox, oy = int(x), int(y)
+        hh = min(unit_alpha.shape[0], H - oy); ww = min(unit_alpha.shape[1], W - ox)
+        pad[oy:oy + hh, ox:ox + ww] = unit_alpha[:hh, :ww]; sp = sp * pad
+    sp = sp[..., None]; arr = arr * (1 - sp) + col * sp * 1.0 + 0
+    # floor pool
+    if base_y is not None:
+        fx = (sx0 + sx1) / 2; fy = base_y + 6
+        pool = np.asarray(blur(radial(W, H, fx, fy, w * .95, h * .045 + 16, (60, 235, 110), .35 * strength, 1.3).getchannel('A'), 8)).astype('float32') / 255
+        p = pool[..., None]; arr = arr * (1 - p * .55) + col * p * .55
+    canvas.paste(Image.fromarray(np.clip(arr, 0, 255).astype('uint8'), 'RGB'), (0, 0))
 def defringe(c):
     """pull the alpha in 1px and soften: kills light/green halo of the matting"""
     a = c.getchannel('A'); a2 = a.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(.6))

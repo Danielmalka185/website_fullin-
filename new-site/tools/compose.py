@@ -90,6 +90,7 @@ import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import scene as SC
 import json
 
+BLOOM = 1.0
 H48_D = 790          # tower-48 height (px) in the 1800x1200 reference scene
 def outp(name, folder='assets/composed'): return os.path.join(root, folder, name)
 def save_webp(im, path, q=78, target_kb=None):
@@ -107,7 +108,7 @@ def build_counter(s, with_items=True, items='slot+pb', w=460):
     L = Image.new('RGBA', (C.width, C.height + head), (0, 0, 0, 0)); L.alpha_composite(C, (0, head))
     if with_items:
         s6 = SC.grade(SC.unit('station-6'))
-        h6 = int(225 * s); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
+        h6 = int(255 * s); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
         SC.LAST.clear(); SC.cutout_on(L, s6, cx=int(w * .36), base_y=head + int(depth * .58), lim=head + depth, lim0=head, strength=1.0)
         if items == 'slot+pb':
             pb = SC.lying(SC.real('powerbank-front-horizontal', 'assets/curated/cutouts'), int(112 * s))
@@ -124,6 +125,7 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     # counter (front-most, slightly nearer than the towers)
     base_c = base48 + int(37 * s)
     Lc, head = build_counter(s, items='slot+pb' if with_pb else 'slot'); s6box = SC.LAST[0]
+    s6a = SC.grade(SC.unit('station-6')).resize(s6box[2:], Image.LANCZOS).getchannel('A')
     cxc = X(285); cx = int(cxc - Lc.width / 2)
     ytop = base_c - Lc.height
     out['counter'] = (cx, ytop, Lc.width, Lc.height)
@@ -137,16 +139,18 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     for n, im, x, b in order:
         pos = room.ground(im, x, b - im.height, b, strength=1.0, refl=.10, shadow_len=1.0)
         out[n] = (pos[0], pos[1], im.width, im.height)
+        SC.bloom(room.canvas, pos, im.size, 'station-48' if n == 't48' else 'station-24', strength=BLOOM, base_y=b, unit_alpha=np.asarray(im.getchannel('A')).astype('float32') / 255)
     room.ground(Lc, cx, ytop, base_c, strength=1.05, refl=.10, shadow_len=.85)
     out['base'] = (base48, b24, base_c)
     out['s6'] = (cx + s6box[0], ytop + s6box[1], s6box[2], s6box[3])
+    SC.bloom(room.canvas, out['s6'][:2], out['s6'][2:], 'station-6', strength=BLOOM * .9, unit_alpha=np.asarray(s6a).astype('float32') / 255)
     return out
 
 def hero_a(W=1800, H=1200, mirror=False, mobile=False):
     if mobile:
-        W, H = 1000, 960; s = .88; ox = 12; base48 = 845
+        W, H = 1000, 960; s = .93; ox = -22; base48 = 850
     else:
-        s = 1.0; ox = 0; base48 = 995
+        s = 1.06; ox = -28; base48 = 1040
     h48 = int(H48_D * s); cam = 1.4
     y_h = base48 - h48 * cam / 1.8
     wall_y = int(base48 - (base48 - y_h) * .62) if not mobile else int(base48 - (base48 - y_h) * .66)
@@ -209,21 +213,24 @@ def hero_b():
 CARD_LAYOUT = {}
 def card(kind):
     """network cards 1000x1250: same camera, same wall/floor line (wall_y), same key light, same counter material."""
-    W, H = 1000, 1250; wall_y = 790; base = 1105; h48 = 1030; cam = 1.4
+    W, H = 1000, 1250; wall_y = 830; base = 1165; h48 = 1120; cam = 1.4
     y_h = base - h48 * cam / 1.8
     room = SC.Room(W, H, wall_y, vp_x=500, horizon_y=y_h, f=1100, cam=cam, glow_cx=500, glow_cy=wall_y * .50, glow_rx=W * .62,
                    seed={'6': 31, '24': 32, '48': 33}[kind], wash=1.0)
     if kind == '6':
-        s = 1.30
-        L, head = build_counter(s, items='slot+pb', w=550)
+        s = 1.62
+        L, head = build_counter(s, items='slot+pb', w=560)
         b = base + 20; s6b = SC.LAST[0]; CARD_LAYOUT['6'] = dict(counter=[int(500 - L.width / 2), b - L.height, L.width, L.height], s6=[int(500 - L.width / 2) + s6b[0], b - L.height + s6b[1], s6b[2], s6b[3]])
         room.ground(L, int(500 - L.width / 2), b - L.height, b, strength=1.05, refl=.10, shadow_len=.85)
+        q = CARD_LAYOUT['6']['s6']; s6a = SC.grade(SC.unit('station-6')).resize(q[2:], Image.LANCZOS).getchannel('A')
+        SC.bloom(room.canvas, q[:2], q[2:], 'station-6', strength=BLOOM, unit_alpha=np.asarray(s6a).astype('float32') / 255)
     else:
         t = SC.grade(SC.unit('station-' + kind))
         h = h48 if kind == '48' else int(h48 * .85)
         r = h / t.height; im = t.resize((int(t.width * r), h), Image.LANCZOS)
         CARD_LAYOUT[kind] = dict(unit=[int(500 - im.width / 2), base - h, im.width, im.height])
         room.ground(im, int(500 - im.width / 2), base - h, base, strength=1.0, refl=.10, shadow_len=1.0)
+        SC.bloom(room.canvas, (int(500 - im.width / 2), base - h), im.size, 'station-' + kind, strength=BLOOM * 1.1, base_y=base, unit_alpha=np.asarray(im.getchannel('A')).astype('float32') / 255)
     room.vignette(.05)
     return room.canvas
 
