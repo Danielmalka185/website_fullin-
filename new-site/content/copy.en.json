@@ -77,18 +77,18 @@
    },
    {
     "label": "Daily cap",
-    "amount": "₪50 per day",
-    "text": "Even if you forget it in your bag until tonight, you'll never pay more than ₪50 a day."
+    "amount": "₪60 per day",
+    "text": "Even if you forget it in your bag until tonight, you'll never pay more than ₪60 a day."
    },
    {
     "label": "Day two",
-    "amount": "Another ₪50",
-    "text": "A new day, a new cap. ₪100 in total for two days."
+    "amount": "Another ₪60 cap",
+    "text": "A new day, a new cap. Up to ₪120 in total for two days."
    },
    {
     "label": "If it's not returned",
-    "amount": "Another ₪100",
-    "text": "The maximum total charge is ₪200, not a shekel more."
+    "amount": "Max total charge ₪200",
+    "text": "If the power bank isn't returned, the maximum total charge is ₪200, not a shekel more."
    }
   ],
   "totalTitle": "So what's the most you can pay?",
@@ -215,7 +215,7 @@
    },
    {
     "q": "How much does it cost?",
-    "a": "With the app: first hour free. Without the app: ₪12 per hour from the first minute. Either way, it's ₪12 per hour after that, capped at ₪50 per day. Day two is another ₪50 at most, so ₪100 for two days. No subscription and no hidden fees. For the guarantee or deposit held on your card (not a charge), see: What is the deposit / credit-frame guarantee?"
+    "a": "With the app: first hour free. Without the app: ₪12 per hour from the first minute. Either way, it's ₪12 per hour after that, capped at ₪60 per day. Day two is another ₪60 at most, so up to ₪120 for two days. No subscription and no hidden fees. For the guarantee or deposit held on your card (not a charge), see: What is the deposit / credit-frame guarantee?"
    },
    {
     "q": "What is the deposit / credit-frame guarantee?",
@@ -227,7 +227,7 @@
    },
    {
     "q": "What happens if I don't return the power bank?",
-    "a": "A further ₪100 is charged, and the maximum total is ₪200."
+    "a": "The maximum total charge is ₪200."
    },
    {
     "q": "Which payment methods can I use?",
@@ -239,7 +239,7 @@
    },
    {
     "q": "Can I rent a station for my business?",
-    "a": "Yes. With rental, the station comes with full service on a fixed retainer. The quote is tailored to your venue size and the period, and we will come back to you with a personal offer."
+    "a": "Yes. With rental, the station comes with full service at a fixed cost. The quote is tailored to your venue size and the period, and we will come back to you with a personal offer."
    },
    {
     "q": "What is included in the rental?",
