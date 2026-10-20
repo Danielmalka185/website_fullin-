@@ -43,8 +43,14 @@
         <figure class="pay-phone reveal">
           <div class="phone"><span class="phone__btn" aria-hidden="true"></span>
             <div class="phone__screen pay-phone__screen" role="group" tabindex="0" data-pay-view aria-label="" data-i18n-attr="aria-label:pay.demo.cap">
-              <img class="pay-phone__img" src="assets/pay/pay-page-v4.webp" width="1040" height="2260" decoding="async" alt="" data-i18n-attr="alt:pay.demo.alt">
-              <span class="pay-phone__bar" aria-hidden="true"></span>
+              <div class="pay-layer pay-layer--open">
+                <img class="pay-phone__img" src="assets/pay/pay-open.webp" width="921" height="1888" decoding="async" alt="" data-i18n-attr="alt:pay.demo.alt0">
+                <span class="pay-phone__bar pay-phone__bar--open" aria-hidden="true"></span>
+              </div>
+              <div class="pay-layer pay-layer--pay">
+                <img class="pay-phone__img" src="assets/pay/pay-page-v4.webp" width="1040" height="2260" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.demo.alt">
+                <span class="pay-phone__bar" aria-hidden="true"></span>
+              </div>
             </div>
           </div>
           <button type="button" class="pay-toggle" data-pay-toggle aria-pressed="false">

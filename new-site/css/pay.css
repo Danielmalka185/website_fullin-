@@ -21,10 +21,14 @@ html[dir="rtl"] .pay-sec { --dir: -1; }
 .pay-demo__stage { position: relative; }
 .pay-phone { position: relative; margin: 0; display: grid; justify-items: center; gap: var(--s-4); padding-block: 1rem; }
 .pay-phone .phone { inline-size: min(85vw, 440px); }
-.pay-phone__screen { aspect-ratio: 520 / 740; background: #fff; }
+.pay-phone__screen { aspect-ratio: 520 / 880; background: #fff; }
 .pay-phone__screen:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-.pay-phone .phone__screen .pay-phone__img { display: block; inline-size: 100%; block-size: auto; max-block-size: none; object-fit: fill; transform: translate3d(0, 0, 0); will-change: transform; animation: pay-scroll var(--pay-d) cubic-bezier(.45, 0, .25, 1) infinite; }
+.pay-layer { position: absolute; inset: 0; overflow: hidden; background: #fff; }
+.pay-layer--pay { opacity: 0; animation: pay-fade var(--pay-d) ease-in-out infinite; }
+.pay-phone .phone__screen .pay-phone__img { display: block; inline-size: 100%; block-size: auto; max-block-size: none; object-fit: fill; transform: translate3d(0, 0, 0); will-change: transform; animation: pay-scroll-open var(--pay-d) cubic-bezier(.45, 0, .25, 1) infinite; }
+.pay-phone .phone__screen .pay-layer--pay .pay-phone__img { animation-name: pay-scroll; }
 .pay-phone__bar { position: absolute; inset-inline: 0; inset-block-end: 0; aspect-ratio: 520 / 130; background: url("../assets/pay/pay-page-v4.webp") bottom center / 100% auto no-repeat; pointer-events: none; }
+.pay-phone__bar--open { aspect-ratio: 521 / 107; background-image: url("../assets/pay/pay-open.webp"); }
 .pay-phone__cap { max-inline-size: 440px; }
 .pay-toggle { display: inline-flex; align-items: center; gap: .5rem; min-block-size: 44px; padding: .4rem 1.1rem; border-radius: 99px; border: 1px solid var(--line-strong); background: #fff; color: var(--text); font-family: inherit; font-weight: 700; font-size: var(--fs-sm); line-height: 1; cursor: pointer; box-shadow: var(--shadow-1); }
 .pay-toggle:hover { border-color: var(--green); }
@@ -35,14 +39,16 @@ html[dir="rtl"] .pay-sec { --dir: -1; }
 .pay-toggle svg { flex: none; }
 
 /* one shared clock: image scroll, step highlights and progress line all use --pay-d and are paused together */
-.pay-sec { --pay-d: 18s; }
+.pay-sec { --pay-d: 22s; }
 .pay-sec.is-paused *, .pay-sec.is-hold *, .pay-sec.is-off * { animation-play-state: paused !important; }
-@keyframes pay-scroll { 0%, 30% { transform: translate3d(0, 0, 0); } 62%, 93% { transform: translate3d(0, -26%, 0); } 100% { transform: translate3d(0, 0, 0); } }
-@keyframes pay-hl-0 { 0%, 13% { opacity: 1; } 15%, 100% { opacity: 0; } }
-@keyframes pay-hl-1 { 0%, 13% { opacity: 0; } 15%, 35% { opacity: 1; } 37%, 100% { opacity: 0; } }
-@keyframes pay-hl-2 { 0%, 35% { opacity: 0; } 37%, 81% { opacity: 1; } 83%, 100% { opacity: 0; } }
+@keyframes pay-scroll-open { 0%, 6% { transform: translate3d(0, 0, 0); } 24%, 33% { transform: translate3d(0, -17.45%, 0); } 34%, 100% { transform: translate3d(0, 0, 0); } }
+@keyframes pay-scroll { 0%, 42% { transform: translate3d(0, 0, 0); } 68%, 100% { transform: translate3d(0, -22.12%, 0); } }
+@keyframes pay-fade { 0%, 28% { opacity: 0; } 33%, 95% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes pay-hl-0 { 0%, 23% { opacity: 1; } 25%, 100% { opacity: 0; } }
+@keyframes pay-hl-1 { 0%, 23% { opacity: 0; } 25%, 41% { opacity: 1; } 43%, 100% { opacity: 0; } }
+@keyframes pay-hl-2 { 0%, 41% { opacity: 0; } 43%, 81% { opacity: 1; } 83%, 100% { opacity: 0; } }
 @keyframes pay-hl-3 { 0%, 81% { opacity: 0; } 83%, 96% { opacity: 1; } 98%, 100% { opacity: 0; } }
-@keyframes pay-fill { 0% { transform: scaleX(.06); } 30% { transform: scaleX(.34); } 62% { transform: scaleX(.7); } 85%, 96% { transform: scaleX(1); } 100% { transform: scaleX(.06); } }
+@keyframes pay-fill { 0% { transform: scaleX(.06); } 24% { transform: scaleX(.3); } 42% { transform: scaleX(.4); } 68% { transform: scaleX(.75); } 85%, 96% { transform: scaleX(1); } 100% { transform: scaleX(.06); } }
 .pay-step::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; border: 1px solid rgba(47,195,83,.55); box-shadow: 0 0 0 1px rgba(47,195,83,.2), 0 24px 50px -24px var(--green-glow); opacity: 0; pointer-events: none; animation: pay-hl-0 var(--pay-d) linear infinite; }
 .pay-step:nth-child(2)::after { animation-name: pay-hl-1; }
 .pay-step:nth-child(3)::after { animation-name: pay-hl-2; }
@@ -67,7 +73,7 @@ html[dir="rtl"] .pay-sec { --dir: -1; }
   .pay-demo { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: var(--s-8); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pay-scan, .pay-phone .phone__screen .pay-phone__img, .pay-steps__fill { animation: none; }
+  .pay-scan, .pay-phone .phone__screen .pay-phone__img, .pay-layer--pay, .pay-steps__fill { animation: none; }
   .pay-step::after { animation: none; opacity: 1; }
   .pay-steps__fill { transform: none; }
   .pay-toggle { display: none; }

@@ -1,3 +1,6 @@
+/* metric-adjusted local fallbacks: limit layout shift while Google Fonts load / fail */
+@font-face { font-family: "Heebo Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Roboto"); size-adjust: 99%; ascent-override: 100%; descent-override: 40%; line-gap-override: 0%; }
+@font-face { font-family: "Space Grotesk Fallback"; src: local("Arial"), local("Helvetica Neue"), local("Roboto"); size-adjust: 104%; ascent-override: 93%; descent-override: 25%; line-gap-override: 0%; }
 /* FULLIN design tokens */
 :root {
   /* LIGHT theme: bright, fresh, energetic */
@@ -23,8 +26,8 @@
   --on-dark: #F2F7F3;
   --on-dark-muted: #A9C0B1;
 
-  --font-he: "Heebo", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-  --font-latin: "Space Grotesk", "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-he: "Heebo", "Heebo Fallback", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  --font-latin: "Space Grotesk", "Space Grotesk Fallback", "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font: var(--font-latin);
 
   /* fluid type scale */

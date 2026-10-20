@@ -129,7 +129,9 @@ html[data-a11y-contrast] :focus-visible { outline: 4px solid #ffff00 !important;
 .a11yw__fab {
   position: fixed;
   inset-block-end: 16px;
+  inset-block-end: max(16px, env(safe-area-inset-bottom, 0px));
   inset-inline-start: 16px;
+  inset-inline-start: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   z-index: 9990;
   width: 48px; height: 48px; min-height: 48px;
   padding: 0;
@@ -145,7 +147,9 @@ html[data-a11y-contrast] :focus-visible { outline: 4px solid #ffff00 !important;
 .a11yw__panel {
   position: fixed;
   inset-block-end: 76px;
+  inset-block-end: calc(60px + max(16px, env(safe-area-inset-bottom, 0px)));
   inset-inline-start: 16px;
+  inset-inline-start: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
   z-index: 9991;
   width: min(360px, calc(100vw - 32px));
   max-height: calc(100vh - 100px);
@@ -206,6 +210,7 @@ html[data-a11y-contrast] :focus-visible { outline: 4px solid #ffff00 !important;
   font-size: 1rem;
   line-height: 1.75;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex; flex-direction: column;
   -webkit-text-size-adjust: 100%;
 }
