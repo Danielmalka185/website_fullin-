@@ -236,6 +236,18 @@
    {
     "q": "How does a business join?",
     "a": "Leave your details in the form or message us on WhatsApp, and we'll get back to you. The station comes at no cost and with no installation, and your business enjoys a revenue share."
+   },
+   {
+    "q": "Can I rent a station for my business?",
+    "a": "Yes. With rental, the station comes with full service on a fixed retainer. The quote is tailored to your venue size and the period, and we will come back to you with a personal offer."
+   },
+   {
+    "q": "What is included in the rental?",
+    "a": "The unit itself, installation, support and service, ongoing upkeep, activity reports, power bank replacement and advertising on the station screen. Everything around the station is on us, so you can focus on your business."
+   },
+   {
+    "q": "Can I get stations for a wedding or event?",
+    "a": "Absolutely, for one day or several. We arrive and set the stations up at your event, and can also run what you need on the screen, such as a message for the couple or your brand. Send us the date, place and estimated guest count, and we will get back to you."
    }
   ]
  },
@@ -254,7 +266,8 @@
     "Hotel",
     "Mall",
     "Event",
-    "Other"
+    "Other",
+    "Wedding / private event"
    ],
    "phone": "Phone",
    "city": "City",
@@ -266,7 +279,7 @@
   },
   "whatsapp": "Or talk to us directly on WhatsApp",
   "appTitle": "Looking to rent a power bank? Get the app",
-  "waMessageTemplate": "Hi FULLIN, I'm interested in a station at my business. (שלום FULLIN, אני מעוניין/ת בעמדה בעסק)\nName (שם): {name}\nBusiness (עסק): {business}\nType (סוג): {type}\nPhone (טלפון): {phone}\nCity (עיר): {city}",
+  "waMessageTemplate": "Hi FULLIN, I'm interested in a station. (שלום FULLIN, אני מעוניין/ת בעמדה)\nInterested in (מה מעניין אותי): {interest}\nName (שם): {name}\nBusiness / event (עסק / אירוע): {business}\nType (סוג): {type}\nPhone (טלפון): {phone}\nCity (עיר): {city}",
   "successNote": "Opening WhatsApp with your message ready. Just hit send."
  },
  "footer": {

@@ -1,0 +1,86 @@
+{
+ "ways": {
+  "eyebrow": "Ways to work with us",
+  "title": "Three ways to get a station",
+  "sub": "Same station, three routes. Pick what fits your place, and we handle the rest.",
+  "badgeNew": "New",
+  "cards": [
+   {
+    "tag": "Simplest",
+    "title": "Hosting: no cost",
+    "text": "A station at your venue, on us. You enjoy the guests, we do everything else.",
+    "bullets": [
+     "Zero cost, zero installation",
+     "Zero effort for your staff, it runs itself",
+     "Revenue share, and guests who stay longer"
+    ],
+    "cta": "Let's talk",
+    "ctaAria": "Talk to us about hosting",
+    "alt": "FULLIN 6-slot station on a bar counter"
+   },
+   {
+    "tag": "Full service",
+    "title": "Rental: full service",
+    "text": "A station for your business on a fixed retainer. Everything around it is on us.",
+    "bullets": [
+     "Unit, installation, support and upkeep in one package",
+     "Activity reports and power bank replacement, handled for you",
+     "Fixed retainer: predictable cost, no headaches"
+    ],
+    "cta": "Let's talk",
+    "ctaAria": "Talk to us about rental",
+    "alt": "FULLIN stations in different sizes: a 6-slot unit and a 24-slot standing tower"
+   },
+   {
+    "tag": "One day or a few",
+    "title": "Events & weddings",
+    "text": "One day or several: guests take and return a power bank on site, and the dance floor stays full.",
+    "bullets": [
+     "Weddings, bar/bat mitzvahs, corporate events, festivals and field events",
+     "We arrive and set the stations up at your event",
+     "And we run whatever you need on the screen"
+    ],
+    "cta": "Let's talk",
+    "ctaAria": "Talk to us about an event",
+    "alt": "A pile of FULLIN power banks on the grass next to a station at a field event"
+   }
+  ],
+  "priceChip": "Tailored quote by size and period",
+  "rentNote": "Includes advertising on the station screen.",
+  "guideTitle": "Which one is for me?",
+  "guide": [
+   {
+    "q": "Want it at zero cost?",
+    "a": "Hosting"
+   },
+   {
+    "q": "Want a fixed service with reports and screen advertising?",
+    "a": "Rental"
+   },
+   {
+    "q": "An event of one day or a few?",
+    "a": "Events"
+   }
+  ],
+  "businessLink": "Three ways to get a station",
+  "lights": "Decorative night string lights"
+ },
+ "contact": {
+  "sub": "Business owners and event organizers: leave your details and we'll get back to you on WhatsApp. Users: the app is just below.",
+  "form": {
+   "interest": "What are you interested in?",
+   "interestPlaceholder": "Choose a route",
+   "interestOptions": [
+    "Hosting",
+    "Rental",
+    "Event / wedding",
+    "Not sure yet"
+   ],
+   "businessEvent": "Business / event name",
+   "typeEvent": "Event type"
+  }
+ },
+ "meta": {
+  "description": "Scan a QR, grab a power bank, return it at any FULLIN station. First hour free with the app, no subscription. For business: free hosting, full-service rental, and stations for events."
+ }
+}
