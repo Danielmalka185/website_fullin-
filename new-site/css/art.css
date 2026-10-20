@@ -32,7 +32,7 @@
 
 /* VENUES: clean framed photo inside a white card */
 .s-venue { position: relative; border-radius: var(--ph-r); padding: 10px; gap: 6px; }
-.s-venue__media.ph { border-radius: calc(var(--ph-r) - 8px); border: 0; box-shadow: 0 0 0 1px rgba(14,21,18,.06), 0 20px 40px -26px rgba(14,40,24,.45); aspect-ratio: 4 / 3; }
+.s-venue__media.ph { border-radius: calc(var(--ph-r) - 8px); border: 0; box-shadow: 0 0 0 1px rgba(14,21,18,.06), 0 20px 40px -26px rgba(14,40,24,.45); aspect-ratio: 4 / 5; }
 .s-venue__media--ai img { transform: none; }
 .s-venue__media.ph > img { --zoom: 1.03; }
 @media (min-width: 860px) { .s-venue__media.ph { aspect-ratio: auto; } }
