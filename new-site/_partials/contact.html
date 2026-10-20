@@ -8,17 +8,31 @@
     <div class="s-contact__grid">
       <form class="s-form s-card reveal" id="lead-form" novalidate>
         <div class="s-field">
+          <label for="lf-interest" data-i18n="contact.form.interest"></label>
+          <div class="s-select">
+            <select id="lf-interest" name="interest" required aria-describedby="lf-interest-err">
+              <option value="" data-x="contact.form.interestPlaceholder">בחרו מסלול</option>
+              <option value="0" data-i18n="contact.form.interestOptions.0"></option>
+              <option value="1" data-i18n="contact.form.interestOptions.1"></option>
+              <option value="2" data-i18n="contact.form.interestOptions.2"></option>
+              <option value="3" data-i18n="contact.form.interestOptions.3"></option>
+            </select>
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          </div>
+          <p class="s-err" id="lf-interest-err" role="alert" hidden></p>
+        </div>
+        <div class="s-field">
           <label for="lf-name" data-i18n="contact.form.name"></label>
           <input id="lf-name" name="name" type="text" autocomplete="name" required aria-describedby="lf-name-err">
           <p class="s-err" id="lf-name-err" role="alert" hidden></p>
         </div>
         <div class="s-field">
-          <label for="lf-business" data-i18n="contact.form.business"></label>
+          <label for="lf-business" id="lf-business-label" data-i18n="contact.form.business"></label>
           <input id="lf-business" name="business" type="text" autocomplete="organization" required aria-describedby="lf-business-err">
           <p class="s-err" id="lf-business-err" role="alert" hidden></p>
         </div>
         <div class="s-field">
-          <label for="lf-type" data-i18n="contact.form.type"></label>
+          <label for="lf-type" id="lf-type-label" data-i18n="contact.form.type"></label>
           <div class="s-select">
             <select id="lf-type" name="type" required aria-describedby="lf-type-err">
               <option value="" data-x="sections.selectPlaceholder">בחרו סוג עסק</option>
@@ -29,6 +43,7 @@
               <option value="4" data-i18n="contact.form.typeOptions.4"></option>
               <option value="5" data-i18n="contact.form.typeOptions.5"></option>
               <option value="6" data-i18n="contact.form.typeOptions.6"></option>
+              <option value="7" data-i18n="contact.form.typeOptions.7"></option>
             </select>
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
           </div>
