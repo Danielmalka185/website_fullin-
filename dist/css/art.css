@@ -1,0 +1,57 @@
+/* ART DIRECTION (light): clean rounded frames, soft shadow, light border, gentle green edge-light. Loaded after sections.css. */
+:root { --ph-r: 22px; }
+
+.ph { position: relative; isolation: isolate; overflow: hidden; border-radius: var(--ph-r); background: #E2EEE5; border: 1px solid #fff;
+  box-shadow: 0 0 0 1px rgba(14,21,18,.08), 0 2px 6px rgba(14,40,24,.06), 0 34px 60px -32px rgba(14,40,24,.4); }
+.ph > img { position: absolute; inset: 0; z-index: 1; inline-size: 100%; block-size: 100%; max-inline-size: none; max-block-size: none; object-fit: cover; display: block;
+  translate: 0 calc(var(--p, 0) * -3%); scale: var(--zoom, 1.08); transition: scale 1.2s var(--ease); will-change: translate, scale; }
+/* photos are moody renders: lift them a touch so they sit comfortably on a light page */
+.ph--photo > img { filter: saturate(1.04) contrast(1.02) brightness(1.1); }
+/* gentle green edge-light (inner rim), no vignette */
+.ph::before, .s-tile.ph .s-tile__btn::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+  background: radial-gradient(70% 55% at 0% 0%, rgba(47,195,83,.22), transparent 60%), radial-gradient(60% 50% at 100% 100%, rgba(232,242,58,.16), transparent 65%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.55), inset 0 0 22px rgba(47,195,83,.14); }
+.ph::after, .s-tile.ph .s-tile__btn::after { content: none; display: none; }
+.ph > .s-badge { z-index: 5; }
+.s-badge--sm { inset-block-start: 10px; inset-inline-start: 10px; padding: 3px 10px; font-size: .68rem; }
+
+/* reveal mask (wipe up). The clip is on the inner button, never on the observed element (IntersectionObserver ignores clipped targets). */
+.s-tile.reveal { opacity: 1; transform: none; }
+.s-tile.reveal > .s-tile__btn { clip-path: inset(0 0 100% 0 round var(--ph-r)); transition: clip-path 1.25s var(--ease); }
+.s-tile.reveal > .s-tile__btn > img { scale: 1.3; }
+.s-tile.reveal.is-in > .s-tile__btn { clip-path: inset(0 0 0 0 round var(--ph-r)); }
+.s-tile.reveal.is-in > .s-tile__btn > img { scale: var(--zoom, 1.08); }
+.no-js .s-tile.reveal > .s-tile__btn { clip-path: none; }
+
+/* NETWORK cards: photo card (power bank) */
+.s-station__media.ph { height: auto; aspect-ratio: 1 / 1; border-radius: 0; border: 0; border-block-end: 1px solid var(--line); box-shadow: none; display: block; }
+.s-station__media.ph > img { max-height: none; max-width: none; transform: none; filter: saturate(1.04) brightness(1.08); }
+@media (min-width: 640px) { .s-station__media.ph { height: auto; aspect-ratio: 4 / 5; } }
+.s-station:hover .ph:not(.ph--stage) > img { --zoom: 1.14; }
+.s-station__media > .s-badge { z-index: 5; }
+
+/* VENUES: clean framed photo inside a white card */
+.s-venue { position: relative; border-radius: var(--ph-r); padding: 10px; gap: 6px; }
+.s-venue__media.ph { border-radius: calc(var(--ph-r) - 8px); border: 0; box-shadow: 0 0 0 1px rgba(14,21,18,.06), 0 20px 40px -26px rgba(14,40,24,.45); aspect-ratio: 4 / 5; }
+.s-venue__media--ai img { transform: none; }
+.s-venue__media.ph > img { --zoom: 1.03; }
+@media (min-width: 860px) { .s-venue__media.ph { aspect-ratio: auto; } }
+
+/* BENTO */
+.s-bento { gap: 14px; }
+.s-tile.ph { border-radius: var(--ph-r); }
+.s-tile.ph::before, .s-tile.ph::after { display: none; }
+.s-tile.ph .s-tile__btn { z-index: 1; isolation: isolate; }
+.s-tile.ph .s-tile__btn > img { z-index: 1; translate: 0 calc(var(--p, 0) * -3%); scale: var(--zoom, 1.08); transition: scale 1.2s var(--ease); filter: saturate(1.04) contrast(1.02) brightness(1.08); will-change: translate, scale; }
+.s-tile.ph .s-tile__btn::after { content: ""; display: block; position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, transparent 60%, rgba(11,26,18,.7)); }
+.s-tile__cap { text-shadow: 0 1px 10px rgba(0,0,0,.5); z-index: 6; }
+.s-tile__zoom { z-index: 6; }
+.s-tile.ph:hover .s-tile__btn > img { --zoom: 1.14; }
+.s-tile--text.ph { background: radial-gradient(80% 120% at 50% 100%, rgba(47,195,83,.28), transparent), radial-gradient(60% 80% at 0% 0%, rgba(232,242,58,.35), transparent), #fff; }
+.s-tile--text.ph::before, .s-tile--text.ph::after { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ph > img { translate: none; scale: 1.02; transition: none; }
+  .s-tile.reveal > .s-tile__btn { clip-path: none; transition: none; }
+  .ph > img, .s-tile.reveal > .s-tile__btn > img, .s-tile.reveal.is-in > .s-tile__btn > img { scale: 1.02; }
+}
