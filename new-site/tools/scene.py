@@ -36,11 +36,15 @@ def vgrad(w, h, stops):
     for c in range(3): out[:, c] = np.interp(t, ts, [s[1][c] for s in stops])
     return Image.fromarray(np.repeat(out[:, None, :], w, 1).astype('uint8'), 'RGB').convert('RGBA')
 def real(n, folder='assets/curated/cutouts'): return Image.open(os.path.join(root, folder, n + '.webp')).convert('RGBA')
+H6PAD = 0   # extra canvas above the 6-slot body in assets/retouched/station-6-holder.png (acrylic holder + flyer, built by tools/holder6.py)
+H6BODY = 1576
+_h6 = os.path.join(root, 'assets/retouched/station-6-holder.png')
+if os.path.exists(_h6): H6PAD = Image.open(_h6).height - H6BODY
 PLINTH = {'station-48': .926, 'station-24': .895}      # where the base plate starts (fraction of unit height)
 def unit(n):
     """professionally retouched, geometrically rectified station (assets/retouched/*.png). NEVER rotate / shear / warp it:
     callers may only scale uniformly and translate. The base plate is shaded with a gradient so it reads as a physical plinth."""
-    c = Image.open(os.path.join(root, 'assets/retouched', n + '.png')).convert('RGBA')
+    c = Image.open(os.path.join(root, 'assets/retouched', n + ('-holder' if n == 'station-6' and H6PAD else '') + '.png')).convert('RGBA')
     if n in PLINTH:
         a = np.array(c).astype('float32'); h, w = a.shape[:2]; y0 = int(h * PLINTH[n])
         t = np.clip((np.arange(h) - y0) / max(1, h - y0), 0, 1)[:, None]
@@ -60,7 +64,7 @@ def unit(n):
 SCREENS = {
     'station-48': dict(S=(58, 60, 748, 1326), F=(0, 0, 804, 1374)),
     'station-24': dict(S=(112, 52, 474, 711), F=(62, 0, 528, 760)),
-    'station-6':  dict(S=(172, 130, 1318, 570), F=(104, 84, 1400, 660)),
+    'station-6':  dict(S=(172, 130 + H6PAD, 1318, 570 + H6PAD), F=(104, 84 + H6PAD, 1400, 660 + H6PAD)),
 }
 def _smooth(x, a, b):
     t = np.clip((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t)
@@ -123,7 +127,7 @@ def light_screen(c, n):
 def bloom(canvas, pos, size, n, strength=1.0, base_y=None, unit_alpha=None):
     """baked emissive bloom of a screen: tight halo + wide wash on wall/floor, light spill on the cabinet face just below the screen,
     faint green pool on the floor at the foot. Pure compositing on the scene canvas (no geometry change of any unit)."""
-    S = SCREENS[n]['S']; src = {'station-48': (804, 2700), 'station-24': (591, 2476), 'station-6': (1501, 1576)}[n]
+    S = SCREENS[n]['S']; src = {'station-48': (804, 2700), 'station-24': (591, 2476), 'station-6': (1501, H6BODY + H6PAD)}[n]
     x, y = pos; w, h = size; rx, ry = w / src[0], h / src[1]
     sx0, sy0, sx1, sy1 = x + S[0] * rx, y + S[1] * ry, x + S[2] * rx, y + S[3] * ry
     W, H = canvas.size; sw, sh = sx1 - sx0, sy1 - sy0

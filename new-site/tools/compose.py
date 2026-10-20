@@ -100,15 +100,19 @@ def save_webp(im, path, q=78, target_kb=None):
         if not target_kb or os.path.getsize(path) <= target_kb * 1024: break
     print(os.path.basename(path), im.size, os.path.getsize(path) // 1024, 'KB'); return path
 
+def hx(s):
+    """extra headroom above the counter for the 6-slot's acrylic holder (0 without the holder asset)"""
+    return int(SC.H6PAD / SC.H6BODY * 255 * s) + 4 if SC.H6PAD else 0
+
 def build_counter(s, with_items=True, items='slot+pb', w=460):
     """shared counter piece: ivory stone top, light oak front. Counter top ~38% of a 48-tower's height (bar height). dims scale with s."""
     w = int(w * s); depth = int(50 * s); thick = int(26 * s); toe = int(16 * s)
-    panel_h = int(215 * s); head = int(300 * s)
+    panel_h = int(215 * s); head = int(300 * s) + hx(s)
     C = SC.counter_layer(w, depth + thick + panel_h + toe, thick, panel_h, toe=toe, depth=depth)
     L = Image.new('RGBA', (C.width, C.height + head), (0, 0, 0, 0)); L.alpha_composite(C, (0, head))
     if with_items:
         s6 = SC.grade(SC.unit('station-6'))
-        h6 = int(255 * s); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
+        h6 = int(255 * s * (SC.H6BODY + SC.H6PAD) / SC.H6BODY); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
         SC.LAST.clear(); SC.cutout_on(L, s6, cx=int(w * .36), base_y=head + int(depth * .58), lim=head + depth, lim0=head, strength=1.0)
         if items == 'slot+pb':
             pb = SC.lying(SC.real('powerbank-front-horizontal', 'assets/curated/cutouts'), int(112 * s))
@@ -128,7 +132,7 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     s6a = SC.grade(SC.unit('station-6')).resize(s6box[2:], Image.LANCZOS).getchannel('A')
     cxc = X(285); cx = int(cxc - Lc.width / 2)
     ytop = base_c - Lc.height
-    out['counter'] = (cx, ytop, Lc.width, Lc.height)
+    out['counter'] = (cx, ytop + hx(s), Lc.width, Lc.height - hx(s))
     # shadows of both towers fall right/back: draw far-to-near so nothing is covered wrongly: 24 (back) -> 48 -> counter
     r24 = h24 / t24.height; i24 = t24.resize((int(t24.width * r24), h24), Image.LANCZOS)
     b24 = base48 - int(23 * s); x24 = int(X(985) - i24.width / 2)
@@ -220,7 +224,7 @@ def card(kind):
     if kind == '6':
         s = 1.62
         L, head = build_counter(s, items='slot+pb', w=560)
-        b = base + 20; s6b = SC.LAST[0]; CARD_LAYOUT['6'] = dict(counter=[int(500 - L.width / 2), b - L.height, L.width, L.height], s6=[int(500 - L.width / 2) + s6b[0], b - L.height + s6b[1], s6b[2], s6b[3]])
+        b = base + 20; s6b = SC.LAST[0]; CARD_LAYOUT['6'] = dict(counter=[int(500 - L.width / 2), b - L.height + hx(s), L.width, L.height - hx(s)], s6=[int(500 - L.width / 2) + s6b[0], b - L.height + s6b[1], s6b[2], s6b[3]])
         room.ground(L, int(500 - L.width / 2), b - L.height, b, strength=1.05, refl=.10, shadow_len=.85)
         q = CARD_LAYOUT['6']['s6']; s6a = SC.grade(SC.unit('station-6')).resize(q[2:], Image.LANCZOS).getchannel('A')
         SC.bloom(room.canvas, q[:2], q[2:], 'station-6', strength=BLOOM, unit_alpha=np.asarray(s6a).astype('float32') / 255)

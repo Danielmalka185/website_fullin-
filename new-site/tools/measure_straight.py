@@ -53,17 +53,19 @@ def six_report(img, box):
     im = Image.open(os.path.join(root, 'assets/retouched/station-6.png')); l = np.asarray(im.convert('RGB')).astype('float32') @ np.array([.299, .587, .114], 'float32')
     a = np.asarray(im.getchannel('A')) > 128; dark = a & (l < 60); H, W = dark.shape
     x0, y0, w, h = box; r = w / W; L = lum(img); res = {}
+    hp = Image.open(os.path.join(root, 'assets/retouched/station-6-holder.png')).height - H if os.path.exists(os.path.join(root, 'assets/retouched/station-6-holder.png')) else 0
+    sy = h / (H + hp); y0 += hp * sy    # the composed unit carries the holder canvas above the body (own y scale: width rounding)
     rows = dark[int(H * .5):int(H * .95)].any(1); idx = np.where(rows)[0] + int(H * .5)
     bands = np.split(idx, np.where(np.diff(idx) > 5)[0] + 1)
     lx, rx, ly, ry, ys, tilt = [], [], [], [], [], []
     for b in bands:
         if len(b) < 40: continue
         mid = int(b.mean()); cols = np.where(dark[mid])[0]; left = cols[cols < W / 2]; right = cols[cols > W / 2]
-        pl = peak(np.gradient(L[int(y0 + mid * r)]), x0 + left[0] * r, 3); pr = peak(np.gradient(L[int(y0 + mid * r)]), x0 + (right[-1] + 1) * r, 3)
+        pl = peak(np.gradient(L[int(y0 + mid * sy)]), x0 + left[0] * r, 3); pr = peak(np.gradient(L[int(y0 + mid * sy)]), x0 + (right[-1] + 1) * r, 3)
         cl, cr = int((left[0] + left[-1]) / 2), int((right[0] + right[-1]) / 2)
-        tl = peak(np.gradient(L[:, int(x0 + cl * r)]), y0 + b[0] * r, 3); tr = peak(np.gradient(L[:, int(x0 + cr * r)]), y0 + b[0] * r, 3)
+        tl = peak(np.gradient(L[:, int(x0 + cl * r)]), y0 + b[0] * sy, 3); tr = peak(np.gradient(L[:, int(x0 + cr * r)]), y0 + b[0] * sy, 3)
         if pl and pr and tl and tr:
-            ys.append(y0 + mid * r); lx.append(pl[0]); rx.append(pr[0]); tilt.append(np.degrees(np.arctan((tr[0] - tl[0]) / ((cr - cl) * r))))
+            ys.append(y0 + mid * sy); lx.append(pl[0]); rx.append(pr[0]); tilt.append(np.degrees(np.arctan((tr[0] - tl[0]) / ((cr - cl) * r))))
     if len(ys) >= 3:
         for nme, v in (('slot-left-vertical', lx), ('slot-right-vertical', rx)):
             A = np.polyfit(ys, v, 1); res[nme] = (np.degrees(np.arctan(A[0])), len(ys), float(np.std(np.array(v) - np.polyval(A, ys))))
