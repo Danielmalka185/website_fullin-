@@ -8,7 +8,7 @@
     </header>
 
     <div class="pay-steps" data-pay-steps>
-      <div class="pay-steps__track" aria-hidden="true"><i class="pay-steps__fill"></i></div>
+      <div class="pay-steps__track" aria-hidden="true"></div>
       <ol class="pay-steps__list" role="list" tabindex="0" aria-labelledby="pay-title">
         <li class="pay-step reveal" data-delay="1">
           <span class="pay-step__ico" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20V12a4 4 0 014-4h8M44 8h8a4 4 0 014 4v8M56 44v8a4 4 0 01-4 4h-8M20 56h-8a4 4 0 01-4-4v-8"/><rect x="18" y="18" width="12" height="12" rx="2"/><rect x="34" y="18" width="12" height="12" rx="2"/><rect x="18" y="34" width="12" height="12" rx="2"/><path d="M34 34h4v4h-4zM42 42h4v4h-4zM42 34h4M34 42h4"/><path class="pay-scan" d="M12 32h40" stroke="#E8F23A"/></svg></span>
@@ -40,26 +40,36 @@
     <div class="pay-demo" data-pay-demo>
       <div class="pay-demo__stage">
         <div class="showcase__glow" aria-hidden="true"></div>
-        <figure class="pay-phone reveal">
-          <div class="phone"><span class="phone__btn" aria-hidden="true"></span>
-            <div class="phone__screen pay-phone__screen" role="group" tabindex="0" data-pay-view aria-label="" data-i18n-attr="aria-label:pay.demo.cap">
-              <div class="pay-layer pay-layer--open">
-                <img class="pay-phone__img" src="assets/pay/pay-open.webp" width="921" height="1888" decoding="async" alt="" data-i18n-attr="alt:pay.demo.alt0">
-                <span class="pay-phone__bar pay-phone__bar--open" aria-hidden="true"></span>
+        <ol class="pay-shots" role="list" tabindex="0" data-pay-track aria-label="" data-i18n-attr="aria-label:pay.demo.cap">
+          <li class="pay-ph reveal" data-delay="1">
+            <figure class="pay-ph__f">
+              <div class="pay-iphone">
+                <span class="pay-iphone__btn pay-iphone__btn--a" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--v1" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--v2" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--p" aria-hidden="true"></span>
+                <div class="pay-iphone__screen"><img src="assets/pay/pay-home.webp" width="921" height="2000" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.demo.shots.0.alt"></div>
               </div>
-              <div class="pay-layer pay-layer--pay">
-                <img class="pay-phone__img" src="assets/pay/pay-page-v4.webp" width="1040" height="2260" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.demo.alt">
-                <span class="pay-phone__bar" aria-hidden="true"></span>
+              <figcaption class="shot__cap"><span class="shot__n" aria-hidden="true">1</span><b data-i18n="pay.demo.shots.0.title"></b><span data-i18n="pay.demo.shots.0.text"></span></figcaption>
+            </figure>
+          </li>
+          <li class="pay-ph reveal" data-delay="2">
+            <figure class="pay-ph__f">
+              <div class="pay-iphone">
+                <span class="pay-iphone__btn pay-iphone__btn--a" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--v1" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--v2" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--p" aria-hidden="true"></span>
+                <div class="pay-iphone__screen"><img src="assets/pay/pay-open.webp" width="921" height="2000" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.demo.shots.1.alt"></div>
               </div>
-            </div>
-          </div>
-          <button type="button" class="pay-toggle" data-pay-toggle aria-pressed="false">
-            <svg class="pay-toggle__pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.200"/><rect x="14" y="5" width="4" height="14" rx="1.200"/></svg>
-            <svg class="pay-toggle__play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 5.500v13a1 1 0 001.500.9l11-6.500a1 1 0 000-1.800l-11-6.500A1 1 0 008 5.500Z"/></svg>
-            <span class="pay-toggle__pause" data-i18n="pay.demo.pause"></span><span class="pay-toggle__play" data-i18n="pay.demo.play"></span>
-          </button>
-          <figcaption class="shot__cap pay-phone__cap"><b data-i18n="pay.demo.title"></b><span data-i18n="pay.demo.text"></span></figcaption>
-        </figure>
+              <figcaption class="shot__cap"><span class="shot__n" aria-hidden="true">2</span><b data-i18n="pay.demo.shots.1.title"></b><span data-i18n="pay.demo.shots.1.text"></span></figcaption>
+            </figure>
+          </li>
+          <li class="pay-ph reveal" data-delay="3">
+            <figure class="pay-ph__f">
+              <div class="pay-iphone">
+                <span class="pay-iphone__btn pay-iphone__btn--a" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--v1" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--v2" aria-hidden="true"></span><span class="pay-iphone__btn pay-iphone__btn--p" aria-hidden="true"></span>
+                <div class="pay-iphone__screen"><img src="assets/pay/pay-checkout.webp" width="921" height="2000" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.demo.shots.2.alt"></div>
+              </div>
+              <figcaption class="shot__cap"><span class="shot__n" aria-hidden="true">3</span><b data-i18n="pay.demo.shots.2.title"></b><span data-i18n="pay.demo.shots.2.text"></span></figcaption>
+            </figure>
+          </li>
+        </ol>
+        <p class="showcase__hint pay-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span data-i18n="pay.demo.swipe"></span></p>
       </div>
 
       <aside class="pay-trust glass reveal" data-delay="2" aria-labelledby="pay-trust-title">

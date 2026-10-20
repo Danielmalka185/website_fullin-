@@ -22,13 +22,25 @@
    }
   ],
   "demo": {
-   "cap": "FULLIN payment page, auto-scrolling",
-   "alt0": "FULLIN's opening screen in the browser: welcome, enter a station ID, scan a QR code, and download the app for a free hour",
-   "alt": "FULLIN's secure payment page as it opens after scanning the QR: logo, a note that the charge is 12 NIS per hour and the 200 NIS is a credit-frame guarantee, Apple Pay and Google Pay buttons, credit card fields and a pay 12 NIS per hour button",
-   "pause": "Pause demo",
-   "play": "Play demo",
-   "title": "This is the payment page",
-   "text": "The page starts on an opening screen: scan the QR or enter the station ID (or get the app for a free hour), then Apple Pay, Google Pay or card. The only actual charge is ₪12 per hour. The ₪200 is a credit-frame guarantee, not a charge."
+   "cap": "FULLIN's three payment screens",
+   "swipe": "Swipe to see all the screens",
+   "shots": [
+    {
+     "title": "Open the page",
+     "text": "FULLIN's page opens in your browser. Nothing to install.",
+     "alt": "FULLIN's home screen in the browser: logo, three tiles (site, power bank rental and app), the Keep It Simple heading and the service features"
+    },
+    {
+     "title": "Scan or enter the ID",
+     "text": "Scan the QR code or type the station ID.",
+     "alt": "The opening screen: welcome to Fullin, enter a station ID, scan a QR code, and download the app for a free hour"
+    },
+    {
+     "title": "Pay with a tap",
+     "text": "Apple Pay, Google Pay or a card. The charge is ₪12 per hour; the ₪200 is a credit-frame guarantee.",
+     "alt": "FULLIN's secure payment page: a note that the charge is 12 NIS per hour and the 200 NIS is a credit-frame guarantee, Apple Pay and Google Pay buttons, credit card fields and a pay 12 NIS per hour button"
+    }
+   ]
   },
   "trust": {
    "title": "Simple, and secure",

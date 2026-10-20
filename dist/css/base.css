@@ -103,7 +103,7 @@ section[id] { scroll-margin-block-start: calc(var(--header-h) + 8px); }
 .nav-list a { display: flex; align-items: center; min-block-size: 56px; font-size: var(--fs-lg); font-weight: 700; border-block-end: 1px solid var(--line); color: var(--text); }
 .nav-list a[aria-current="true"] { color: var(--green-ink); }
 .lang { display: inline-flex; padding: 4px; gap: 2px; border-radius: var(--r-pill); border: 1px solid var(--line-strong); background: #fff; align-self: flex-start; }
-.lang button { min-inline-size: 44px; min-block-size: 40px; padding-inline: .7rem; border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 700; color: var(--muted-2); letter-spacing: .04em; transition: background var(--t-fast), color var(--t-fast); }
+.lang button { min-inline-size: 44px; min-block-size: 44px; padding-inline: .7rem; border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 700; color: var(--muted-2); letter-spacing: .04em; transition: background var(--t-fast), color var(--t-fast); }
 .lang button:hover { color: var(--text); }
 .lang button[aria-pressed="true"] { background: var(--green); color: var(--text); }
 .menu .btn { align-self: stretch; margin-block-start: auto; }
@@ -137,4 +137,10 @@ section[id] { scroll-margin-block-start: calc(var(--header-h) + 8px); }
   .no-js .nav-list { flex-direction: row; flex-wrap: wrap; }
   .no-js .nav-list a { min-block-size: 44px; padding-inline: .75rem; border: 0; font-size: var(--fs-sm); }
   .no-js .hero { padding-block-start: 11rem; }
+}
+
+/* Touch laptops/tablets that get the desktop nav: keep 44px tap targets */
+@media (min-width: 960px) and (pointer: coarse) {
+  .lang button { min-inline-size: 44px; min-block-size: 44px; }
+  .nav-list a { min-inline-size: 44px; justify-content: center; }
 }

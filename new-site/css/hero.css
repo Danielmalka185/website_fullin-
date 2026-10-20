@@ -151,3 +151,12 @@
 @media (min-width: 960px) { .hero__title { font-size: clamp(3.4rem, 1rem + 4.6vw, 5.2rem); } }
 
 @media (max-width: 959px) { .hero__eyebrow, .hero__title, .hero__sub, .hero__cta { position: relative; z-index: 2; } }
+
+/* Short landscape phones: compact the headline so the CTA stays reachable without a long scroll */
+@media (max-width: 959px) and (max-height: 520px) and (orientation: landscape) {
+  .hero { padding-block: calc(var(--header-h) + .5rem) 3rem; }
+  .hero__title { font-size: clamp(1.9rem, 13vh, 3rem); }
+  .hero__sub { margin-block-start: .5rem; font-size: var(--fs-base); max-inline-size: 38rem; }
+  .hero__cta { margin-block-start: .75rem; }
+  .hero__scroll { display: none; }
+}
