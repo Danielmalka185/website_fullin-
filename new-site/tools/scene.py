@@ -35,7 +35,23 @@ def vgrad(w, h, stops):
     ts = [s[0] for s in stops]
     for c in range(3): out[:, c] = np.interp(t, ts, [s[1][c] for s in stops])
     return Image.fromarray(np.repeat(out[:, None, :], w, 1).astype('uint8'), 'RGB').convert('RGBA')
-def real(n, folder='assets/real'): return Image.open(os.path.join(root, folder, n + '.webp')).convert('RGBA')
+def real(n, folder='assets/curated/cutouts'): return Image.open(os.path.join(root, folder, n + '.webp')).convert('RGBA')
+PLINTH = {'station-48': .926, 'station-24': .895}      # where the base plate starts (fraction of unit height)
+def unit(n):
+    """professionally retouched, geometrically rectified station (assets/retouched/*.png). NEVER rotate / shear / warp it:
+    callers may only scale uniformly and translate. The base plate is shaded with a gradient so it reads as a physical plinth."""
+    c = Image.open(os.path.join(root, 'assets/retouched', n + '.png')).convert('RGBA')
+    if n in PLINTH:
+        a = np.array(c).astype('float32'); h, w = a.shape[:2]; y0 = int(h * PLINTH[n])
+        t = np.clip((np.arange(h) - y0) / max(1, h - y0), 0, 1)[:, None]
+        k = 1 - .20 * (t ** .8)                                   # lit top face -> shaded front lip
+        hl = np.clip(1 - np.abs(np.arange(h) - y0 - 6) / 10, 0, 1)[:, None] * 5     # thin highlight on the plinth edge
+        cool = np.array([.985, 1.0, 1.0], 'float32')
+        rgb = a[..., :3] * (k[..., None] * (1 + (cool - 1) * (t[..., None] > 0))) + hl[..., None]
+        side = 1 - .06 * (np.abs(np.linspace(-1, 1, w)) ** 2.2)[None, :, None] * (t[..., None] > 0)
+        a[..., :3] = np.clip(rgb * side, 0, 255)
+        c = Image.fromarray(a.astype('uint8'), 'RGBA')
+    return c
 def defringe(c):
     """pull the alpha in 1px and soften: kills light/green halo of the matting"""
     a = c.getchannel('A'); a2 = a.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(.6))
@@ -151,11 +167,7 @@ class Room:
             d.line((0, yy + 2, W * S, yy + 2), fill=(255, 255, 255, int(40 * t + 10)), width=2)
             Z -= step
             if Z < .2: break
-        for k in range(-14, 15):
-            X = k * step
-            x_top = self.vp_x + X * (wy - yh) / cam; x_bot = self.vp_x + X * (H - yh) / cam
-            d.line((x_top * S, 0, x_bot * S, fh * S), fill=(40, 70, 52, 20), width=2)
-            d.line((x_top * S + 3, 0, x_bot * S + 3, fh * S), fill=(255, 255, 255, 40), width=2)
+        # frontal studio camera: floor = straight horizontal band (no converging joints)
         seam = seam.resize((W, fh), Image.LANCZOS)
         # seams fade near the wall (hazy) and are subtle overall
         sa = np.array(seam).copy(); sa[..., 3] = (sa[..., 3] * np.clip(np.linspace(.5, 1, fh), 0, 1)[:, None]).astype('uint8')
@@ -166,7 +178,7 @@ class Room:
         self.canvas.paste(floor, (0, wy))
 
     # ------------------------------------------------------------ grounding
-    def _key_shear(self): return .24, .13     # shadow shear (right) and depth squash (back) per unit height
+    def _key_shear(self): return .0, .10     # shadow shear (right) and depth squash (back) per unit height
 
     def ground(self, layer, x, y, base_y, foot=None, strength=1.0, refl=.13, shadow_len=1.0, ao_wide=1.0, floor_surface=True):
         """paste RGBA `layer` with top-left at (x,y). base_y = y of the contact line on the floor (absolute).
@@ -245,60 +257,48 @@ class Room:
 
 # ---------------------------------------------------------------- the bar counter piece (shared material: white stone top, light fluted oak front)
 def counter_layer(w, top_h, thick, panel_h, toe=26, depth=60, seed=5, side=0):
-    """returns RGBA layer: top surface (depth px, seen from above), stone front edge (thick), oak fluted panel (panel_h), toe-kick recess.
-    layer height = depth + thick + panel_h + toe ; top surface starts at y=0. `side` = width of the visible right side sliver."""
-    H = depth + thick + panel_h + toe; W = w + side
+    """Frontal bar counter, all edges strictly horizontal/vertical: white stone top (thin visible top face + front edge),
+    dark slim body with a soft lime under-glow line, recessed dark plinth. layer height = depth + thick + panel_h + toe."""
+    H = depth + thick + panel_h + toe; W = w
     L = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-    rng = np.random.default_rng(seed)
-    # ---- stone top surface (lit, slightly receding): subtle veining + soft reflection of the lit wall at the far edge
-    top = np.zeros((depth, w, 3), 'float32'); top[:] = np.array([247, 247, 244])
+    # ---- stone top face: bright, soft gradient (far edge catches the green wash), faint veining
+    top = np.zeros((depth, w, 3), 'float32'); top[:] = np.array([249, 250, 248])
     gy = np.linspace(0, 1, depth)[:, None, None]
-    top = top * (1 - .05 * gy) + np.array([232, 244, 236]) * .0
+    top = top * (1 - .06 * gy) + np.array([226, 242, 232]) * .06 * (1 - gy)
     vein = noise(w, depth, 90, 6, seed + 1); v = np.clip(1 - np.abs(vein - .5) * 14, 0, 1) ** 2
-    vein2 = noise(w, depth, 200, 14, seed + 2); v2 = np.clip(1 - np.abs(vein2 - .55) * 9, 0, 1) ** 2
-    top = top - (v[..., None] * 9 + v2[..., None] * 6) + grain(w, depth, seed)[..., None] * .8
-    far = np.clip(1 - np.linspace(0, 1, depth) * 6, 0, 1)[:, None, None] * 7      # far edge catches the green wash
-    top = top + far * np.array([-.4, .35, -.2])
-    Lt = Image.fromarray(np.clip(top, 0, 255).astype('uint8'), 'RGB').convert('RGBA')
-    L.alpha_composite(Lt, (0, 0))
-    # ---- stone front edge (vertical face, slightly in shade) with bright top bevel and darker bottom lip
-    fe = np.zeros((thick, w, 3), 'float32'); fe[:] = np.array([232, 234, 231])
+    top = top - v[..., None] * 8 + grain(w, depth, seed)[..., None] * .7
+    L.alpha_composite(Image.fromarray(np.clip(top, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, 0))
+    # ---- stone front edge
+    fe = np.zeros((thick, w, 3), 'float32'); fe[:] = np.array([236, 238, 235])
     ty = np.linspace(0, 1, thick)[:, None, None]
-    fe = fe * (1 - .07 * ty) + (noise(w, thick, 120, 4, seed + 3)[..., None] - .5) * 6 + grain(w, thick, seed + 4)[..., None] * .8
-    # soft left-to-right falloff: key light is on the left
-    fe = fe * (1 - np.linspace(0, .045, w)[None, :, None])
-    Le = Image.fromarray(np.clip(fe, 0, 255).astype('uint8'), 'RGB').convert('RGBA'); L.alpha_composite(Le, (0, depth))
+    fe = fe * (1 - .09 * ty) + (noise(w, thick, 120, 4, seed + 3)[..., None] - .5) * 5 + grain(w, thick, seed + 4)[..., None] * .7
+    fe = fe * (1 - np.linspace(0, .03, w)[None, :, None])
+    L.alpha_composite(Image.fromarray(np.clip(fe, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, depth))
     d = ImageDraw.Draw(L, 'RGBA')
-    d.line((0, depth, w, depth), fill=(255, 255, 255, 255), width=2)                    # bevel highlight
-    d.line((0, depth + 2, w, depth + 2), fill=(214, 220, 214, 140), width=1)
-    d.line((0, depth + thick - 1, w, depth + thick - 1), fill=(120, 130, 120, 120), width=2)  # lower arris
-    # ---- fluted oak panel, set back under the overhang (shadowed under the slab)
+    d.line((0, depth, w, depth), fill=(255, 255, 255, 255), width=2)
+    d.line((0, depth + thick - 1, w, depth + thick - 1), fill=(110, 120, 114, 150), width=2)
+    # ---- dark slim body: charcoal with a soft vertical gradient + very quiet vertical ribbing; slab shadow on top
     ph = panel_h
-    wood = np.zeros((ph, w, 3), 'float32'); wood[:] = np.array([232, 211, 178])
-    xs = np.arange(w)[None, :]; pitch = 16.0
-    ph_ = (xs % pitch) / pitch
-    flute = (np.cos(ph_ * 2 * np.pi) * .5 + .5)                                          # 1 at flute crown, 0 in groove
-    shade = (flute ** .8 - .5) * 20 - np.where(ph_ > .5, (ph_ - .5) * 14, 0)             # lit left, shadowed right of each rib
-    grain_v = (noise(w, ph, 3, 90, seed + 5) - .5) * 14 + (noise(w, ph, 1, 40, seed + 6) - .5) * 5
-    wood = wood + (shade[..., None] if shade.ndim == 3 else shade[:, :, None]) * np.array([1, 1, 1.05]) + grain_v[..., None] * np.array([1, .9, .7])
+    body = np.zeros((ph, w, 3), 'float32'); body[:] = np.array([66, 72, 70])
     py = np.linspace(0, 1, ph)[:, None, None]
-    wood = wood * (1 - .22 * np.clip(1 - py * 7, 0, 1) - .10 * py)                       # overhang shadow at top, floor falloff below
-    wood = wood * (1 - np.linspace(0, .06, w)[None, :, None])
-    Lw = Image.fromarray(np.clip(wood, 0, 255).astype('uint8'), 'RGB').convert('RGBA'); L.alpha_composite(Lw, (0, depth + thick))
-    # slab shadow cast onto the panel (soft)
-    sdw = Image.new('L', (w, ph), 0); ImageDraw.Draw(sdw).rectangle((0, 0, w, 6), fill=150); sdw = blur(sdw, 7)
-    Ls = Image.new('RGBA', (w, ph), (60, 40, 20, 0)); Ls.putalpha(sdw.point(lambda v: int(v * .55))); L.alpha_composite(Ls, (0, depth + thick))
-    # ---- toe-kick recess: dark gap (shadowed) so the cabinet reads as standing, not floating
-    tk = Image.new('RGBA', (w, toe), (52, 44, 36, 255)); ta = np.linspace(.0, 1, toe);
-    tk_arr = np.array(tk).astype('float32'); tk_arr[..., :3] *= np.linspace(1.15, .75, toe)[:, None, None]; tk_arr[..., :3] += grain(w, toe, seed + 9)[..., None] * .8
-    L.alpha_composite(Image.fromarray(np.clip(tk_arr, 0, 255).astype('uint8'), 'RGBA'), (0, depth + thick + ph))
-    d.line((0, depth + thick + ph, w, depth + thick + ph), fill=(30, 24, 18, 170), width=2)
-    # ---- right-hand side sliver (receding face, in shade) keeps the object solid
-    if side:
-        sl = Image.new('RGBA', (side, H - depth * 0), (0, 0, 0, 0)); sd = ImageDraw.Draw(sl)
-        sd.polygon([(0, depth), (side, depth - int(depth * .3)), (side, H - toe - int(toe * .3)), (0, H)], fill=(168, 150, 124, 255))
-        sd.polygon([(0, depth), (side, depth - int(depth * .3)), (side, depth - int(depth * .3) + thick), (0, depth + thick)], fill=(205, 208, 204, 255))
-        L.alpha_composite(sl, (w, 0))
+    body = body * (1 - .26 * py) + np.array([30, 80, 50]) * .05 * (1 - py)
+    rib = (np.cos((np.arange(w)[None, :] % 20) / 20 * 2 * np.pi) * .5 + .5)
+    body = body + (rib[..., None] - .5) * 5 + (noise(w, ph, 3, 90, seed + 5)[..., None] - .5) * 3 + grain(w, ph, seed + 6)[..., None] * .7
+    body = body * (1 - np.linspace(0, .07, w)[None, :, None])
+    L.alpha_composite(Image.fromarray(np.clip(body, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (0, depth + thick))
+    sdw = Image.new('L', (w, ph), 0); ImageDraw.Draw(sdw).rectangle((0, 0, w, 5), fill=170); sdw = blur(sdw, 6)
+    Ls = Image.new('RGBA', (w, ph), (0, 0, 0, 0)); Ls.putalpha(sdw.point(lambda v: int(v * .6))); L.alpha_composite(Ls, (0, depth + thick))
+    # lime under-glow line right under the slab (glow + crisp hairline), strictly horizontal
+    gl = Image.new('RGBA', (w, 40), (0, 0, 0, 0)); ImageDraw.Draw(gl).rectangle((8, 8, w - 8, 10), fill=LIME + (200,))
+    gl = blur(gl, 5); L.alpha_composite(gl, (0, depth + thick + 4))
+    d.line((8, depth + thick + 12, w - 8, depth + thick + 12), fill=(236, 244, 120, 235), width=1)
+    # ---- recessed dark plinth (toe): inset on both sides, so the counter stands on the floor
+    inset = max(6, int(w * .025))
+    tk = np.zeros((toe, w - 2 * inset, 3), 'float32'); tk[:] = np.array([22, 26, 25])
+    tk = tk * np.linspace(1.15, .8, toe)[None, :, None].transpose(1, 0, 2) + grain(w - 2 * inset, toe, seed + 9)[..., None] * .6
+    L.alpha_composite(Image.fromarray(np.clip(tk, 0, 255).astype('uint8'), 'RGB').convert('RGBA'), (inset, depth + thick + ph))
+    # the body's lower edge is a dark arris line
+    d.line((0, depth + thick + ph - 1, w, depth + thick + ph - 1), fill=(8, 10, 9, 200), width=2)
     return L
 
 
@@ -308,12 +308,13 @@ def lying(c, scale_w):
     return c.resize((scale_w, max(1, int(c.height * r))), Image.LANCZOS)
 
 
-def cutout_on(top_layer, item, cx, base_y, shadow=(8, 22, 14), strength=1.0, key=(.55, .22), lim=None, lim0=0):
+LAST = []   # (x, y, w, h) of every item placed by cutout_on (layer coords) -- used by the straightness measurement
+def cutout_on(top_layer, item, cx, base_y, shadow=(8, 22, 14), strength=1.0, key=(.0, .22), lim=None, lim0=0):
     """stand/lay a cutout on the top surface of a counter layer: contact + short cast shadow (same key light), then the item."""
     item = item.convert('RGBA'); iw, ih = item.size
     al = item.getchannel('A'); a = np.array(al)
     rows = np.where((a > 128).any(1))[0]; bot = rows[-1]
-    x = int(cx - iw / 2); y = int(base_y - bot)
+    x = int(cx - iw / 2); y = int(base_y - bot); LAST.append((x, y, iw, ih))
     L = top_layer; Wt, Ht = L.size
     sh = Image.new('L', (Wt, Ht), 0)
     # cast: sheared right + slightly back

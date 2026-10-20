@@ -102,16 +102,15 @@ def save_webp(im, path, q=78, target_kb=None):
 def build_counter(s, with_items=True, items='slot+pb', w=420):
     """shared counter piece (white stone top, fluted light oak front). dims scale with s. Returns RGBA layer incl. headroom for items."""
     w = int(w * s); depth = int(66 * s); thick = int(32 * s); toe = int(22 * s)
-    panel_h = int(320 * s); head = int(250 * s)
-    C = SC.counter_layer(w, depth + thick + panel_h + toe, thick, panel_h, toe=toe, depth=depth, side=int(14 * s))
+    panel_h = int(235 * s); head = int(250 * s)
+    C = SC.counter_layer(w, depth + thick + panel_h + toe, thick, panel_h, toe=toe, depth=depth)
     L = Image.new('RGBA', (C.width, C.height + head), (0, 0, 0, 0)); L.alpha_composite(C, (0, head))
     if with_items:
-        s6 = SC.grade(SC.defringe(SC.real('station-6')))
+        s6 = SC.grade(SC.unit('station-6'))
         h6 = int(205 * s); s6 = s6.resize((int(s6.width * h6 / s6.height), h6), Image.LANCZOS)
-        SC.cutout_on(L, s6, cx=int(w * .34), base_y=head + int(depth * .58), lim=head + depth, lim0=head, strength=1.0)
+        SC.LAST.clear(); SC.cutout_on(L, s6, cx=int(w * .34), base_y=head + int(depth * .58), lim=head + depth, lim0=head, strength=1.0)
         if items == 'slot+pb':
             pb = SC.lying(SC.real('powerbank-front-horizontal', 'assets/curated/cutouts'), int(104 * s))
-            pb = pb.rotate(-6, expand=True, resample=Image.BICUBIC)
             SC.cutout_on(L, SC.grade(pb), cx=int(w * .74), base_y=head + int(depth * .80), lim=head + depth, lim0=head, strength=1.0)
     return L, head
 
@@ -119,12 +118,12 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     """48 tower + 24 tower on the floor, 6-slot on a bar counter, all on the shared floor. coordinates from the 1800 reference."""
     X = (lambda xd: W - (ox + xd * s)) if mirror else (lambda xd: ox + xd * s)
     out = {}
-    t48 = SC.grade(SC.defringe(SC.real('station-48')))
-    t24 = SC.grade(SC.defringe(SC.real('station-24')))
+    t48 = SC.grade(SC.unit('station-48'))
+    t24 = SC.grade(SC.unit('station-24'))
     h48 = int(H48_D * s); h24 = int(h48 * .85 * .965)
     # counter (front-most, slightly nearer than the towers)
     base_c = base48 + int(37 * s)
-    Lc, head = build_counter(s, items='slot+pb' if with_pb else 'slot')
+    Lc, head = build_counter(s, items='slot+pb' if with_pb else 'slot'); s6box = SC.LAST[0]
     cxc = X(260); cx = int(cxc - Lc.width / 2)
     ytop = base_c - Lc.height
     out['counter'] = (cx, ytop, Lc.width, Lc.height)
@@ -138,8 +137,9 @@ def lineup(room, s, ox, base48, mirror=False, W=1800, with_pb=True):
     for n, im, x, b in order:
         pos = room.ground(im, x, b - im.height, b, strength=1.0, refl=.10, shadow_len=1.0)
         out[n] = (pos[0], pos[1], im.width, im.height)
-    room.ground(Lc, cx, ytop, base_c, strength=1.05, refl=.07, shadow_len=.85)
+    room.ground(Lc, cx, ytop, base_c, strength=1.05, refl=.10, shadow_len=.85)
     out['base'] = (base48, b24, base_c)
+    out['s6'] = (cx + s6box[0], ytop + s6box[1], s6box[2], s6box[3])
     return out
 
 def hero_a(W=1800, H=1200, mirror=False, mobile=False):
@@ -163,7 +163,7 @@ def hero_b():
     """Cinematic venue: AI bar render (labelled 'הדמיה' in the page) with the REAL 48 cutout standing on the same wood floor, graded to the scene."""
     src = Image.open(os.path.join(root, 'assets/curated/venues-render/bar-tower-station.webp')).convert('RGBA')
     bg = src.copy()
-    cut = SC.defringe(SC.real('station-48'))
+    cut = SC.unit('station-48')
     base_y, cx, hgt = 1506, 962, 1400
     r = hgt / cut.height; cut = cut.resize((int(cut.width * r), hgt), Image.LANCZOS)
     arr = np.array(cut).astype('float32'); h, w = arr.shape[:2]
@@ -188,7 +188,7 @@ def hero_b():
     sh = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(sh)
     d.ellipse((cx - 250, base_y - 34, cx + 250, base_y + 40), fill=(0, 0, 0, 120)); sh = SC.blur(sh, 26); bg.alpha_composite(sh)
     # cast shadow right/back along the floor (same key light direction as scene A)
-    al = cut.getchannel('A'); sx, sq = .30, .10
+    al = cut.getchannel('A'); sx, sq = .0, .10
     cast = Image.new('L', (W_, H_), 0)
     cs = SC.Room._shear_shadow(None, al.crop((0, 0, cut.width, cut.height - 4)), sx, sq, cut.width + int(cut.height * sx) + 40, int(cut.height * sq) + 18)
     cast.paste(cs, (x, base_y - cs.height + 6)); cast = SC.blur(cast, 14)
@@ -206,6 +206,7 @@ def hero_b():
     a = a * (1 - np.clip(dd - .5, 0, 1)[..., None] * .22)
     return Image.fromarray(np.clip(a, 0, 255).astype('uint8'), 'RGB'), dict(cx=(cx - 200) / 1248 * 100, top=(y - 40) / 1560 * 100)
 
+CARD_LAYOUT = {}
 def card(kind):
     """network cards 1000x1250: same camera, same wall/floor line (wall_y), same key light, same counter material."""
     W, H = 1000, 1250; wall_y = 800; base = 1135; h48 = 1010; cam = 1.4
@@ -215,11 +216,13 @@ def card(kind):
     if kind == '6':
         s = 1.38
         L, head = build_counter(s, items='slot+pb', w=400)
-        b = base + 20; room.ground(L, int(500 - L.width / 2), b - L.height, b, strength=1.05, refl=.07, shadow_len=.85)
+        b = base + 20; s6b = SC.LAST[0]; CARD_LAYOUT['6'] = dict(counter=[int(500 - L.width / 2), b - L.height, L.width, L.height], s6=[int(500 - L.width / 2) + s6b[0], b - L.height + s6b[1], s6b[2], s6b[3]])
+        room.ground(L, int(500 - L.width / 2), b - L.height, b, strength=1.05, refl=.10, shadow_len=.85)
     else:
-        t = SC.grade(SC.defringe(SC.real('station-' + kind)))
+        t = SC.grade(SC.unit('station-' + kind))
         h = h48 if kind == '48' else int(h48 * .85 * .985)
         r = h / t.height; im = t.resize((int(t.width * r), h), Image.LANCZOS)
+        CARD_LAYOUT[kind] = dict(unit=[int(500 - im.width / 2), base - h, im.width, im.height])
         room.ground(im, int(500 - im.width / 2), base - h, base, strength=1.0, refl=.10, shadow_len=1.0)
     room.vignette(.05)
     return room.canvas
@@ -227,6 +230,7 @@ def card(kind):
 def render_cards():
     for k in ('6', '24', '48'):
         save_webp(card(k), outp('card-%s.webp' % k), target_kb=140)
+    json.dump(CARD_LAYOUT, open(os.path.join(root, 'content', 'card-layout.json'), 'w'), indent=1)
 
 def render_scenes():
     res = {}
@@ -238,9 +242,9 @@ def render_scenes():
     json.dump(res, open(os.path.join(root, 'content', 'scene-layout.json'), 'w'), indent=1)
     def vars_(pref, L):
         o = []
-        for k, sc in (('t48', .21), ('t24', .22)):
+        for k, sc, hh in (('t48', .28, .90), ('t24', .17, .57)):
             x, y, w, h = L[k]; W, H = L['W'], L['H']
-            o.append('--%s-%sx:%.2f%%;--%s-%sy:%.2f%%;--%s-%sw:%.2f%%;--%s-%sh:%.2f%%;' % (pref, k, (x + w / 2) / W * 100, pref, k, (y + h * sc) / H * 100, pref, k, w * 1.5 / W * 100, pref, k, h * .62 / H * 100))
+            o.append('--%s-%sx:%.2f%%;--%s-%sy:%.2f%%;--%s-%sw:%.2f%%;--%s-%sh:%.2f%%;' % (pref, k, (x + w / 2) / W * 100, pref, k, (y + h * sc) / H * 100, pref, k, w * 1.5 / W * 100, pref, k, h * hh / H * 100))
         o.append('--%s-floory:%.2f%%;' % (pref, L['base'][0] / L['H'] * 100)); return ''.join(o)
     css = '/* generated by tools/compose.py scenes: screen-glow positions, percent of each hero scene image */\n:root{%s}\n:root[dir="ltr"]{%s}\n@media (max-width:959px){:root,:root[dir="ltr"]{%s}}\n' % (vars_('a', res['hero-a']), vars_('a', res['hero-a-ltr']), vars_('a', res['hero-a-m']))
     css += ':root{--b-cx:%.2f%%;--b-top:%.2f%%;}\n' % (res['hero-b']['cx'], res['hero-b']['top'])
