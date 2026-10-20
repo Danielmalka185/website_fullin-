@@ -21,20 +21,14 @@
     "text": "Take it, charge, and return it at any FULLIN station."
    }
   ],
-  "cap": "Payment page screens",
-  "swipe": "Swipe to see the screens",
-  "shots": [
-   {
-    "title": "Apple Pay, Google Pay or card",
-    "text": "The payment page opens in your browser, with quick-pay buttons.",
-    "alt": "FULLIN's secure payment page in a browser: Apple Pay and Google Pay buttons, credit card fields and a pay 12 NIS per hour button"
-   },
-   {
-    "title": "Or enter card details",
-    "text": "The only actual charge is ₪12 per hour. The ₪200 is a credit-frame guarantee, not a charge.",
-    "alt": "The payment page: cardholder name, card number, expiry and CVV fields, and a pay 12 NIS per hour button"
-   }
-  ],
+  "demo": {
+   "cap": "FULLIN payment page, auto-scrolling",
+   "alt": "FULLIN's secure payment page as it opens after scanning the QR: logo, a note that the charge is 12 NIS per hour and the 200 NIS is a credit-frame guarantee, Apple Pay and Google Pay buttons, credit card fields and a pay 12 NIS per hour button",
+   "pause": "Pause demo",
+   "play": "Play demo",
+   "title": "This is the payment page",
+   "text": "It opens right after the scan: Apple Pay and Google Pay buttons first, card fields below. The only actual charge is ₪12 per hour. The ₪200 is a credit-frame guarantee, not a charge."
+  },
   "trust": {
    "title": "Simple, and secure",
    "card": "Credit card",

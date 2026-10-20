@@ -40,21 +40,20 @@
     <div class="pay-demo" data-pay-demo>
       <div class="pay-demo__stage">
         <div class="showcase__glow" aria-hidden="true"></div>
-        <ol class="pay-phones" role="list" tabindex="0" aria-label="" data-i18n-attr="aria-label:pay.cap">
-          <li class="pay-phone reveal">
-            <figure class="shot__f">
-              <div class="phone"><span class="phone__btn" aria-hidden="true"></span><div class="phone__screen"><img src="assets/pay/pay-page-v3.webp" width="520" height="1130" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.shots.0.alt"></div></div>
-              <figcaption class="shot__cap"><span class="shot__n" aria-hidden="true">3</span><b data-i18n="pay.shots.0.title"></b><span data-i18n="pay.shots.0.text"></span></figcaption>
-            </figure>
-          </li>
-          <li class="pay-phone reveal" data-delay="2">
-            <figure class="shot__f">
-              <div class="phone"><span class="phone__btn" aria-hidden="true"></span><div class="phone__screen phone__screen--short"><img src="assets/pay/pay-card-v3.webp" width="520" height="768" loading="lazy" decoding="async" alt="" data-i18n-attr="alt:pay.shots.1.alt"></div></div>
-              <figcaption class="shot__cap"><span class="shot__n" aria-hidden="true">3</span><b data-i18n="pay.shots.1.title"></b><span data-i18n="pay.shots.1.text"></span></figcaption>
-            </figure>
-          </li>
-        </ol>
-        <p class="showcase__hint pay-demo__hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span data-i18n="pay.swipe"></span></p>
+        <figure class="pay-phone reveal">
+          <div class="phone"><span class="phone__btn" aria-hidden="true"></span>
+            <div class="phone__screen pay-phone__screen" role="group" tabindex="0" data-pay-view aria-label="" data-i18n-attr="aria-label:pay.demo.cap">
+              <img class="pay-phone__img" src="assets/pay/pay-page-v4.webp" width="1040" height="2260" decoding="async" alt="" data-i18n-attr="alt:pay.demo.alt">
+              <span class="pay-phone__bar" aria-hidden="true"></span>
+            </div>
+          </div>
+          <button type="button" class="pay-toggle" data-pay-toggle aria-pressed="false">
+            <svg class="pay-toggle__pause" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1.200"/><rect x="14" y="5" width="4" height="14" rx="1.200"/></svg>
+            <svg class="pay-toggle__play" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M8 5.500v13a1 1 0 001.500.9l11-6.500a1 1 0 000-1.800l-11-6.500A1 1 0 008 5.500Z"/></svg>
+            <span class="pay-toggle__pause" data-i18n="pay.demo.pause"></span><span class="pay-toggle__play" data-i18n="pay.demo.play"></span>
+          </button>
+          <figcaption class="shot__cap pay-phone__cap"><b data-i18n="pay.demo.title"></b><span data-i18n="pay.demo.text"></span></figcaption>
+        </figure>
       </div>
 
       <aside class="pay-trust glass reveal" data-delay="2" aria-labelledby="pay-trust-title">

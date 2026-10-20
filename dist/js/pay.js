@@ -1,25 +1,24 @@
-/* FULLIN scan & pay: step line draws on scroll (desktop), step highlight, carousel hint. Vanilla, transform/opacity only. */
+/* FULLIN scan & pay: one big phone with a slow scripted auto-scroll (pure CSS keyframes on the image, steps and progress line share one clock).
+   JS only toggles state classes on #pay: .is-paused (button), .is-hold (hover / focus on the phone), .is-off (section off-screen). Vanilla. */
 (function () {
   'use strict';
   var sec = document.getElementById('pay'); if (!sec) return;
-  var steps = sec.querySelector('[data-pay-steps]');
-  var demo = sec.querySelector('[data-pay-demo]');
-  var items = steps ? [].slice.call(steps.querySelectorAll('.pay-step')) : [];
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var phones = sec.querySelector('.pay-phones');
-  if (phones && demo) phones.addEventListener('scroll', function () { demo.classList.add('is-scrolled'); }, { passive: true });
-  if (!steps) return;
-  if (reduce) { steps.style.setProperty('--p', '1'); items.forEach(function (i) { i.classList.add('is-on'); }); return; }
-  var ticking = false;
-  function upd() {
-    ticking = false;
-    var r = steps.getBoundingClientRect(), vh = window.innerHeight || 800;
-    var p = Math.max(0, Math.min(1, (vh * .85 - r.top) / (r.height + vh * .2)));
-    steps.style.setProperty('--p', p.toFixed(3));
-    items.forEach(function (it, i) { it.classList.toggle('is-on', p * 1.1 >= (i + .35) / items.length); });
+  var view = sec.querySelector('[data-pay-view]');
+  var btn = sec.querySelector('[data-pay-toggle]');
+  var phone = sec.querySelector('.pay-phone');
+  if (btn) btn.addEventListener('click', function () {
+    var p = btn.getAttribute('aria-pressed') !== 'true';
+    btn.setAttribute('aria-pressed', p ? 'true' : 'false');
+    sec.classList.toggle('is-paused', p);
+  });
+  if (view && phone) {
+    var hold = function (on) { sec.classList.toggle('is-hold', on); };
+    phone.addEventListener('mouseenter', function () { hold(true); });
+    phone.addEventListener('mouseleave', function () { hold(view === document.activeElement); });
+    view.addEventListener('focus', function () { hold(true); });
+    view.addEventListener('blur', function () { hold(false); });
   }
-  function on() { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }
-  window.addEventListener('scroll', on, { passive: true });
-  window.addEventListener('resize', on);
-  upd();
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { sec.classList.toggle('is-off', !es[0].isIntersecting); }, { threshold: .1 }).observe(phone || sec);
+  }
 })();
