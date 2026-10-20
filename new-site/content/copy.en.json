@@ -93,7 +93,7 @@
   ],
   "totalTitle": "So what's the most you can pay?",
   "totalText": "₪200 in total, even in the worst case, when the power bank never comes back.",
-  "footnote": "The free hour is a benefit for app users. No subscription. No hidden fees. Pay with Apple Pay, Google Pay or a credit card. On the payment page the only charge is ₪12 per hour; ₪100 is held as a credit-frame guarantee and is not an actual charge.",
+  "footnote": "The free hour is a benefit for app users. No subscription. No hidden fees. Pay with Apple Pay, Google Pay or a credit card. On the payment page and at the station's card terminal the only charge is ₪12 per hour; ₪200 is held as a credit-frame guarantee (deposit) and is not an actual charge.",
   "noApp": "Without the app: ₪12 per hour from the first minute"
  },
  "network": {
@@ -219,7 +219,7 @@
    },
    {
     "q": "What is the deposit / credit-frame guarantee?",
-    "a": "It depends on how you pay. On the payment page (scan the QR, pay with Apple Pay, Google Pay or card): a ₪100 credit-frame guarantee is held. It is not a charge, and you are only charged ₪12 per hour (subject to the daily cap). At stations that have a card terminal, if you pay by card at the terminal: a ₪200 deposit is held. That is not a charge either, and it is returned after use according to your credit-card company."
+    "a": "On both the payment page and the station's card terminal, ₪200 is held as a deposit / credit-frame guarantee. It is not a charge: it is returned after use according to your credit-card company, and you are only actually charged ₪12 per hour (subject to the daily cap)."
    },
    {
     "q": "Who gets the free first hour?",

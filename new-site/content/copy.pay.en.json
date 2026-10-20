@@ -31,7 +31,7 @@
    },
    {
     "title": "Or enter card details",
-    "text": "The only actual charge is ₪12 per hour. The ₪100 on the screen is a credit-frame guarantee, not a charge, and the payment page has no ₪200 deposit.",
+    "text": "The only actual charge is ₪12 per hour. The ₪200 is a credit-frame guarantee, not a charge.",
     "alt": "The payment page: cardholder name, card number, expiry and CVV fields, and a pay 12 NIS per hour button"
    }
   ],
@@ -46,6 +46,6 @@
    "text": "Scan and pay: ₪12 per hour from the first minute. A free first hour? That's for people who download the app.",
    "link": "See the app"
   },
-  "terminal": "Some stations also have a card terminal. If you pay by card at the station's terminal, a ₪200 deposit is held, not a charge, and it is returned after use according to your credit-card company."
+  "terminal": "Some stations also have a card terminal. There, too, ₪200 is held as a deposit, just like on the payment page: it is not a charge and is returned after use according to your credit-card company."
  }
 }
