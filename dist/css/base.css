@@ -5,7 +5,7 @@ body {
   margin: 0; background: var(--bg); color: var(--text);
   font-family: var(--font); font-size: var(--fs-base); line-height: 1.6;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  overflow-x: clip; min-block-size: 100vh; min-block-size: 100dvh; -webkit-tap-highlight-color: rgba(47,195,83,.18);
+  overflow-x: hidden; overflow-x: clip; min-block-size: 100vh; min-block-size: 100dvh; -webkit-tap-highlight-color: rgba(47,195,83,.18);
 }
 html[lang="he"] body, html[lang="ar"] body { font-family: var(--font-he); }
 img, svg, video { display: block; max-inline-size: 100%; }
@@ -131,12 +131,13 @@ section[id] { scroll-margin-block-start: calc(var(--header-h) + 8px); }
 /* No-JS: keep navigation usable (the toggle cannot work, so show the menu inline under the logo on small screens) */
 .no-js .menu-btn { display: none; }
 @media (max-width: 959px) {
-  .no-js .site-header { position: absolute; block-size: auto; }
+  .no-js .site-header { position: relative; block-size: auto; background: var(--bg); }
   .no-js .hdr { flex-wrap: wrap; block-size: auto; padding-block: .5rem; }
   .no-js .menu { position: static; inset: auto; padding: 0; visibility: visible; opacity: 1; transform: none; background: none; overflow: visible; flex-basis: 100%; gap: .5rem; }
   .no-js .nav-list { flex-direction: row; flex-wrap: wrap; }
   .no-js .nav-list a { min-block-size: 44px; padding-inline: .75rem; border: 0; font-size: var(--fs-sm); }
-  .no-js .hero { padding-block-start: 11rem; }
+  .no-js .hero { padding-block-start: 1.5rem; }
+  .no-js .menu .btn { margin-block-start: 0; }
 }
 
 /* Touch laptops/tablets that get the desktop nav: keep 44px tap targets */
@@ -144,3 +145,4 @@ section[id] { scroll-margin-block-start: calc(var(--header-h) + 8px); }
   .lang button { min-inline-size: 44px; min-block-size: 44px; }
   .nav-list a { min-inline-size: 44px; justify-content: center; }
 }
+.no-js .lang { display: none; }

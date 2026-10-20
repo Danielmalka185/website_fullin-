@@ -28,15 +28,15 @@ html[dir="rtl"] .pay-sec { --dir: -1; }
 .pay-demo__stage.is-scrolled .pay-hint { opacity: 0; }
 
 /* regular iPhone 14/15 look: steel band, thin black bezel, Dynamic Island, side buttons, soft shadow */
-.pay-iphone { position: relative; inline-size: 100%; border-radius: 12.4cqw; padding: 2.1cqw; background: #0a0a0c; box-shadow: 0 0 0 1.1cqw #4a4c52, 0 0 0 1.5cqw #8d9097, 0 0 0 1.9cqw #2c2d31, 0 38px 50px -26px rgba(14, 40, 24, .55), 0 14px 24px -14px rgba(14, 40, 24, .4); margin-block: 2cqw; transition: transform var(--t) var(--ease); }
-.pay-iphone__screen { position: relative; overflow: hidden; border-radius: 10.4cqw; background: #fff; aspect-ratio: 921 / 2000; }
+.pay-iphone { position: relative; inline-size: 100%; border-radius: 36px; padding: 6px; background: #0a0a0c; box-shadow: 0 0 0 3px #4a4c52, 0 0 0 4px #8d9097, 0 0 0 5px #2c2d31, 0 38px 50px -26px rgba(14, 40, 24, .55); margin-block: 6px; border-radius: 12.4cqw; padding: 2.1cqw; box-shadow: 0 0 0 1.1cqw #4a4c52, 0 0 0 1.5cqw #8d9097, 0 0 0 1.9cqw #2c2d31, 0 38px 50px -26px rgba(14, 40, 24, .55), 0 14px 24px -14px rgba(14, 40, 24, .4); margin-block: 2cqw; transition: transform var(--t) var(--ease); }
+.pay-iphone__screen { position: relative; overflow: hidden; border-radius: 30px; border-radius: 10.4cqw; background: #fff; aspect-ratio: 921 / 2000; }
 .pay-iphone__screen::after { content: ""; position: absolute; inset-block-start: 1.25%; inset-inline-start: 50%; translate: -50% 0; inline-size: 30%; aspect-ratio: 3.4; border-radius: 99px; background: #000; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06); }
 .pay-iphone__screen img { display: block; inline-size: 100%; block-size: 100%; object-fit: fill; }
-.pay-iphone__btn { position: absolute; inline-size: 1.1cqw; border-radius: 1cqw; background: linear-gradient(90deg, #5b5d63, #2c2d31); }
-.pay-iphone__btn--a { left: -2.9cqw; top: 15%; block-size: 3.4%; }
-.pay-iphone__btn--v1 { left: -2.9cqw; top: 21.5%; block-size: 6.4%; }
-.pay-iphone__btn--v2 { left: -2.9cqw; top: 29.5%; block-size: 6.4%; }
-.pay-iphone__btn--p { right: -2.9cqw; top: 25%; block-size: 10%; background: linear-gradient(270deg, #5b5d63, #2c2d31); }
+.pay-iphone__btn { position: absolute; inline-size: 3px; border-radius: 3px; inline-size: 1.1cqw; border-radius: 1cqw; background: linear-gradient(90deg, #5b5d63, #2c2d31); }
+.pay-iphone__btn--a { left: -8px; left: -2.9cqw; top: 15%; block-size: 3.4%; }
+.pay-iphone__btn--v1 { left: -8px; left: -2.9cqw; top: 21.5%; block-size: 6.4%; }
+.pay-iphone__btn--v2 { left: -8px; left: -2.9cqw; top: 29.5%; block-size: 6.4%; }
+.pay-iphone__btn--p { right: -8px; right: -2.9cqw; top: 25%; block-size: 10%; background: linear-gradient(270deg, #5b5d63, #2c2d31); }
 .pay-ph .shot__cap { max-inline-size: 270px; }
 .pay-trust { padding: var(--s-6); display: grid; gap: var(--s-4); align-content: start; }
 .pay-trust h3 { font-size: var(--fs-lg); }

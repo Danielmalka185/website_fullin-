@@ -16,7 +16,7 @@
   --field-bg:rgba(255,255,255,.07);--field-border:rgba(255,255,255,.28);
   background:var(--dark);
 }
-.s-section{position:relative;padding-block:clamp(72px,11vw,150px);scroll-margin-top:72px;overflow-x:clip}
+.s-section{position:relative;padding-block:clamp(72px,11vw,150px);scroll-margin-top:72px;overflow-x: hidden; overflow-x: clip}
 .s-head{max-width:760px;margin-block-end:clamp(32px,5vw,56px)}
 .s-title{font-size:clamp(2rem,6.2vw,4rem);line-height:1.05;font-weight:800;letter-spacing:-.02em;margin:.25em 0 .35em;text-wrap:balance}
 .s-sub{font-size:clamp(1rem,2.2vw,1.2rem);color:var(--s-muted);line-height:1.6;margin:0;max-width:60ch}

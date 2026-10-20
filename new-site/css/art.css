@@ -55,3 +55,11 @@
   .s-tile.reveal > .s-tile__btn { clip-path: none; transition: none; }
   .ph > img, .s-tile.reveal > .s-tile__btn > img, .s-tile.reveal.is-in > .s-tile__btn > img { scale: 1.02; }
 }
+
+/* Safari <= 14 (no aspect-ratio) */
+@supports not (aspect-ratio: 1) {
+  .s-station__media.ph::before { content: ""; display: block; padding-block-start: 100%; }
+}
+@media (min-width: 640px) {
+  @supports not (aspect-ratio: 1) { .s-station__media.ph::before { padding-block-start: 125%; } }
+}

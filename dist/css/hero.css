@@ -1,5 +1,5 @@
 /* HERO (light, luminous) */
-.hero { position: relative; isolation: isolate; min-block-size: 100vh; min-block-size: 100svh; display: flex; align-items: center; padding-block: calc(var(--header-h) + 1.5rem) 5.5rem; overflow: clip; background: linear-gradient(180deg, #E4F4E7 0%, #F0F8F1 42%, var(--bg) 100%); }
+.hero { position: relative; isolation: isolate; min-block-size: 100vh; min-block-size: 100svh; display: flex; align-items: center; padding-block: calc(var(--header-h) + 1.5rem) 5.5rem; overflow: hidden; overflow: clip; background: linear-gradient(180deg, #E4F4E7 0%, #F0F8F1 42%, var(--bg) 100%); }
 .hero__bg { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .hero__glow { position: absolute; inset: 0; background:
   radial-gradient(55% 60% at 78% 46%, rgba(47,195,83,.26), transparent 70%),
@@ -102,9 +102,9 @@
 .hero__stage { position: relative; container-type: size; order: 2; align-self: stretch; inline-size: 100vw; margin-inline: calc(50% - 50vw); margin-block: -1.2rem -2.4rem; aspect-ratio: 1000 / 960; overflow: hidden; pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
 @media (max-width: 959px) { .hero--b .hero__stage { aspect-ratio: 4 / 5; } }
-.scene { --ar: 1.5; position: absolute; inset-block-end: 0; inset-inline-end: 0; inline-size: max(100cqw, calc(100cqh * var(--ar))); aspect-ratio: var(--ar); }
+.scene { --ar: 1.5; position: absolute; inset-block-end: 0; inset-inline-end: 0; inline-size: 100%; inline-size: max(100cqw, calc(100cqh * var(--ar))); aspect-ratio: var(--ar); }
 .scene--a { --ar: 1.0417; }
-.scene--b { --ar: .8; inline-size: 100cqw; }
+.scene--b { --ar: .8; inline-size: 100%; inline-size: 100cqw; }
 .hero:not(.hero--b) .scene--b, .hero--b .scene--a { display: none; }
 .scene__zoom { position: absolute; inset: 0; transform-origin: 50% 88%; animation: scenezoom 34s ease-in-out infinite alternate; will-change: transform; }
 @keyframes scenezoom { to { transform: scale(1.035); } }
@@ -142,8 +142,8 @@
 
 @media (min-width: 960px) {
   .hero__stage { position: absolute; inset: 0; z-index: -1; inline-size: auto; margin: 0; aspect-ratio: auto; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 90%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 16%, #000 90%, transparent 100%); }
-  .scene--a { --ar: 1.5; inline-size: 100cqw; }
-  .scene--b { --ar: .8; inline-size: auto; block-size: 92cqh; inset-inline-end: 0; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10%); mask-image: linear-gradient(180deg, transparent 0, #000 10%); }
+  .scene--a { --ar: 1.5; inline-size: 100%; inline-size: 100cqw; }
+  .scene--b { --ar: .8; inline-size: auto; block-size: 92%; block-size: 92cqh; inset-inline-end: 0; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10%); mask-image: linear-gradient(180deg, transparent 0, #000 10%); }
   .scene .scene__badge { inset-block-end: 14%; }
 }
 @media (prefers-reduced-motion: reduce) { .scene__zoom, .bk, .fx { animation: none !important; } .fx--scr { opacity: .2; } }
@@ -159,4 +159,12 @@
   .hero__sub { margin-block-start: .5rem; font-size: var(--fs-base); max-inline-size: 38rem; }
   .hero__cta { margin-block-start: .75rem; }
   .hero__scroll { display: none; }
+}
+
+/* Safari <= 14 has no aspect-ratio: keep the hero stage from collapsing */
+@supports not (aspect-ratio: 1) {
+  .hero__stage::before { content: ""; display: block; padding-block-start: 96%; }
+}
+@media (max-width: 959px) {
+  @supports not (aspect-ratio: 1) { .hero--b .hero__stage::before { padding-block-start: 125%; } }
 }

@@ -1,5 +1,5 @@
 /* FULLIN #ways: three ways to get a station. Prefix w-. Light theme. */
-.w-section{position:relative;padding-block:clamp(72px,11vw,150px);scroll-margin-top:72px;overflow-x:clip;color:var(--text);
+.w-section{position:relative;padding-block:clamp(72px,11vw,150px);scroll-margin-top:72px;overflow-x: hidden; overflow-x: clip;color:var(--text);
   background:linear-gradient(180deg,var(--bg),var(--surface-2) 18%,var(--surface-2) 82%,var(--bg))}
 .w-section::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 35% at 12% 20%,rgba(47,195,83,.12),transparent 70%),radial-gradient(40% 30% at 92% 70%,rgba(232,242,58,.14),transparent 70%);pointer-events:none}
 .w-section>.container{position:relative}
