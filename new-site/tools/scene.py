@@ -88,7 +88,7 @@ def light_screen(c, n):
     near = np.exp(-dist / (sw * .035))                      # screen light falling on the bezel
     wgt = (inF * dark * .92)[..., None]
     rgb = rgb * (1 - wgt) + graphite * wgt
-    rgb = rgb + (inF * dark * near * .13)[..., None] * np.array([.10, .62, .26], 'float32')
+    rgb = rgb + (inF * dark * near * .09)[..., None] * np.array([.10, .62, .26], 'float32')
     # ---- the display itself
     sc = rgb.copy()
     sc = np.clip(sc, 0, 1) ** (.86 if six else .70)
@@ -142,7 +142,7 @@ def bloom(canvas, pos, size, n, strength=1.0, base_y=None, unit_alpha=None):
     yy, xx = np.mgrid[0:H, 0:W].astype('float32')
     below = np.clip(1 - (yy - sy1) / (sh * .16), 0, 1) ** 1.6 * (yy > sy1)
     lat = np.clip(1 - np.abs(xx - (sx0 + sx1) / 2) / (sw * .62), 0, 1) ** .8
-    sp = (below * lat * .50 * strength)
+    sp = (below * lat * .30 * strength)
     if unit_alpha is not None:
         pad = np.zeros((H, W), 'float32'); ox, oy = int(x), int(y)
         hh = min(unit_alpha.shape[0], H - oy); ww = min(unit_alpha.shape[1], W - ox)

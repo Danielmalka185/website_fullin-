@@ -115,14 +115,14 @@
 @media (max-width: 959px) { .scene__pic--ltr { display: none !important; } :root[dir="ltr"] .scene__pic--rtl { display: block; } }
 .fx { position: absolute; display: block; pointer-events: none; border-radius: 50%; }
 /* screen glow: lifts the emissive screens (screen blend) + a green light wash around them (multiply) */
-.fx--scr { mix-blend-mode: screen; background: radial-gradient(closest-side, rgba(70,255,120,.55), rgba(47,195,83,.18) 62%, transparent 100%); animation: scrpulse 5.2s ease-in-out infinite; opacity: .45; }
+.fx--scr { mix-blend-mode: screen; background: radial-gradient(closest-side, rgba(70,255,120,.55), rgba(47,195,83,.18) 62%, transparent 100%); animation: scrpulse 5.2s ease-in-out infinite; opacity: .16; }
 .fx--scr48 { inset-inline-start: calc(var(--a-t48x) - var(--a-t48w) * .33); inset-block-start: calc(var(--a-t48y) - var(--a-t48h) * .30); inline-size: calc(var(--a-t48w) * .66); block-size: calc(var(--a-t48h) * .60); border-radius: 18%; }
 .fx--scr24 { inset-inline-start: calc(var(--a-t24x) - var(--a-t24w) * .33); inset-block-start: calc(var(--a-t24y) - var(--a-t24h) * .30); inline-size: calc(var(--a-t24w) * .66); block-size: calc(var(--a-t24h) * .60); border-radius: 18%; animation-delay: -2.4s; }
-.fx--halo { mix-blend-mode: multiply; background: radial-gradient(closest-side, rgba(47,195,83,.26), rgba(47,195,83,.09) 60%, transparent 100%); animation: halopulse 5.2s ease-in-out infinite; opacity: .8; }
+.fx--halo { mix-blend-mode: multiply; background: radial-gradient(closest-side, rgba(47,195,83,.26), rgba(47,195,83,.09) 60%, transparent 100%); animation: halopulse 5.2s ease-in-out infinite; opacity: .45; }
 .fx--halo48 { inset-inline-start: calc(var(--a-t48x) - var(--a-t48w) * .9); inset-block-start: calc(var(--a-t48y) - var(--a-t48h) * .75); inline-size: calc(var(--a-t48w) * 1.8); block-size: calc(var(--a-t48h) * 1.5); }
 .fx--halo24 { inset-inline-start: calc(var(--a-t24x) - var(--a-t24w) * .9); inset-block-start: calc(var(--a-t24y) - var(--a-t24h) * .75); inline-size: calc(var(--a-t24w) * 1.8); block-size: calc(var(--a-t24h) * 1.5); animation-delay: -2.4s; }
-@keyframes scrpulse { 50% { opacity: .85; } }
-@keyframes halopulse { 50% { opacity: 1; } }
+@keyframes scrpulse { 50% { opacity: .34; } }
+@keyframes halopulse { 50% { opacity: .75; } }
 /* bokeh on the free (copy) side of the wall: drifts opposite to the zoom for depth. fixed positions, transform-only */
 .scene__bk { position: absolute; inset: 0; pointer-events: none; }
 .bk { position: absolute; display: block; border-radius: 50%; filter: blur(7px); animation: bkdrift 26s ease-in-out infinite alternate; will-change: transform; }
@@ -146,7 +146,7 @@
   .scene--b { --ar: .8; inline-size: auto; block-size: 92cqh; inset-inline-end: 0; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 10%); mask-image: linear-gradient(180deg, transparent 0, #000 10%); }
   .scene .scene__badge { inset-block-end: 14%; }
 }
-@media (prefers-reduced-motion: reduce) { .scene__zoom, .bk, .fx { animation: none !important; } .fx--scr { opacity: .5; } }
+@media (prefers-reduced-motion: reduce) { .scene__zoom, .bk, .fx { animation: none !important; } .fx--scr { opacity: .2; } }
 
 @media (min-width: 960px) { .hero__title { font-size: clamp(3.4rem, 1rem + 4.6vw, 5.2rem); } }
 
