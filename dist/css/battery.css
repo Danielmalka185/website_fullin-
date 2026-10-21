@@ -1,0 +1,27 @@
+/* FULLIN page battery (decorative). Transform/opacity only. */
+.pbat { --bc: #E5484D; --bt: #B42318; position: fixed; z-index: 101; pointer-events: none; opacity: 0; transition: opacity .4s ease; display: flex; align-items: center; justify-content: center; gap: 6px; font: 700 12px/1 var(--font-latin, "Space Grotesk", sans-serif); font-variant-numeric: tabular-nums; color: var(--bt); inset-block-start: calc((var(--header-h, 68px) - 24px) / 2); inset-inline-start: 50%; margin-inline-start: -34px; inline-size: 68px; block-size: 24px; }
+.pbat.is-on { opacity: 1; }
+.pbat[data-c="a"] { --bc: #F5A524; --bt: #8A5200; }
+.pbat[data-c="g"], .pbat[data-c="f"] { --bc: var(--green, #2FC353); --bt: var(--green-ink, #137A38); }
+.pbat__b { position: relative; inline-size: 34px; block-size: 16px; border: 2px solid rgba(14, 21, 18, .6); border-radius: 5px; background: rgba(255, 255, 255, .9); overflow: hidden; flex: none; }
+.pbat__b::before { content: ""; position: absolute; inset: 1px; border-radius: 3px; background: var(--bc); transform-origin: left center; transform: scaleX(var(--p, .01)); }
+html[dir="rtl"] .pbat__b::before { transform-origin: right center; }
+.pbat__b svg { position: absolute; inset: 0; margin: auto; inline-size: 12px; block-size: 12px; fill: #07090b; opacity: .5; }
+.pbat__n { inline-size: 3ch; text-align: start; }
+.pbat__n { padding: 2px 4px; box-sizing: content-box; border-radius: 8px; background: rgba(255, 255, 255, .92); }
+.pbat.is-active .pbat__b::before { will-change: transform; }
+.pbat.is-pulse .pbat__b { animation: pbat-pulse .7s ease-out 1; }
+.pbat.is-pulse .pbat__b svg { animation: pbat-bolt .9s ease-out 1; }
+@keyframes pbat-pulse { 40% { transform: scale(1.18); } }
+@keyframes pbat-bolt { 0% { opacity: 1; transform: scale(1.7); } 100% { opacity: .5; transform: none; } }
+.menu-open .pbat { opacity: 0; }
+@media (min-width: 960px) {
+  .pbat { flex-direction: column; gap: 5px; inset-block-start: 50%; inset-inline-start: auto; inset-inline-end: 10px; inset-inline-end: max(10px, env(safe-area-inset-right, 0px), env(safe-area-inset-left, 0px)); margin: -40px 0 0; inline-size: 30px; block-size: 80px; justify-content: flex-start; z-index: 90; }
+  .pbat__b { inline-size: 28px; block-size: 56px; border-radius: 7px; }
+  .pbat__b::before { inset: 2px; border-radius: 4px; transform-origin: center bottom; transform: scaleY(var(--p, .01)); }
+  html[dir="rtl"] .pbat__b::before { transform-origin: center bottom; }
+  .pbat__b svg { inline-size: 16px; block-size: 16px; }
+  .pbat__n { inline-size: auto; min-inline-size: 3ch; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) { .pbat { display: none; } }
+html[data-motion="off"] .pbat { display: none; }
