@@ -44,6 +44,20 @@
   syncMenuMode();
   doc.addEventListener('fullin:lang', function () { btn.setAttribute('aria-label', T(btn.getAttribute('aria-expanded') === 'true' ? btn.dataset.labelClose : btn.dataset.labelOpen)); });
 
+  /* land the section HEADING just under the sticky header (sections have big top padding, so aligning the section box leaves a big blank gap) */
+  function goTo(tgt, smooth, tol) {
+    var hd = $('header'), hh = hd ? hd.getBoundingClientRect().height : 72;
+    var pad = parseFloat(getComputedStyle(tgt).paddingTop) || 0;
+    var y = Math.max(0, Math.round(tgt.getBoundingClientRect().top + window.pageYOffset + pad - hh - 14));
+    if (tol && Math.abs(window.pageYOffset - y) <= tol) return;
+    try { window.scrollTo({ top: y, behavior: smooth ? 'smooth' : 'auto' }); } catch (er) { window.scrollTo(0, y); }
+  }
+  // arriving with a #hash (shared link / reload): same alignment once layout has settled
+  window.addEventListener('load', function () {
+    var h = location.hash && location.hash.slice(1); if (!h || h === 'top' || h === 'main') return;
+    var t = doc.getElementById(h); if (t) setTimeout(function () { goTo(t, false); }, 350);
+  });
+
   /* ---------- smooth anchors + focus management ---------- */
   doc.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');
@@ -56,7 +70,7 @@
     if (menu.classList.contains('is-open')) setMenu(false);
     var smooth = !reduced();
     if (id === 'top') window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
-    else tgt.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    else { goTo(tgt, smooth); setTimeout(function () { goTo(tgt, false, 8); }, smooth ? 1100 : 250); }
     try { history.pushState(null, '', location.pathname + location.search + '#' + id); } catch (er) {}
     var h = id === 'top' ? $('h1', tgt) : ($('h2, h1', tgt) || tgt);
     if (id === 'main') h = tgt;
